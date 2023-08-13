@@ -46,5 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pillarPrefab: {fileID: 2207589625095704608, guid: 2d85bf89d4452074a8853798b066c42b, type: 3}
   span: 1.5
-  pillarSpeed: 200
-  pillarYRandomRange: 100
+  pillarSpeed: 250
+  pillarYRandomRange: 150
