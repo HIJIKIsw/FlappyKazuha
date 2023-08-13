@@ -4,16 +4,16 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Pillars
+  - Undefined
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
+  - Pillar
+  - PillarDestroyer
   - 
   - 
   - 
@@ -42,7 +42,7 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Pillars
+  - name: Pillar
     uniqueID: 295809933
     locked: 0
   - name: Player

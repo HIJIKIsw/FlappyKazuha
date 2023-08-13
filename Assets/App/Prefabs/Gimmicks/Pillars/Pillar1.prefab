@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 331567772832974131}
+  - component: {fileID: -9113069398032769977}
   - component: {fileID: 1463837982502058976}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pillar1
-  m_TagString: Pillars
+  m_TagString: Undefined
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,6 +35,18 @@ Transform:
   - {fileID: 2806652551921067056}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-9113069398032769977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2207589625095704608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f323dac3b2005d4cbedb38eee164184, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &1463837982502058976
 Rigidbody2D:
   serializedVersion: 4
@@ -72,7 +85,7 @@ GameObject:
   - component: {fileID: 4110649886213462031}
   - component: {fileID: 7076544305362151348}
   - component: {fileID: 7535706091462697274}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +171,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -200,7 +213,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2806652551921067056}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PillarBottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,7 +247,7 @@ GameObject:
   - component: {fileID: 4895592234515305289}
   - component: {fileID: 4478792000718648300}
   - component: {fileID: 9104749345604995348}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -320,7 +333,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -362,7 +375,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3980551892242894290}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PillarTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
