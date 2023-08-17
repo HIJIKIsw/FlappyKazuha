@@ -45,12 +45,12 @@ TagManager:
   - name: Background
     uniqueID: 2789101501
     locked: 0
+  - name: Item
+    uniqueID: 1630968771
+    locked: 0
   - name: Pillar
     uniqueID: 295809933
     locked: 0
   - name: Player
     uniqueID: 248092727
-    locked: 0
-  - name: Item
-    uniqueID: 1630968771
     locked: 0
