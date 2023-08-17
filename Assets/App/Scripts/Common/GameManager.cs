@@ -8,7 +8,8 @@ namespace Flappy
 	///  ゲームマネージャ
 	/// </summary>
 	/// <remarks>シングルトンクラス</remarks>
-	public class GameManager : MonoBehaviour
+	/// TODO: MonoBehaviourを継承するようにしてAutoLoader的なクラスからインスタンス化する
+	public class GameManager
 	{
 		/// <summary>
 		/// インスタンス

@@ -48,3 +48,4 @@ MonoBehaviour:
   span: 1.5
   pillarSpeed: 250
   pillarYRandomRange: 150
+  primogemPrefab: {fileID: 6014284129322135983, guid: c415d62c44f872846aafb9c4615dbd9f, type: 3}
