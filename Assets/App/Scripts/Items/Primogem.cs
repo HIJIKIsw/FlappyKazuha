@@ -25,7 +25,6 @@ namespace Flappy.Items
 				case "Player":
 					{
 						GameManager.Instance.PrimogemCount++;
-						Debug.Log(GameManager.Instance.PrimogemCount);
 						GameObject.Destroy(this.gameObject);
 						break;
 					}
