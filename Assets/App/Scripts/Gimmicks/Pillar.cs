@@ -14,6 +14,7 @@ namespace Flappy.Gimmicks
 		/// 他のトリガコライダと接触した
 		/// </summary>
 		/// <param name="collider">接触対象のコライダ</param>
+		/// TODO: PillarDestroyer側に移動する。こっちにはDestroyメソッドを実装する。
 		void OnTriggerEnter2D(Collider2D collider)
 		{
 			var otherLayer = collider.gameObject.layer;

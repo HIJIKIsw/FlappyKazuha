@@ -33,7 +33,7 @@ namespace Flappy.Gimmicks
 				var randY = Random.Range(-pillarYRandomRange, pillarYRandomRange);
 				var pillarPosition = this.transform.position + (Vector3.up * randY);
 				
-
+				// TODO: パフォーマンス改善のため、GetComponentではなくPillarクラス側にpublicなメンバを作ってそこから参照する
 				var pillar = GameObject.Instantiate(this.pillarPrefab, pillarPosition, Quaternion.identity);
 				pillar.GetComponent<Rigidbody2D>().velocity = Vector2.left * this.pillarSpeed;
 			}
