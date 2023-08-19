@@ -1,5 +1,4 @@
 using UnityEngine;
-using System;
 
 namespace Flappy.Common
 {
@@ -11,9 +10,10 @@ namespace Flappy.Common
 	/// <summary>
 	/// MonoBehaviourを継承し、初期化メソッドを備えたシングルトンなクラス
 	/// </summary>
+	/// <remarks>Awake は継承先で override / new しないこと</remarks>
 	public class SingletonMonoBehaviour<T> : MonoBehaviourWithInit where T : MonoBehaviourWithInit
 	{
-		//　インスタンス
+		// インスタンス
 		private static T _instance;
 
 		/// <summary>
@@ -23,18 +23,18 @@ namespace Flappy.Common
 		{
 			get
 			{
-				//インスタンスがまだ作られていない
+				// インスタンスがまだ作られていない
 				if (_instance == null)
 				{
-					//シーン内からインスタンスを取得
+					// シーン内からインスタンスを取得
 					_instance = (T)FindObjectOfType(typeof(T));
 
-					//シーン内に存在しない場合はエラー
+					// シーン内に存在しない場合はエラー
 					if (_instance == null)
 					{
 						Debug.LogError(typeof(T) + " is nothing");
 					}
-					//発見した場合は初期化
+					// 発見した場合は初期化
 					else
 					{
 						_instance.InitIfNeeded();
@@ -49,16 +49,15 @@ namespace Flappy.Common
 		/// </summary>
 		protected sealed override void Awake()
 		{
-			//存在しているインスタンスが自分であれば問題なし
+			// 存在しているインスタンスが自分であれば問題なし
 			if (this == Instance)
 			{
 				return;
 			}
 
-			//自分じゃない場合は重複して存在しているので、エラー
+			// 自分じゃない場合は重複して存在しているので、エラー
 			Debug.LogError(typeof(T) + " is duplicated");
 		}
-
 	}
 
 	/// <summary>
@@ -66,7 +65,7 @@ namespace Flappy.Common
 	/// </summary>
 	public class MonoBehaviourWithInit : MonoBehaviour
 	{
-		//初期化したかどうかのフラグ(一度しか初期化が走らないようにするため)
+		// 初期化したかどうかのフラグ(一度しか初期化が走らないようにするため)
 		private bool _isInitialized = false;
 
 		/// <summary>
@@ -87,7 +86,7 @@ namespace Flappy.Common
 		/// </summary>
 		protected virtual void Init() { }
 
-		//sealed overrideするためにvirtualで作成
+		// sealed overrideするためにvirtualで作成
 		protected virtual void Awake() { }
 	}
 }
