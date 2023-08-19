@@ -1,11 +1,11 @@
 using Flappy.Common;
+using UnityEngine;
 
 namespace Flappy.Manager
 {
 	/// <summary>
 	///  ゲームマネージャ
 	/// </summary>
-	/// <remarks>シングルトンクラス</remarks>
 	public class GameManager : SingletonMonoBehaviour<GameManager>
 	{
 		/// <summary>
@@ -14,6 +14,15 @@ namespace Flappy.Manager
 		GameManager()
 		{
 			// Nothing to do.
+		}
+
+		/// <summary>
+		/// 初期化
+		/// </summary>
+		void Start()
+		{
+			// マルチタッチを無効化
+			Input.multiTouchEnabled = false;
 		}
 
 		/// <summary>
