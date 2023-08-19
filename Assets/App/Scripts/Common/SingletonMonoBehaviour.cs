@@ -3,49 +3,91 @@ using System;
 
 namespace Flappy.Common
 {
-	public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
+	//  SingletonMonoBehaviour.cs
+	//  http://kan-kikuchi.hatenablog.com/entry/SingletonMonoBehaviour
+	//
+	//  Created by kan.kikuchi on 2016.04.19.
+
+	/// <summary>
+	/// MonoBehaviourを継承し、初期化メソッドを備えたシングルトンなクラス
+	/// </summary>
+	public class SingletonMonoBehaviour<T> : MonoBehaviourWithInit where T : MonoBehaviourWithInit
 	{
-		private static T instance;
+		//　インスタンス
+		private static T _instance;
+
+		/// <summary>
+		/// インスタンス
+		/// </summary>
 		public static T Instance
 		{
 			get
 			{
-				if (instance == null)
+				//インスタンスがまだ作られていない
+				if (_instance == null)
 				{
-					Type t = typeof(T);
+					//シーン内からインスタンスを取得
+					_instance = (T)FindObjectOfType(typeof(T));
 
-					instance = (T)FindObjectOfType(t);
-					if (instance == null)
+					//シーン内に存在しない場合はエラー
+					if (_instance == null)
 					{
-						Debug.LogError(t + " がアタッチされている GameObject が見つかりませんでした。");
+						Debug.LogError(typeof(T) + " is nothing");
+					}
+					//発見した場合は初期化
+					else
+					{
+						_instance.InitIfNeeded();
 					}
 				}
-				return instance;
+				return _instance;
 			}
 		}
 
-		virtual protected void Awake()
+		/// <summary>
+		/// 初期化
+		/// </summary>
+		protected sealed override void Awake()
 		{
-			// 他のゲームオブジェクトにアタッチされているか調べる
-			if (ExistsAttachedOtherGameOcject() == true)
+			//存在しているインスタンスが自分であれば問題なし
+			if (this == Instance)
 			{
-				// アタッチされている場合は破棄する
-				GameObject.Destroy(this);
+				return;
 			}
+
+			//自分じゃない場合は重複して存在しているので、エラー
+			Debug.LogError(typeof(T) + " is duplicated");
 		}
 
-		protected bool ExistsAttachedOtherGameOcject()
+	}
+
+	/// <summary>
+	/// 初期化メソッドを備えたMonoBehaviour
+	/// </summary>
+	public class MonoBehaviourWithInit : MonoBehaviour
+	{
+		//初期化したかどうかのフラグ(一度しか初期化が走らないようにするため)
+		private bool _isInitialized = false;
+
+		/// <summary>
+		/// 必要なら初期化する
+		/// </summary>
+		public void InitIfNeeded()
 		{
-			if (instance == null)
+			if (_isInitialized)
 			{
-				instance = this as T;
-				return false;
+				return;
 			}
-			else if (Instance == this)
-			{
-				return false;
-			}
-			return true;
+			Init();
+			_isInitialized = true;
 		}
+
+		/// <summary>
+		/// 初期化(Awake時かその前の初アクセス、どちらかの一度しか行われない)
+		/// </summary>
+		protected virtual void Init() { }
+
+		//sealed overrideするためにvirtualで作成
+		protected virtual void Awake() { }
 	}
 }
