@@ -7,7 +7,7 @@ namespace Flappy
 {
 	public class PlayerController : MonoBehaviour
 	{
-		Rigidbody2D rigidbody2D;
+		new Rigidbody2D rigidbody2D;
 
 		/// <summary>
 		/// ジャンプ初速
