@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   overlayLoadingPrefab: {fileID: 8870318422714905930, guid: 2694dcc6ba486b14a985b8451a367f7f, type: 3}
-  fullScreenLoadingPrefab: {fileID: 2315450574724476345, guid: 4f8418cf931c91c42a81afffc67cdfce, type: 3}
+  fullscreenLoadingPrefab: {fileID: 2315450574724476345, guid: 4f8418cf931c91c42a81afffc67cdfce, type: 3}
 --- !u!1 &1300980033
 GameObject:
   m_ObjectHideFlags: 0
