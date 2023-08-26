@@ -11,6 +11,8 @@ namespace Flappy.Manager
 	/// </summary>
 	public class LoadingManager : SingletonMonoBehaviour<LoadingManager>
 	{
+		// 背景を作りました！
+
 		[SerializeField]
 		GameObject overlayLoadingPrefab;
 
