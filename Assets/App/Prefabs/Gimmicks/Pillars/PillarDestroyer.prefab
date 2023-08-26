@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7957575028793549866}
   - component: {fileID: 1472481321411320180}
+  - component: {fileID: 5213706848228565818}
   m_Layer: 7
   m_Name: PillarDestroyer
   m_TagString: Untagged
@@ -77,3 +78,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 100, y: 1000}
   m_EdgeRadius: 0
+--- !u!114 &5213706848228565818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2556624480898590458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4281724d88e640d4ab8953b126cb65cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collider: {fileID: 0}

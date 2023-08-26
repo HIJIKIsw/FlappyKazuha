@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 331567772832974131}
   - component: {fileID: -9113069398032769977}
   - component: {fileID: 1463837982502058976}
+  - component: {fileID: 8419930438513009881}
   m_Layer: 6
   m_Name: Pillar1
   m_TagString: Undefined
@@ -74,6 +75,77 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 6
+--- !u!66 &8419930438513009881
+CompositeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2207589625095704608}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_GeometryType: 0
+  m_GenerationType: 0
+  m_EdgeRadius: 0
+  m_ColliderPaths:
+  - m_Collider: {fileID: 7535706091462697274}
+    m_ColliderPaths:
+    - - X: 435000000
+        Y: 5939999744
+      - X: -435000000
+        Y: 5939999744
+      - X: -435000000
+        Y: 1020000000
+      - X: 435000000
+        Y: 1020000000
+  - m_Collider: {fileID: 9104749345604995348}
+    m_ColliderPaths:
+    - - X: 435000000
+        Y: -1020000000
+      - X: -435000000
+        Y: -1020000000
+      - X: -435000000
+        Y: -5939999744
+      - X: 435000000
+        Y: -5939999744
+  m_CompositePaths:
+    m_Paths:
+    - - {x: 43.499973, y: 102}
+      - {x: 43.499973, y: 594}
+      - {x: -43.5, y: 593.99994}
+      - {x: -43.499973, y: 102}
+    - - {x: 43.499973, y: -594}
+      - {x: 43.499973, y: -102}
+      - {x: -43.5, y: -102.00003}
+      - {x: -43.499973, y: -594}
+  m_VertexDistance: 0.0005
+  m_OffsetDistance: 0.00005
+  m_UseDelaunayMesh: 0
+  m_CompositeGameObject: {fileID: 2207589625095704608}
 --- !u!1 &4296957508310773879
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,7 +218,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 295809933
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d5045ec315d916e40837886992edc59b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -190,7 +262,7 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: -1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -308,7 +380,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 295809933
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d5045ec315d916e40837886992edc59b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -352,7 +424,7 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: -1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}

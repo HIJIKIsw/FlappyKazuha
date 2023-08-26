@@ -8,28 +8,11 @@ namespace Flappy.Gimmicks
 	public class Pillar : MonoBehaviour
 	{
 		/// <summary>
-		/// 他のトリガコライダと接触した
+		/// 柱を消す処理
 		/// </summary>
-		/// <param name="collider">接触対象のコライダ</param>
-		/// TODO: PillarDestroyer側に移動する。こっちにはDestroyメソッドを実装する。
-		void OnTriggerEnter2D(Collider2D collider)
+		public void Remove()
 		{
-			var otherLayer = collider.gameObject.layer;
-			var otherLayerName = LayerMask.LayerToName(otherLayer);
-
-			switch (otherLayerName)
-			{
-				case "PillarDestroyer":
-					{
-						GameObject.Destroy(this.gameObject);
-						break;
-					}
-				default:
-					{
-						// Nothing to do.
-						break;
-					}
-			}
+			GameObject.Destroy(this.gameObject);
 		}
 	}
 }
