@@ -39,7 +39,7 @@ namespace Flappy.UI
 			this.canvasGroup.alpha = 1f;
 			this.canvasGroup.DOFade(0f, fadeTime).OnComplete(() =>
 			{
-				this.gameObject.SetActive(false);
+				GameObject.Destroy(this.gameObject);
 			});
 		}
 
@@ -50,7 +50,13 @@ namespace Flappy.UI
 		public void SetProgress(float progress)
 		{
 			progress = Mathf.Clamp(progress, 0f, 1f);
-			this.progressBarFill.fillAmount = progress;
+			this.progressBarFill.DOFillAmount(progress, 0.08f).OnComplete(() =>
+			{
+				if( progress >= 1f )
+				{
+					this.Hide();
+				}
+			});
 		}
 	}
 }
