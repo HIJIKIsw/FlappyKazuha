@@ -4,14 +4,8 @@ using UnityEngine;
 
 namespace Flappy
 {
-	public class TitleScene : MonoBehaviour, ISceneBase
+	public class TitleScene : SceneBase
 	{
-		public static string Name
-		{
-			get
-			{
-				return nameof(TitleScene);
-			}
-		}
+		public override string Name => "Title";
 	}
 }

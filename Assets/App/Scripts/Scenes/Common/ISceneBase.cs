@@ -3,8 +3,8 @@ namespace Flappy
 	public interface ISceneBase
 	{
 		/// <summary>
-		/// シーン名
+		/// シーンファイル名
 		/// </summary>
-		public static string Name { get; }
+		string Name { get; }
 	}
 }

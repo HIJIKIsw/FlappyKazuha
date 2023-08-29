@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Flappy
 {
-	public class CreditScene : SceneBase
+	public abstract class SceneBase : MonoBehaviour, ISceneBase
 	{
-		public override string Name => "Credit";
+		public abstract string Name { get; }
 	}
 }
