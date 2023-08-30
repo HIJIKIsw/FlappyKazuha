@@ -1,4 +1,4 @@
-namespace Flappy
+namespace Flappy.Common
 {
 	public interface IScene
 	{

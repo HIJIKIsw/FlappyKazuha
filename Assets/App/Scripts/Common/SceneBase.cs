@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Flappy
+namespace Flappy.Common
 {
 	public abstract class SceneBase : MonoBehaviour, IScene
 	{
