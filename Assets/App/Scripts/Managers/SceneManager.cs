@@ -62,14 +62,15 @@ namespace Flappy.Manager
 		/// シーンを読み込む
 		/// </summary>
 		/// <typeparam name="T">読み込むシーンクラス</typeparam>
+		/// <param name="parameter">シーンに渡すパラメータ</param>
 		/// <param name="isAdditive">シーンを追加で読み込むか</param>
-		public void Load<T>(bool isAdditive = false) where T : SceneBase
+		public void Load<T>(SceneParameter parameter = null, bool isAdditive = false) where T : SceneBase
 		{
 			// シーン名を取得
 			var sceneName = this.GetSceneName<T>();
 
 			// 同名シーンは複数読み込み不可
-			if( this.managedSceneNames.Contains(sceneName) == true )
+			if (this.managedSceneNames.Contains(sceneName) == true)
 			{
 				Debug.LogAssertion($"The specified scene \"{sceneName}\" is already exists.");
 				return;
@@ -84,7 +85,31 @@ namespace Flappy.Manager
 			var asyncOperation = USceneManager.LoadSceneAsync(sceneName, UnityEngine.SceneManagement.LoadSceneMode.Additive);
 			this.managedSceneNames.Add(sceneName);
 
-			// TODO: シーンにパラメータを渡す処理周りの実装
+			// TODO: メソッド抽出などしてきれいに書き直す
+			asyncOperation.completed += (op) =>
+			{
+				var scene = USceneManager.GetSceneByName(sceneName);
+				var rootGameObjects = scene.GetRootGameObjects();
+				SceneBase sceneComponent = null;
+				foreach (var rootGameObject in rootGameObjects)
+				{
+					sceneComponent = rootGameObject.GetComponent<SceneBase>();
+					if (sceneComponent != null)
+					{
+						break;
+					}
+				}
+
+				if (sceneComponent != null)
+				{
+					sceneComponent.Initialize(parameter);
+				}
+				else
+				{
+					Debug.LogAssertion("Failed to get the loaded scene.");
+				}
+			};
+
 			// TODO: Loading2呼び出し周りの処理実装
 			// TODO: シーンを置き換える場合の処理実装する
 		}
