@@ -1,6 +1,6 @@
 namespace Flappy
 {
-	public interface ISceneBase
+	public interface IScene
 	{
 		/// <summary>
 		/// シーンファイル名
