@@ -23,5 +23,13 @@ namespace Flappy.Common
 			this.parameter = parameter ?? new SceneParameter();
 			this.gameObject.SetActive(true);
 		}
+
+		/// <summary>
+		/// シーンのアクティブ状態を設定
+		/// </summary>
+		public virtual void SetActive(bool value)
+		{
+			this.gameObject.SetActive(value);
+		}
 	}
 }
