@@ -81,35 +81,43 @@ namespace Flappy.Manager
 				return;
 			}
 
-			var unloadAsynOperation = USceneManager.UnloadSceneAsync(this.CurrentScene.Name);
-			var loadAsyncOperation = USceneManager.LoadSceneAsync(sceneName, UnityEngine.SceneManagement.LoadSceneMode.Additive);
-			this.CurrentScene = null;
-
-			// TODO: メソッド抽出などしてきれいに書き直す
-			loadAsyncOperation.completed += (op) =>
+			LoadingManager.Instance.ShowFullscreen(2, () =>
 			{
-				var scene = USceneManager.GetSceneByName(sceneName);
-				var rootGameObjects = scene.GetRootGameObjects();
-				foreach (var rootGameObject in rootGameObjects)
+				var unloadAsynOperation = USceneManager.UnloadSceneAsync(this.CurrentScene.Name);
+				var loadAsyncOperation = USceneManager.LoadSceneAsync(sceneName, UnityEngine.SceneManagement.LoadSceneMode.Additive);
+
+				this.CurrentScene = null;
+
+				// TODO: メソッド抽出などしてきれいに書き直す
+				unloadAsynOperation.completed += (op) =>
 				{
-					this.CurrentScene = rootGameObject.GetComponent<SceneBase>();
+					LoadingManager.Instance.CompleteTask();
+				};
+				loadAsyncOperation.completed += (op) =>
+				{
+					var scene = USceneManager.GetSceneByName(sceneName);
+					var rootGameObjects = scene.GetRootGameObjects();
+					foreach (var rootGameObject in rootGameObjects)
+					{
+						this.CurrentScene = rootGameObject.GetComponent<SceneBase>();
+						if (this.CurrentScene != null)
+						{
+							break;
+						}
+					}
+
 					if (this.CurrentScene != null)
 					{
-						break;
+						this.CurrentScene.Initialize(parameter);
 					}
-				}
+					else
+					{
+						Debug.LogAssertion("Failed to get the loaded scene.");
+					}
 
-				if (this.CurrentScene != null)
-				{
-					this.CurrentScene.Initialize(parameter);
-				}
-				else
-				{
-					Debug.LogAssertion("Failed to get the loaded scene.");
-				}
-			};
-
-			// TODO: Loading2呼び出し周りの処理実装
+					LoadingManager.Instance.CompleteTask();
+				};
+			});
 		}
 
 		private string GetSceneName<T>() where T : SceneBase
