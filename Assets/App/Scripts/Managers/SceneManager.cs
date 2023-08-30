@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Flappy.Common;
 using UnityEngine;
 using USceneManager = UnityEngine.SceneManagement.SceneManager;
@@ -28,10 +29,9 @@ namespace Flappy.Manager
 		GameObject sceneComponentContainer;
 
 		/// <summary>
-		/// 現在のシーン
+		/// 管理対象のシーン
 		/// </summary>
-		SceneBase currentScene = null;
-		List<SceneBase> additiveScenes = new List<SceneBase>();
+		HashSet<string> managedSceneNames = new HashSet<string>();
 
 		void Start()
 		{
@@ -43,14 +43,14 @@ namespace Flappy.Manager
 				var sceneComponent = rootGameObject.GetComponent<SceneBase>();
 				if (sceneComponent != null)
 				{
-					this.currentScene = sceneComponent;
+					this.managedSceneNames.Add(sceneComponent.Name);
 					break;
 				}
 			}
 
-			if (this.currentScene != null)
+			if (this.managedSceneNames.Any() == true)
 			{
-				Debug.Log("Scene loaded: " + this.currentScene.Name);
+				Debug.Log("Scene loaded: " + this.managedSceneNames.First());
 			}
 			else
 			{
@@ -66,27 +66,57 @@ namespace Flappy.Manager
 		public void Load<T>(bool isAdditive = false) where T : SceneBase
 		{
 			// シーン名を取得
-			sceneComponentContainer.SetActive(false);
-			var sceneComponent = sceneComponentContainer.AddComponent<T>();
-			var sceneName = sceneComponent.Name;
-			GameObject.Destroy(sceneComponent);
+			var sceneName = this.GetSceneName<T>();
 
-			if (this.ExistsScene(sceneName) == false)
+			// 同名シーンは複数読み込み不可
+			if( this.managedSceneNames.Contains(sceneName) == true )
+			{
+				Debug.LogAssertion($"The specified scene \"{sceneName}\" is already exists.");
+				return;
+			}
+
+			if (this.ExistsSceneFile(sceneName) == false)
 			{
 				Debug.LogAssertion($"Could not find scene \"{sceneName}\".");
 				return;
 			}
 
-			USceneManager.LoadScene(sceneName, UnityEngine.SceneManagement.LoadSceneMode.Additive);
-			USceneManager.UnloadSceneAsync(currentScene.name);
+			var asyncOperation = USceneManager.LoadSceneAsync(sceneName, UnityEngine.SceneManagement.LoadSceneMode.Additive);
+			this.managedSceneNames.Add(sceneName);
 
 			// TODO: シーンにパラメータを渡す処理周りの実装
 			// TODO: Loading2呼び出し周りの処理実装
-			// TODO: シーンを追加で読み込む場合の処理実装する
-			// TODO: currentScene を更新する
+			// TODO: シーンを置き換える場合の処理実装する
 		}
 
-		private bool ExistsScene(string name)
+		/// <summary>
+		/// シーンをアンロード
+		/// </summary>
+		/// <typeparam name="T">アンロードするシーンクラス</typeparam>
+		public void Unload<T>() where T : SceneBase
+		{
+			var sceneName = this.GetSceneName<T>();
+			var scene = USceneManager.GetSceneByName(sceneName);
+			if (scene.IsValid() == false)
+			{
+				Debug.LogAssertion($"The specified scene \"{sceneName}\" has not been loaded.");
+				return;
+			}
+			USceneManager.UnloadSceneAsync(sceneName);
+			this.managedSceneNames.Remove(sceneName);
+		}
+
+		private string GetSceneName<T>() where T : SceneBase
+		{
+			// TODO: もっと良いやり方があったら直す
+			this.sceneComponentContainer.SetActive(false);
+			var sceneComponent = (SceneBase)this.sceneComponentContainer.AddComponent(typeof(T));
+			var sceneName = sceneComponent.Name;
+			GameObject.Destroy(sceneComponent);
+			return sceneName;
+		}
+
+		private bool ExistsSceneFile(string name)
 		{
 			for (int i = 0; i < USceneManager.sceneCountInBuildSettings; i++)
 			{
