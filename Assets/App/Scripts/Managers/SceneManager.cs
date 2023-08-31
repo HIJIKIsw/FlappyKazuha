@@ -81,6 +81,7 @@ namespace Flappy.Manager
 				return;
 			}
 
+			// TODO: メソッド抽出などしてきれいに書き直す
 			LoadingManager.Instance.ShowFullscreen(2, () =>
 			{
 				var unloadAsynOperation = USceneManager.UnloadSceneAsync(this.CurrentScene.Name);
@@ -108,6 +109,7 @@ namespace Flappy.Manager
 
 					if (this.CurrentScene != null)
 					{
+						this.CurrentScene.SetActive(false);
 						this.CurrentScene.Initialize(parameter);
 					}
 					else
@@ -117,6 +119,9 @@ namespace Flappy.Manager
 
 					LoadingManager.Instance.CompleteTask();
 				};
+			}, () =>
+			{
+				this.CurrentScene?.SetActive(true);
 			});
 		}
 

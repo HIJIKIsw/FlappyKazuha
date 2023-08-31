@@ -21,7 +21,6 @@ namespace Flappy.Common
 		public virtual void Initialize(SceneParameter parameter = null)
 		{
 			this.parameter = parameter ?? new SceneParameter();
-			this.gameObject.SetActive(true);
 		}
 
 		/// <summary>
