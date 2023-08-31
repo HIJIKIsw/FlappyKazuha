@@ -67,9 +67,9 @@ namespace Flappy.Manager
 		/// フルスクリーンロード画面を表示
 		/// </summary>
 		/// <param name="tasksCount">ロード完了までのタスクの個数</param>
-		/// <param name="onCompletedFade">フェードイン完了後に実行するアクション</param>
+		/// <param name="onBeginLoad">フェードイン完了後に実行するアクション</param>
 		/// <remarks>フルスクリーンロードは直接非表示にできず、タスクが完了するたびに CompleteTask を呼び出して、LoadingManager 側で非表示にする。</remarks>
-		public void ShowFullscreen(int tasksCount, UnityAction onCompletedFade = null)
+		public void ShowFullscreen(int tasksCount, UnityAction onBeginLoad = null)
 		{
 			if (this.fullscreenLoadingInstance != null)
 			{
@@ -82,7 +82,7 @@ namespace Flappy.Manager
 			this.completedTasks = 0;
 
 			this.fullscreenLoadingInstance = GameObject.Instantiate(this.fullscreenLoadingPrefab, this.transform);
-			this.fullscreenLoadingInstance.Show(onCompletedFade: onCompletedFade);
+			this.fullscreenLoadingInstance.Show(onBeginLoad: onBeginLoad);
 		}
 
 		/// <summary>
