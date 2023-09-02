@@ -6,9 +6,6 @@ namespace Flappy.Gimmicks
 {
 	public class PillarDestroyer : MonoBehaviour
 	{
-		[SerializeField]
-		BoxCollider2D collider;
-
 		/// <summary>
 		/// 柱を消すための当たり判定
 		/// </summary>
