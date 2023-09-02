@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Flappy.Manager
 {
@@ -20,11 +19,13 @@ namespace Flappy.Manager
 		private static void LoadManagerScene()
 		{
 			// ManagerSceneが有効でない時(まだ読み込んでいない時)だけ追加ロードするように
-			if (!SceneManager.GetSceneByName(ManagerSceneAutoLoader.MANAGER_SCENE_NAME).IsValid())
+			var managerScene = UnityEngine.SceneManagement.SceneManager.GetSceneByName(ManagerSceneAutoLoader.MANAGER_SCENE_NAME);
+			if (managerScene.IsValid() == false)
 			{
-				SceneManager.LoadScene(ManagerSceneAutoLoader.MANAGER_SCENE_NAME, LoadSceneMode.Additive);
+				UnityEngine.SceneManagement.SceneManager.LoadScene(
+					ManagerSceneAutoLoader.MANAGER_SCENE_NAME,
+					UnityEngine.SceneManagement.LoadSceneMode.Additive);
 			}
 		}
-
 	}
 }
