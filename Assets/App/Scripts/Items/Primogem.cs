@@ -1,5 +1,6 @@
 using UnityEngine;
 using Flappy.Manager;
+using Flappy.Common;
 
 namespace Flappy.Items
 {
@@ -22,6 +23,8 @@ namespace Flappy.Items
 			{
 				case "Player":
 					{
+						AudioManager.Instance.PlaySE(Constants.Assets.Audio.SE.pico22, 0.4f, 0.8f);
+
 						GameManager.Instance.PrimogemCount++;
 						GameObject.Destroy(this.gameObject);
 						break;
