@@ -23,7 +23,7 @@ namespace Flappy.Items
 			{
 				case "Player":
 					{
-						AudioManager.Instance.PlaySE(Constants.Assets.Audio.SE.pico22, 0.4f, 0.8f);
+						AudioManager.Instance.PlaySE(Constants.Assets.Audio.SE.pico22, 0.5f, 1.8f);
 
 						GameManager.Instance.PrimogemCount++;
 						GameObject.Destroy(this.gameObject);
