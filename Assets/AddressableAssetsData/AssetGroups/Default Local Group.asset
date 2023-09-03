@@ -17,13 +17,8 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: d07c16801ae733a4ea8e8a4d045ff7fa
   m_SerializeEntries:
-  - m_GUID: 44429c5a62b97aa46b560dd9503392d3
-    m_Address: Audio/SE/poka3
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9662298911458ca468741961d0d651f1
-    m_Address: Assets/App/Audio/Mock/pico22.ogg
+    m_Address: Audio/SE/pico22
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
