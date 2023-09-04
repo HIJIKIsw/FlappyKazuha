@@ -22,6 +22,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c5c1211cf6cda4c49b46ed5bf85aa9e8
+    m_Address: Audio/SE/kaifuku1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d744424dbe6bafe4db333b7059b87dd3
+    m_Address: Audio/SE/kaifuku2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: defd891a142de174b9cf34444c33dfa0, type: 2}
   m_SchemaSet:
