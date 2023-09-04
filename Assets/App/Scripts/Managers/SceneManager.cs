@@ -81,6 +81,9 @@ namespace Flappy.Manager
 				return;
 			}
 
+			AudioManager.Instance.PlaySE(Constants.Assets.Audio.SE.kaifuku1, 0.1f, 0.8f);
+			AudioManager.Instance.PlaySE(Constants.Assets.Audio.SE.kaifuku2, 0.4f, 2.5f);
+
 			// TODO: メソッド抽出などしてきれいに書き直す
 			LoadingManager.Instance.ShowFullscreen(2, () =>
 			{
