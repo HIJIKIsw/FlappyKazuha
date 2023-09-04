@@ -29,6 +29,12 @@ namespace Flappy.Manager
 		GameObject sceneComponentContainer;
 
 		/// <summary>
+		/// シーン遷移中にシーン内カメラの代わりに使用するカメラ
+		/// </summary>
+		[SerializeField]
+		Camera alternativeCamera;
+
+		/// <summary>
 		/// 現在のシーン
 		/// </summary>
 		public SceneBase CurrentScene { get; private set; }
@@ -151,6 +157,11 @@ namespace Flappy.Manager
 			}
 
 			return false;
+		}
+
+		public void SetAlternativeCameraActive(bool value)
+		{
+			this.alternativeCamera.gameObject.SetActive(value);
 		}
 	}
 }

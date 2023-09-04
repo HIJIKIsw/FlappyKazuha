@@ -17,6 +17,17 @@ namespace Flappy.Common
 		private static T _instance;
 
 		/// <summary>
+		/// 初期化済フラグ
+		/// </summary>
+		public static bool IsInitialized
+		{
+			get
+			{
+				return _instance != null;
+			}
+		}
+
+		/// <summary>
 		/// インスタンス
 		/// </summary>
 		public static T Instance
