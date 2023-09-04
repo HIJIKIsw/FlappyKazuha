@@ -5,10 +5,9 @@ namespace Flappy.Utility
 {
 	public class StaticCoroutine : MonoBehaviour
 	{
-		public static void Start(IEnumerator coroutine, string name = "StaticCoroutine")
+		public static void Start(IEnumerator coroutine)
 		{
-			var obj = new GameObject();
-			obj.name = name;
+			var obj = new GameObject("StaticCoroutine");
 
 			var component = obj.AddComponent<StaticCoroutine>();
 			component.StartCoroutine(component.Do(coroutine));
