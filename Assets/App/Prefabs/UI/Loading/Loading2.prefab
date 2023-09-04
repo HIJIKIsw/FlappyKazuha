@@ -127,8 +127,8 @@ Canvas:
   m_GameObject: {fileID: 391355537837439544}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
-  m_Camera: {fileID: 5279851431535922592}
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -239,7 +239,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 248293558172759652}
   - {fileID: 9064058182014484925}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1238,86 +1237,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1001 &2031691362907994475
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 8820377485438710105}
-    m_Modifications:
-    - target: {fileID: 577035534626830684, guid: 1866e9f2c398a764d96cc6c683dc68bf, type: 3}
-      propertyPath: m_Name
-      value: Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 577035534626830684, guid: 1866e9f2c398a764d96cc6c683dc68bf, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2251827487463673615, guid: 1866e9f2c398a764d96cc6c683dc68bf, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2251827487463673615, guid: 1866e9f2c398a764d96cc6c683dc68bf, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2251827487463673615, guid: 1866e9f2c398a764d96cc6c683dc68bf, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2251827487463673615, guid: 1866e9f2c398a764d96cc6c683dc68bf, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2251827487463673615, guid: 1866e9f2c398a764d96cc6c683dc68bf, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2251827487463673615, guid: 1866e9f2c398a764d96cc6c683dc68bf, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2251827487463673615, guid: 1866e9f2c398a764d96cc6c683dc68bf, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2251827487463673615, guid: 1866e9f2c398a764d96cc6c683dc68bf, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2251827487463673615, guid: 1866e9f2c398a764d96cc6c683dc68bf, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2251827487463673615, guid: 1866e9f2c398a764d96cc6c683dc68bf, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6158611332390548683, guid: 1866e9f2c398a764d96cc6c683dc68bf, type: 3}
-      propertyPath: m_Depth
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 6158611332390548683, guid: 1866e9f2c398a764d96cc6c683dc68bf, type: 3}
-      propertyPath: m_ClearFlags
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6158611332390548683, guid: 1866e9f2c398a764d96cc6c683dc68bf, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 512
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1866e9f2c398a764d96cc6c683dc68bf, type: 3}
---- !u!4 &248293558172759652 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2251827487463673615, guid: 1866e9f2c398a764d96cc6c683dc68bf, type: 3}
-  m_PrefabInstance: {fileID: 2031691362907994475}
-  m_PrefabAsset: {fileID: 0}
---- !u!20 &5279851431535922592 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 6158611332390548683, guid: 1866e9f2c398a764d96cc6c683dc68bf, type: 3}
-  m_PrefabInstance: {fileID: 2031691362907994475}
-  m_PrefabAsset: {fileID: 0}
