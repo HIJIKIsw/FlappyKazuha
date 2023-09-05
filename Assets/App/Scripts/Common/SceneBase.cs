@@ -1,9 +1,21 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Flappy.Common
 {
 	public abstract class SceneBase : MonoBehaviour, IScene
 	{
+		/// <summary>
+		/// Unity シーンオブジェクト
+		/// </summary>
+		public Scene Scene
+		{
+			get
+			{
+				return this.gameObject.scene;
+			}
+		}
+
 		/// <summary>
 		/// シーンファイル名
 		/// </summary>

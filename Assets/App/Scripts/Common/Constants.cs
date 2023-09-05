@@ -20,7 +20,9 @@ namespace Flappy.Common
 				/// </summary>
 				public enum SE
 				{
-					pico22
+					pico22,
+					kaifuku1,
+					kaifuku2,
 				}
 			}
 		}

@@ -8,36 +8,37 @@ namespace Flappy.Common
 {
 	public class MainCamera : MonoBehaviour
 	{
+		bool isQuitting = false;
+
+		void OnApplicationQuit()
+		{
+			this.isQuitting = true;
+		}
+
 		// TODO: もうちょいきれいに書きたい
 		void OnEnable()
 		{
-			if (SceneManager.IsInitialized == false)
+			if (isQuitting == true)
 			{
-				StaticCoroutine.Start(this.WaitForSceneManager(() =>
-				{
-					SceneManager.Instance.SetAlternativeCameraActive(false);
-				}));
+				return;
 			}
-			else
+			StaticCoroutine.Start(this.WaitForSceneManager(() =>
 			{
 				SceneManager.Instance.SetAlternativeCameraActive(false);
-			}
+			}));
 		}
 
 		// TODO: もうちょいきれいに書きたい
 		void OnDisable()
 		{
-			if (SceneManager.IsInitialized == false)
+			if (isQuitting == true)
 			{
-				StaticCoroutine.Start(this.WaitForSceneManager(() =>
-				{
-					SceneManager.Instance.SetAlternativeCameraActive(true);
-				}));
+				return;
 			}
-			else
+			StaticCoroutine.Start(this.WaitForSceneManager(() =>
 			{
 				SceneManager.Instance.SetAlternativeCameraActive(true);
-			}
+			}));
 		}
 
 		/// <summary>

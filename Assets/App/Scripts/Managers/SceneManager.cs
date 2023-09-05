@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Flappy.Common;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using USceneManager = UnityEngine.SceneManagement.SceneManager;
 
 namespace Flappy.Manager
@@ -87,6 +88,9 @@ namespace Flappy.Manager
 				return;
 			}
 
+			AudioManager.Instance.PlaySE(Constants.Assets.Audio.SE.kaifuku1, 0.1f, 0.8f);
+			AudioManager.Instance.PlaySE(Constants.Assets.Audio.SE.kaifuku2, 0.4f, 2.5f);
+
 			// TODO: メソッド抽出などしてきれいに書き直す
 			LoadingManager.Instance.ShowFullscreen(2, () =>
 			{
@@ -127,7 +131,11 @@ namespace Flappy.Manager
 				};
 			}, () =>
 			{
-				this.CurrentScene?.SetActive(true);
+				if (this.CurrentScene != null)
+				{
+					this.CurrentScene.SetActive(true);
+					USceneManager.SetActiveScene(this.CurrentScene.Scene);
+				}
 			});
 		}
 
