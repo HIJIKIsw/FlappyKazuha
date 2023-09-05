@@ -23,6 +23,7 @@ namespace Flappy.Common
 					pico22,
 					kaifuku1,
 					kaifuku2,
+					boyon,
 				}
 			}
 		}
