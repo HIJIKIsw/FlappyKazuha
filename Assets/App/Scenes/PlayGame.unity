@@ -488,6 +488,7 @@ Transform:
   - {fileID: 1146258332}
   - {fileID: 181614413}
   - {fileID: 8884928608654799346}
+  - {fileID: 1089734117}
   - {fileID: 7777630808677347140}
   - {fileID: 8328841317379291796}
   - {fileID: 73139242}
@@ -505,6 +506,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d35dc4940cbf047a9e76b778285d77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1089734116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1089734117}
+  m_Layer: 0
+  m_Name: PillarContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &1089734117
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089734116}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 661008218}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1146258330
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -863,6 +895,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PillarEmitter
       objectReference: {fileID: 0}
+    - target: {fileID: 2375960906258716270, guid: cf00e87a48b4aa541beb898348648c38, type: 3}
+      propertyPath: pillarContainer
+      value: 
+      objectReference: {fileID: 1089734116}
     - target: {fileID: 7469438405708381978, guid: cf00e87a48b4aa541beb898348648c38, type: 3}
       propertyPath: m_LocalPosition.x
       value: 800
