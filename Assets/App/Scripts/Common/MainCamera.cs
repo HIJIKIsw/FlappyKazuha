@@ -22,17 +22,10 @@ namespace Flappy.Common
 			{
 				return;
 			}
-			if (SceneManager.IsInitialized == false)
-			{
-				StaticCoroutine.Start(this.WaitForSceneManager(() =>
-				{
-					SceneManager.Instance.SetAlternativeCameraActive(false);
-				}));
-			}
-			else
+			StaticCoroutine.Start(this.WaitForSceneManager(() =>
 			{
 				SceneManager.Instance.SetAlternativeCameraActive(false);
-			}
+			}));
 		}
 
 		// TODO: もうちょいきれいに書きたい
@@ -42,17 +35,10 @@ namespace Flappy.Common
 			{
 				return;
 			}
-			if (SceneManager.IsInitialized == false)
-			{
-				StaticCoroutine.Start(this.WaitForSceneManager(() =>
-				{
-					SceneManager.Instance.SetAlternativeCameraActive(true);
-				}));
-			}
-			else
+			StaticCoroutine.Start(this.WaitForSceneManager(() =>
 			{
 				SceneManager.Instance.SetAlternativeCameraActive(true);
-			}
+			}));
 		}
 
 		/// <summary>
