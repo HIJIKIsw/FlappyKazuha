@@ -44,8 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de3895c946a08dd488fc5fa025b966a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pillarPrefab: {fileID: 2207589625095704608, guid: 2d85bf89d4452074a8853798b066c42b, type: 3}
+  pillarPrefab: {fileID: -9113069398032769977, guid: 2d85bf89d4452074a8853798b066c42b, type: 3}
   span: 1.5
   pillarSpeed: 250
   pillarYRandomRange: 150
   primogemPrefab: {fileID: 6014284129322135983, guid: c415d62c44f872846aafb9c4615dbd9f, type: 3}
+  pillarContainer: {fileID: 0}
