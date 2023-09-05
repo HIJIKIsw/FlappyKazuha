@@ -176,7 +176,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e62ec7c86620584cbaf5d87c93f3a09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rigidbody2D: {fileID: 8492820422519441252}
   jumpForce: 600
+  playGameScene: {fileID: 0}
 --- !u!50 &8492820422519441252
 Rigidbody2D:
   serializedVersion: 4

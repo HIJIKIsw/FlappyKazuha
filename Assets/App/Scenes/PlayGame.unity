@@ -241,6 +241,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 661008218}
     m_Modifications:
+    - target: {fileID: 1083791387230228714, guid: 412ed52ee28df8948bfe46ec2becddf5, type: 3}
+      propertyPath: playGameScene
+      value: 
+      objectReference: {fileID: 661008219}
     - target: {fileID: 4379040375103320704, guid: 412ed52ee28df8948bfe46ec2becddf5, type: 3}
       propertyPath: m_Name
       value: Player
@@ -506,6 +510,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d35dc4940cbf047a9e76b778285d77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pillarContainer: {fileID: 1089734116}
+  pillarEmmiter: {fileID: 8884928608654799347}
 --- !u!1 &1089734116
 GameObject:
   m_ObjectHideFlags: 0
@@ -949,6 +955,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7469438405708381978, guid: cf00e87a48b4aa541beb898348648c38, type: 3}
   m_PrefabInstance: {fileID: 8884928608654799345}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8884928608654799347 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2375960906258716270, guid: cf00e87a48b4aa541beb898348648c38, type: 3}
+  m_PrefabInstance: {fileID: 8884928608654799345}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de3895c946a08dd488fc5fa025b966a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
