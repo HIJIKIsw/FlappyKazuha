@@ -8,9 +8,20 @@ namespace Flappy.Common
 {
 	public class MainCamera : MonoBehaviour
 	{
+		bool isQuitting = false;
+
+		void OnApplicationQuit()
+		{
+			this.isQuitting = true;
+		}
+
 		// TODO: もうちょいきれいに書きたい
 		void OnEnable()
 		{
+			if (isQuitting == true)
+			{
+				return;
+			}
 			if (SceneManager.IsInitialized == false)
 			{
 				StaticCoroutine.Start(this.WaitForSceneManager(() =>
@@ -27,6 +38,10 @@ namespace Flappy.Common
 		// TODO: もうちょいきれいに書きたい
 		void OnDisable()
 		{
+			if (isQuitting == true)
+			{
+				return;
+			}
 			if (SceneManager.IsInitialized == false)
 			{
 				StaticCoroutine.Start(this.WaitForSceneManager(() =>
