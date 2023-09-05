@@ -26,6 +26,9 @@ namespace Flappy.Gimmicks
 		[SerializeField]
 		GameObject primogemPrefab;
 
+		[SerializeField]
+		GameObject pillarContainer;
+
 		void Update()
 		{
 			this.currentTime += Time.deltaTime;
@@ -37,7 +40,7 @@ namespace Flappy.Gimmicks
 				var pillarPosition = this.transform.position + (Vector3.up * randY);
 				
 				// TODO: パフォーマンス改善のため、GetComponentではなくPillarクラス側にpublicなメンバを作ってそこから参照する
-				var pillar = GameObject.Instantiate(this.pillarPrefab, pillarPosition, Quaternion.identity);
+				var pillar = GameObject.Instantiate(this.pillarPrefab, pillarPosition, Quaternion.identity, pillarContainer.transform);
 				pillar.GetComponent<Rigidbody2D>().velocity = Vector2.left * this.pillarSpeed;
 
 				var primogem = GameObject.Instantiate(this.primogemPrefab, pillar.transform);
