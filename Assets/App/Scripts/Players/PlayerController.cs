@@ -34,7 +34,7 @@ namespace Flappy
 		/// </summary>
 		void Update()
 		{
-			if (Input.GetKeyDown(KeyCode.Space))
+			if (Input.GetMouseButtonDown(0))
 			{
 				this.isJump = true;
 			}
