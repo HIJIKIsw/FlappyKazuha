@@ -6,6 +6,17 @@ namespace Flappy.Common
 	public static class Constants
 	{
 		/// <summary>
+		/// ゲーム挙動に関わる変数
+		/// </summary>
+		public static class Game
+		{
+			/// <summary>
+			/// 1秒間に加算されるスコア
+			/// </summary>
+			public const float ScorePerSecond = 2f;
+		}
+
+		/// <summary>
 		/// アセットアドレス
 		/// </summary>
 		public static class Assets

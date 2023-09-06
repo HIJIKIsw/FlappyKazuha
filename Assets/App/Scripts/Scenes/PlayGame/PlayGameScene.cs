@@ -36,7 +36,7 @@ namespace Flappy
 		{
 			if (this.IsProceedScoreCount == true)
 			{
-				this.currentScore += Time.deltaTime * 2f;
+				this.currentScore += Time.deltaTime * Constants.Game.ScorePerSecond;
 			}
 		}
 
