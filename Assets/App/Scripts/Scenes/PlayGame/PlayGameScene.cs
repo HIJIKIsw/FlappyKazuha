@@ -7,14 +7,20 @@ namespace Flappy
 {
 	public class PlayGameScene : SceneBase
 	{
+		/// <summary>
+		/// シーン名
+		/// </summary>
 		public override string Name => "PlayGame";
 
 		[SerializeField]
-		GameObject pillarContainer;
+		private GameObject pillarContainer;
 
 		[SerializeField]
-		PillarEmmiter pillarEmmiter;
+		private PillarEmmiter pillarEmmiter;
 
+		/// <summary>
+		/// ゲームオーバー時処理
+		/// </summary>
 		public void GameOver()
 		{
 			var pillars = this.GetAllPillars();
@@ -25,7 +31,10 @@ namespace Flappy
 			this.pillarEmmiter.gameObject.SetActive(false);
 		}
 
-		public List<Pillar> GetAllPillars()
+		/// <summary>
+		/// 全ての柱を取得
+		/// </summary>
+		private List<Pillar> GetAllPillars()
 		{
 			var pillars = new List<Pillar>();
 			var pillarCount = this.pillarContainer.transform.childCount;
