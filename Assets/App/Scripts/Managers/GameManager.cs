@@ -1,3 +1,4 @@
+using System;
 using Flappy.Common;
 using UnityEngine;
 
@@ -34,7 +35,19 @@ namespace Flappy.Manager
 		/// <summary>
 		/// 自己ベストスコア
 		/// </summary>
-		public float BestScore { get; set; } = 0f;
+		/// <remarks>値は常に少数第一位までで出し入れされる (四捨五入)</remarks>
+		public float BestScore
+		{
+			get
+			{
+				return (float)Math.Round(this.bestScore, 1);
+			}
+			set
+			{
+				this.bestScore = (float)Math.Round(value, 1);
+			}
+		}
+		private float bestScore = 0f;
 	}
 }
 
