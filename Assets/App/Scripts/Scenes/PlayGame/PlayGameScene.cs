@@ -23,16 +23,23 @@ namespace Flappy
 		private PillarEmmiter pillarEmmiter;
 
 		[SerializeField]
-		private TextMeshProUGUI scoreValue;
+		private TextMeshProUGUI currentScoreText;
+
+		[SerializeField]
+		private TextMeshProUGUI bestScoreText;
 
 		public bool IsProceedScoreCount { get; set; } = false;
 
 		private float currentScore = 0f;
+		private float bestScore = 0f;
 
 		private void Start()
 		{
 			// TODO: タップでスタート実装後はタップするまでカウント始まらないようにする
 			this.IsProceedScoreCount = true;
+
+			this.bestScore = GameManager.Instance.BestScore;
+			this.bestScoreText.text = this.scoreToText(this.bestScore);
 		}
 
 		private void Update()
@@ -45,7 +52,7 @@ namespace Flappy
 
 		private void FixedUpdate()
 		{
-			scoreValue.text = this.currentScore.ToString("F1") + " m";
+			currentScoreText.text = this.scoreToText(this.currentScore);
 		}
 
 		/// <summary>
@@ -55,6 +62,12 @@ namespace Flappy
 		{
 			this.IsProceedScoreCount = false;
 
+			// 自己ベストは少数第一位までで保持されているので丸めてから比較する
+			if (Math.Round(this.currentScore, 1) > GameManager.Instance.BestScore)
+			{
+				GameManager.Instance.BestScore = this.currentScore;
+			}
+
 			var pillars = this.GetAllPillars();
 			foreach (var pillar in pillars)
 			{
@@ -63,7 +76,8 @@ namespace Flappy
 			this.pillarEmmiter.gameObject.SetActive(false);
 
 			// TODO: リザルト画面
-			DOVirtual.DelayedCall(2f, () => {
+			DOVirtual.DelayedCall(2f, () =>
+			{
 				SceneManager.Instance.Load<TitleScene>();
 			});
 		}
@@ -84,6 +98,15 @@ namespace Flappy
 				}
 			}
 			return pillars;
+		}
+
+		/// <summary>
+		/// スコアを画面に表示する形式の文字列に変換
+		/// </summary>
+		private string scoreToText(float score)
+		{
+			var roundScore = Math.Round(score, 1);
+			return roundScore.ToString("F1") + " m";
 		}
 	}
 }

@@ -35,7 +35,7 @@ namespace Flappy.Manager
 		/// <summary>
 		/// 自己ベストスコア
 		/// </summary>
-		/// <remarks>値は常に少数第一位までで出し入れされる (四捨五入)</remarks>
+		/// <remarks>値は常に少数第一位までで丸めて出し入れされる (四捨五入)</remarks>
 		public float BestScore
 		{
 			get
