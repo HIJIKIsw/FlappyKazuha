@@ -76,7 +76,7 @@ namespace Flappy.UI
 		float intervalLeapMag = 0f;
 		bool isCalledLongPressEvent = false;
 
-		void Start()
+		new void Start()
 		{
 			this.intervalLeapMag = 1.0f / this.IntervalLerpTime;
 		}
