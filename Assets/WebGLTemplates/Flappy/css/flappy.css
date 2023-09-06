@@ -1,0 +1,9 @@
+/* フッター削除 */
+#unity-footer {
+	display: none;
+}
+
+/* フォーカス時に黒枠が出ないようにする */
+#unity-canvas {
+	outline: none;
+}
