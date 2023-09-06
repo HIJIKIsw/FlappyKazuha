@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Flappy.Common;
 using Flappy.Gimmicks;
+using TMPro;
 using UnityEngine;
 
 namespace Flappy
@@ -18,11 +19,39 @@ namespace Flappy
 		[SerializeField]
 		private PillarEmmiter pillarEmmiter;
 
+		[SerializeField]
+		private TextMeshProUGUI scoreValue;
+
+		public bool IsProceedScoreCount { get; set; } = false;
+
+		private float currentScore = 0f;
+
+		private void Start()
+		{
+			// TODO: タップでスタート実装後はタップするまでカウント始まらないようにする
+			this.IsProceedScoreCount = true;
+		}
+
+		private void Update()
+		{
+			if (this.IsProceedScoreCount == true)
+			{
+				this.currentScore += Time.deltaTime * 2f;
+			}
+		}
+
+		private void FixedUpdate()
+		{
+			scoreValue.text = this.currentScore.ToString("F1") + " m";
+		}
+
 		/// <summary>
 		/// ゲームオーバー時処理
 		/// </summary>
 		public void GameOver()
 		{
+			this.IsProceedScoreCount = false;
+
 			var pillars = this.GetAllPillars();
 			foreach (var pillar in pillars)
 			{

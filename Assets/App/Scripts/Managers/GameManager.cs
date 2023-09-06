@@ -30,6 +30,11 @@ namespace Flappy.Manager
 		/// </summary>
 		/// TODO: 所持品クラスみたいなものを作ってそっちにまとめる (原石、ネームプレート、称号など)
 		public int PrimogemCount { get; set; } = 0;
+
+		/// <summary>
+		/// 自己ベストスコア
+		/// </summary>
+		public float BestScore { get; set; } = 0f;
 	}
 }
 
