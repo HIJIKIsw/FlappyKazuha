@@ -1,4 +1,3 @@
-using DG.Tweening;
 using Flappy.Manager;
 using UnityEngine;
 
@@ -89,11 +88,6 @@ namespace Flappy
 			this.isDead = true;
 			this.playGameScene.GameOver();
 			this.SetSpeed(Vector2.up * this.jumpForce);
-
-			// TODO: リザルト画面
-			DOVirtual.DelayedCall(2f, () => {
-				SceneManager.Instance.Load<TitleScene>();
-			});
 		}
 	}
 }

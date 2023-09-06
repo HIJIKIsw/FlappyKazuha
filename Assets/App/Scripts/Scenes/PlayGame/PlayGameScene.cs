@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
+using DG.Tweening;
 using Flappy.Common;
 using Flappy.Gimmicks;
-using TMPro;
-using UnityEngine;
+using Flappy.Manager;
 
 namespace Flappy
 {
@@ -58,6 +61,11 @@ namespace Flappy
 				pillar.SetSpeed(Vector2.zero);
 			}
 			this.pillarEmmiter.gameObject.SetActive(false);
+
+			// TODO: リザルト画面
+			DOVirtual.DelayedCall(2f, () => {
+				SceneManager.Instance.Load<TitleScene>();
+			});
 		}
 
 		/// <summary>
