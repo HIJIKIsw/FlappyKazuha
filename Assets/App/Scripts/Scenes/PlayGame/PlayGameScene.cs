@@ -53,6 +53,10 @@ namespace Flappy
 		private void FixedUpdate()
 		{
 			currentScoreText.text = this.scoreToText(this.currentScore);
+			if (Math.Round(this.currentScore, 1) > GameManager.Instance.BestScore)
+			{
+				this.bestScoreText.text = this.scoreToText(this.currentScore);
+			}
 		}
 
 		/// <summary>
