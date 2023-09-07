@@ -22,6 +22,60 @@ namespace Flappy.Manager
 
 		List<AudioSource> audioSources = new List<AudioSource>();
 
+		[SerializeField, Range(0f, 1f)]
+		float masterVolume = 0.5f;
+
+		[SerializeField, Range(0f, 1f)]
+		float seVolume = 0.5f;
+
+		[SerializeField, Range(0f, 1f)]
+		float bgmVolume = 0.5f;
+
+		/// <summary>
+		/// マスター音量
+		/// </summary>
+		public float MasterVolume
+		{
+			get
+			{
+				return this.masterVolume;
+			}
+			set
+			{
+				this.masterVolume = Mathf.Clamp01(value);
+			}
+		}
+
+		/// <summary>
+		/// SE 音量
+		/// </summary>
+		public float SeVolume
+		{
+			get
+			{
+				return this.seVolume;
+			}
+			set
+			{
+				this.seVolume = Mathf.Clamp01(value);
+			}
+		}
+
+		/// <summary>
+		/// BGM 音量
+		/// </summary>
+		public float BgmVolume
+		{
+			get
+			{
+				return this.bgmVolume;
+			}
+			set
+			{
+				this.bgmVolume = Mathf.Clamp01(value);
+			}
+		}
+
 		void Start()
 		{
 			for (var i = 0; i < this.defaultAudioInstances; i++)
@@ -39,7 +93,7 @@ namespace Flappy.Manager
 				var audioClip = handle.Result;
 				var audioSource = this.GetAvailableAudioSource();
 				audioSource.clip = audioClip;
-				audioSource.volume = volume;
+				audioSource.volume = volume * this.masterVolume * this.seVolume;
 				audioSource.pitch = pitch;
 				audioSource.Play();
 			};
