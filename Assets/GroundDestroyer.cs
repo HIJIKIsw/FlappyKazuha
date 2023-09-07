@@ -2,17 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundtileDestroyer : MonoBehaviour
+namespace Flappy.Gimmicks
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	public class PillarDestroyer : MonoBehaviour
+	{
+		[SerializeField]
+		BoxCollider2D collider;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+		/// <summary>
+		/// 柱を消すための当たり判定
+		/// </summary>
+		void OnTriggerEnter2D(Collider2D collider)
+		{
+			var otherLayer = collider.gameObject.layer;
+			var otherLayerName = LayerMask.LayerToName(otherLayer);
+
+			switch (otherLayerName)
+			{
+				case "Pillar":
+					{
+						var pillarComponent = collider.gameObject.GetComponent<Pillar>();
+						pillarComponent.Remove();
+						break;
+					}
+				default:
+					{
+						// Nothing to do.
+						break;
+					}
+			}
+		}
+	}
 }
