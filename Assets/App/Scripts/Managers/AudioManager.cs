@@ -9,7 +9,6 @@ namespace Flappy.Manager
 {
 	// TODO: 一度読み込んだアセットをキャッシュしておく仕組み
 	// TODO: 初回再生するまでアセットが読み込まれないので、アセットを先読みする仕組み
-	// TODO: 同時再生数の上限設定 (上限を超えるものはキュー方式で順番に再生する)
 	// TODO: BGM用のAPI (再生、切り替え、停止など、フェード出来るとなおよい)
 	public class AudioManager : SingletonMonoBehaviour<AudioManager>
 	{
@@ -19,6 +18,12 @@ namespace Flappy.Manager
 		/// <remarks>足りない場合は自動で拡張する</remarks>
 		[SerializeField]
 		int defaultAudioInstances = 8;
+
+		/// <summary>
+		/// 同時再生最大数
+		/// </summary>
+		[SerializeField]
+		int maxAudioInstances = 12;
 
 		List<AudioSource> audioSources = new List<AudioSource>();
 
@@ -92,6 +97,10 @@ namespace Flappy.Manager
 			{
 				var audioClip = handle.Result;
 				var audioSource = this.GetAvailableAudioSource();
+				if (audioSource == null)
+				{
+					return;
+				}
 				audioSource.clip = audioClip;
 				audioSource.volume = volume * this.masterVolume * this.seVolume;
 				audioSource.pitch = pitch;
@@ -104,6 +113,10 @@ namespace Flappy.Manager
 			var audioSource = this.audioSources.FirstOrDefault(_ => _.isPlaying == false);
 			if (audioSource == null)
 			{
+				if (this.audioSources.Count >= this.maxAudioInstances)
+				{
+					return null;
+				}
 				audioSource = this.AddComponent<AudioSource>();
 				this.audioSources.Add(audioSource);
 			}
