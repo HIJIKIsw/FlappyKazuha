@@ -2,17 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundEmitter : MonoBehaviour
+namespace Flappy.Gimmicks
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    /// <summary>
+    /// 地面エミッター
+    /// </summary>
+    public class GroundEmmiter : MonoBehaviour
+	{
+    	[SerializeField]
+		GameObject GroundPrefab;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+		[SerializeField]
+		float span;
+
+		float currentTime = 0f;
+
+		[SerializeField]
+		float GroundSpeed;
+
+        void Update()
+		{
+			this.currentTime += Time.deltaTime;
+			if( this.currentTime >= span )
+			{
+				this.currentTime = 0f;
+
+				var Ground = GameObject.Instantiate(this.GroundPrefab, GroundPosition, Quaternion.identity);
+				Ground.GetComponent<Rigidbody2D>().velocity = Vector2.left * this.GroundSpeed;
+
+            }
+        }
     }
 }

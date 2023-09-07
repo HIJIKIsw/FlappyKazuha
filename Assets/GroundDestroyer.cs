@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace Flappy.Gimmicks
 {
-	public class PillarDestroyer : MonoBehaviour
+	public class GroundDestroyer : MonoBehaviour
 	{
 		[SerializeField]
 		BoxCollider2D collider;
 
 		/// <summary>
-		/// 柱を消すための当たり判定
+		/// Groundを消すための当たり判定
 		/// </summary>
 		void OnTriggerEnter2D(Collider2D collider)
 		{
@@ -19,10 +19,10 @@ namespace Flappy.Gimmicks
 
 			switch (otherLayerName)
 			{
-				case "Pillar":
+				case "Ground":
 					{
-						var pillarComponent = collider.gameObject.GetComponent<Pillar>();
-						pillarComponent.Remove();
+						var GroundComponent = collider.gameObject.GetComponent<Ground>();
+						GroundComponent.Remove();
 						break;
 					}
 				default:
