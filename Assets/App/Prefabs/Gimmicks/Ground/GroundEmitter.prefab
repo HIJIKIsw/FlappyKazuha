@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 140242873976306184}
   - component: {fileID: 6639010828534981526}
   - component: {fileID: 8931879344550465409}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GroundEmitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,7 +65,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 1.695891}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -76,7 +76,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 4.33}
+  m_Size: {x: 1, y: 0.9382179}
   m_EdgeRadius: 0
 --- !u!114 &8931879344550465409
 MonoBehaviour:
@@ -90,3 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d49e9a3a5d572114d9fb1b1eff864458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GroundPrefab: {fileID: 2646937592493523933, guid: 082cc884a2e13b24bb6517f34f01747c, type: 3}
+  span: 1
+  GroundSpeed: 250
+  GroundPosition: {x: 1200, y: -336}

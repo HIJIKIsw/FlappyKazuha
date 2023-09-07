@@ -38,7 +38,6 @@ TagManager:
   - 
   - 
   - 
-  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
@@ -51,6 +50,9 @@ TagManager:
     locked: 0
   - name: Pillar
     uniqueID: 295809933
+    locked: 0
+  - name: Ground
+    uniqueID: 1280577421
     locked: 0
   - name: Player
     uniqueID: 248092727

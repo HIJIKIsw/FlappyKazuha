@@ -20,6 +20,9 @@ namespace Flappy.Gimmicks
 		[SerializeField]
 		float GroundSpeed;
 
+		[SerializeField]
+		Vector2 GroundPosition;
+
         void Update()
 		{
 			this.currentTime += Time.deltaTime;
