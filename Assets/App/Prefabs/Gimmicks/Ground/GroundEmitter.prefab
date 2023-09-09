@@ -91,6 +91,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GroundPrefab: {fileID: 2646937592493523933, guid: 082cc884a2e13b24bb6517f34f01747c, type: 3}
-  span: 1
   GroundSpeed: 250
-  GroundPosition: {x: 1200, y: -336}
+  StartupGroundPosition: {x: 0, y: -344}

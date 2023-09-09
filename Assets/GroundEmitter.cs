@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Flappy.Gimmicks
@@ -12,26 +13,34 @@ namespace Flappy.Gimmicks
     	[SerializeField]
 		GameObject GroundPrefab;
 
-		[SerializeField]
-		float span;
-
 		float currentTime = 0f;
 
 		[SerializeField]
 		float GroundSpeed;
 
 		[SerializeField]
-		Vector2 GroundPosition;
+		Vector2 StartupGroundPosition;
+
+		//var otherLayer = collider.gameObject.layer;
+		//var otherLayerName = LayerMask.LayerToName(otherLayer);
+		GameObject latestGround;
 
         void Update()
 		{
-			this.currentTime += Time.deltaTime;
-			if( this.currentTime >= span )
+			
+			if ( this.latestGround == null || this.latestGround.transform.position.x <= 0 )
 			{
-				this.currentTime = 0f;
-
-				var Ground = GameObject.Instantiate(this.GroundPrefab, GroundPosition, Quaternion.identity);
-				Ground.GetComponent<Rigidbody2D>().velocity = Vector2.left * this.GroundSpeed;
+				Vector2 GroundBornX;
+				if ( this.latestGround == null )
+				{
+					GroundBornX = this.StartupGroundPosition;
+				}
+				else
+				{
+					GroundBornX = new Vector2(this.latestGround.transform.position.x+1488, this.latestGround.transform.position.y);
+				}
+				this.latestGround = GameObject.Instantiate(this.GroundPrefab, GroundBornX, Quaternion.identity);
+				this.latestGround.GetComponent<Rigidbody2D>().velocity = Vector2.left * this.GroundSpeed;
 
             }
         }

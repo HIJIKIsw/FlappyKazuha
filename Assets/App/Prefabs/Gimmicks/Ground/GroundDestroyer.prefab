@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2909600982444999129}
   - component: {fileID: -1259120420939685966}
   - component: {fileID: -3892489306961746484}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GroundDestroyer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0

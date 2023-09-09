@@ -101,20 +101,20 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 436575419801312585}
     m_ColliderPaths:
-    - - X: -1474305664
-        Y: 196799984
-      - X: -3305694464
-        Y: 196799984
-      - X: -3305694464
-        Y: -244800000
-      - X: -1474305664
-        Y: -244800000
+    - - X: 7820000256
+        Y: 320000000
+      - X: -7539999744
+        Y: 320000000
+      - X: -7539999744
+        Y: -160000000
+      - X: 7820000256
+        Y: -160000000
   m_CompositePaths:
     m_Paths:
-    - - {x: -147.43059, y: -24.48}
-      - {x: -147.43059, y: 19.679998}
-      - {x: -330.56946, y: 19.67997}
-      - {x: -330.56943, y: -24.48}
+    - - {x: 782, y: -16}
+      - {x: 782, y: 32}
+      - {x: -754, y: 31.999971}
+      - {x: -753.99994, y: -16}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
@@ -158,7 +158,7 @@ Transform:
   m_GameObject: {fileID: 7336320404505325259}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -239, y: 0, z: 0}
+  m_LocalPosition: {x: 14, y: 8, z: 0}
   m_LocalScale: {x: 48, y: 48, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -202,15 +202,15 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 295809933
-  m_SortingLayer: 3
+  m_SortingLayerID: 1280577421
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -660070601, guid: 29e21165cb3ae334d969d4be634eaa9e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 4, y: 1}
+  m_Size: {x: 32, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -248,16 +248,16 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 1
-  m_Offset: {x: -0.00000017881393, y: -0.050000012}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
-    newSize: {x: 4, y: 1}
+    newSize: {x: 32, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.8153934, y: 0.91999996}
+  m_Size: {x: 32, y: 1}
   m_EdgeRadius: 0

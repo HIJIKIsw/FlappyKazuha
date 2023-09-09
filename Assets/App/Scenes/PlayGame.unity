@@ -696,17 +696,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -1259120420939685966, guid: e2671711a5cd12242a5a2c59d96d9fe1, type: 3}
-      propertyPath: m_IncludeLayers.m_Bits
-      value: 512
-      objectReference: {fileID: 0}
     - target: {fileID: 2909600982444999129, guid: e2671711a5cd12242a5a2c59d96d9fe1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1120
       objectReference: {fileID: 0}
     - target: {fileID: 2909600982444999129, guid: e2671711a5cd12242a5a2c59d96d9fe1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -16
       objectReference: {fileID: 0}
     - target: {fileID: 2909600982444999129, guid: e2671711a5cd12242a5a2c59d96d9fe1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -743,10 +739,6 @@ PrefabInstance:
     - target: {fileID: 4695855955707160352, guid: e2671711a5cd12242a5a2c59d96d9fe1, type: 3}
       propertyPath: m_Name
       value: GroundDestroyer
-      objectReference: {fileID: 0}
-    - target: {fileID: 4695855955707160352, guid: e2671711a5cd12242a5a2c59d96d9fe1, type: 3}
-      propertyPath: m_Layer
-      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
