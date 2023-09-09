@@ -9,7 +9,6 @@ namespace Flappy.Manager
 {
 	// TODO: 一度読み込んだアセットをキャッシュしておく仕組み
 	// TODO: 初回再生するまでアセットが読み込まれないので、アセットを先読みする仕組み
-	// TODO: 同時再生数の上限設定 (上限を超えるものはキュー方式で順番に再生する)
 	// TODO: BGM用のAPI (再生、切り替え、停止など、フェード出来るとなおよい)
 	public class AudioManager : SingletonMonoBehaviour<AudioManager>
 	{
@@ -20,7 +19,67 @@ namespace Flappy.Manager
 		[SerializeField]
 		int defaultAudioInstances = 8;
 
+		/// <summary>
+		/// 同時再生最大数
+		/// </summary>
+		[SerializeField]
+		int maxAudioInstances = 12;
+
 		List<AudioSource> audioSources = new List<AudioSource>();
+
+		[SerializeField, Range(0f, 1f)]
+		float masterVolume = 0.5f;
+
+		[SerializeField, Range(0f, 1f)]
+		float seVolume = 0.5f;
+
+		[SerializeField, Range(0f, 1f)]
+		float bgmVolume = 0.5f;
+
+		/// <summary>
+		/// マスター音量
+		/// </summary>
+		public float MasterVolume
+		{
+			get
+			{
+				return this.masterVolume;
+			}
+			set
+			{
+				this.masterVolume = Mathf.Clamp01(value);
+			}
+		}
+
+		/// <summary>
+		/// SE 音量
+		/// </summary>
+		public float SeVolume
+		{
+			get
+			{
+				return this.seVolume;
+			}
+			set
+			{
+				this.seVolume = Mathf.Clamp01(value);
+			}
+		}
+
+		/// <summary>
+		/// BGM 音量
+		/// </summary>
+		public float BgmVolume
+		{
+			get
+			{
+				return this.bgmVolume;
+			}
+			set
+			{
+				this.bgmVolume = Mathf.Clamp01(value);
+			}
+		}
 
 		void Start()
 		{
@@ -38,8 +97,12 @@ namespace Flappy.Manager
 			{
 				var audioClip = handle.Result;
 				var audioSource = this.GetAvailableAudioSource();
+				if (audioSource == null)
+				{
+					return;
+				}
 				audioSource.clip = audioClip;
-				audioSource.volume = volume;
+				audioSource.volume = volume * this.masterVolume * this.seVolume;
 				audioSource.pitch = pitch;
 				audioSource.Play();
 			};
@@ -50,6 +113,10 @@ namespace Flappy.Manager
 			var audioSource = this.audioSources.FirstOrDefault(_ => _.isPlaying == false);
 			if (audioSource == null)
 			{
+				if (this.audioSources.Count >= this.maxAudioInstances)
+				{
+					return null;
+				}
 				audioSource = this.AddComponent<AudioSource>();
 				this.audioSources.Add(audioSource);
 			}

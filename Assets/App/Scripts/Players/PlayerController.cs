@@ -83,7 +83,7 @@ namespace Flappy
 				return;
 			}
 
-			AudioManager.Instance.PlaySE(Common.Constants.Assets.Audio.SE.boyon, 0.3f, 1.5f);
+			AudioManager.Instance.PlaySE(Common.Constants.Assets.Audio.SE.boyon, 0.5f, 1.5f);
 
 			this.isDead = true;
 			this.playGameScene.GameOver();
