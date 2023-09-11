@@ -301,17 +301,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6138896914313040945, guid: 412ed52ee28df8948bfe46ec2becddf5, type: 3}
   m_PrefabInstance: {fileID: 181614412}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &181614414 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1083791387230228714, guid: 412ed52ee28df8948bfe46ec2becddf5, type: 3}
-  m_PrefabInstance: {fileID: 181614412}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e62ec7c86620584cbaf5d87c93f3a09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &607377912
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,11 +1023,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1322935189}
   m_CullTransparentMesh: 1
---- !u!61 &1610359177 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 3633286343004212042, guid: f5256620c7f09b94d99b96d568288e02, type: 3}
-  m_PrefabInstance: {fileID: 1625937314730531607}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1731140705
 GameObject:
   m_ObjectHideFlags: 0
@@ -1337,10 +1321,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 661008218}
     m_Modifications:
-    - target: {fileID: 3633286343004212042, guid: f5256620c7f09b94d99b96d568288e02, type: 3}
-      propertyPath: m_Size.y
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 5207622805790981222, guid: f5256620c7f09b94d99b96d568288e02, type: 3}
       propertyPath: m_Name
       value: HeightLimit
@@ -1385,14 +1365,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6363616787514459053, guid: f5256620c7f09b94d99b96d568288e02, type: 3}
-      propertyPath: Player
-      value: 
-      objectReference: {fileID: 181614414}
-    - target: {fileID: 6363616787514459053, guid: f5256620c7f09b94d99b96d568288e02, type: 3}
-      propertyPath: limiterCollider
-      value: 
-      objectReference: {fileID: 1610359177}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
