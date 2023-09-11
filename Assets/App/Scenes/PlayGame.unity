@@ -301,6 +301,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6138896914313040945, guid: 412ed52ee28df8948bfe46ec2becddf5, type: 3}
   m_PrefabInstance: {fileID: 181614412}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &181614414 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1083791387230228714, guid: 412ed52ee28df8948bfe46ec2becddf5, type: 3}
+  m_PrefabInstance: {fileID: 181614412}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e62ec7c86620584cbaf5d87c93f3a09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &607377912
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,11 +1034,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1322935189}
   m_CullTransparentMesh: 1
---- !u!1 &1443132296 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4379040375103320704, guid: 412ed52ee28df8948bfe46ec2becddf5, type: 3}
-  m_PrefabInstance: {fileID: 181614412}
-  m_PrefabAsset: {fileID: 0}
 --- !u!61 &1610359177 stripped
 BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 3633286343004212042, guid: f5256620c7f09b94d99b96d568288e02, type: 3}
@@ -1382,7 +1388,7 @@ PrefabInstance:
     - target: {fileID: 6363616787514459053, guid: f5256620c7f09b94d99b96d568288e02, type: 3}
       propertyPath: Player
       value: 
-      objectReference: {fileID: 1443132296}
+      objectReference: {fileID: 181614414}
     - target: {fileID: 6363616787514459053, guid: f5256620c7f09b94d99b96d568288e02, type: 3}
       propertyPath: limiterCollider
       value: 
@@ -1530,7 +1536,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2089900323272996263, guid: cf00e87a48b4aa541beb898348648c38, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2375960906258716270, guid: cf00e87a48b4aa541beb898348648c38, type: 3}
       propertyPath: pillarContainer

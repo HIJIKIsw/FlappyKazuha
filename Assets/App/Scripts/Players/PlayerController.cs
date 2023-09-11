@@ -89,5 +89,11 @@ namespace Flappy
 			this.playGameScene.GameOver();
 			this.SetSpeed(Vector2.up * this.jumpForce);
 		}
+
+		public void SetPosition(Vector2 position)
+		{
+			// this.transform.positionがプレイヤーに直通するフィールドなので、それに引数として位置情報を渡す
+			this.transform.position = position;
+		}
 	}
 }
