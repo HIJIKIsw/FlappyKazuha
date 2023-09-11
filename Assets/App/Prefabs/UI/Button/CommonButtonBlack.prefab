@@ -8,6 +8,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1538455517200879332, guid: 37328e4f6a78e5b4f95e365fedf2bcb3, type: 3}
+      propertyPath: m_Color.b
+      value: 0.69803923
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538455517200879332, guid: 37328e4f6a78e5b4f95e365fedf2bcb3, type: 3}
+      propertyPath: m_Color.g
+      value: 0.9019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 1653539702917267116, guid: 37328e4f6a78e5b4f95e365fedf2bcb3, type: 3}
+      propertyPath: m_Color.b
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1653539702917267116, guid: 37328e4f6a78e5b4f95e365fedf2bcb3, type: 3}
+      propertyPath: m_Color.g
+      value: 0.3254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 1653539702917267116, guid: 37328e4f6a78e5b4f95e365fedf2bcb3, type: 3}
+      propertyPath: m_Color.r
+      value: 0.2901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 4498853936106475592, guid: 37328e4f6a78e5b4f95e365fedf2bcb3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4920820995812313926, guid: 37328e4f6a78e5b4f95e365fedf2bcb3, type: 3}
       propertyPath: m_Name
       value: CommonButtonBlack
@@ -96,6 +120,22 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: b002cc280ecddb64fa5dfac8a370cbf3, type: 2}
+    - target: {fileID: 9069343769950599526, guid: 37328e4f6a78e5b4f95e365fedf2bcb3, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.84705883
+      objectReference: {fileID: 0}
+    - target: {fileID: 9069343769950599526, guid: 37328e4f6a78e5b4f95e365fedf2bcb3, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.8980392
+      objectReference: {fileID: 0}
+    - target: {fileID: 9069343769950599526, guid: 37328e4f6a78e5b4f95e365fedf2bcb3, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.9254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 9069343769950599526, guid: 37328e4f6a78e5b4f95e365fedf2bcb3, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4292404716
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
