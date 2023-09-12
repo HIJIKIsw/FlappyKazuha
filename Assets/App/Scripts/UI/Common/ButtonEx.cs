@@ -13,7 +13,7 @@ namespace Flappy.UI
 	/// Button の拡張クラス
 	/// </summary>
 	/// <remarks>
-	/// 長押しの対応や押下時の効果音を設定できる
+	/// Unity 標準のボタンを長押しに対応させたもの
 	/// </remarks>
 	public class ButtonEx : Button
 	{
