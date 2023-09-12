@@ -1415,6 +1415,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 4160088581966336290}
+  windowRect: {fileID: 2012290842943216921}
   title: {fileID: 7321560541326998289}
   message: {fileID: 4617209046955915407}
   buttonGroup: {fileID: 3668462294685044424}

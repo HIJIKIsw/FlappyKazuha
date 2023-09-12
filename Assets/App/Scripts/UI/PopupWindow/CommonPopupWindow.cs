@@ -19,6 +19,12 @@ namespace Flappy.UI
 		CanvasGroup canvasGroup;
 
 		/// <summary>
+		/// WindowオブジェクトのRectTransform
+		/// </summary>
+		[SerializeField]
+		RectTransform windowRect;
+
+		/// <summary>
 		/// タイトル
 		/// </summary>
 		[SerializeField]
@@ -159,6 +165,19 @@ namespace Flappy.UI
 			// ボタンが1つでも追加されたら、Footer オブジェクトを有効に、EmptyFooterを無効にする
 			this.footer.gameObject.SetActive(false);
 			this.emptyFooter.gameObject.SetActive(true);
+
+			return this;
+		}
+
+		/// <summary>
+		/// ウィンドウサイズをセット
+		/// </summary>
+		/// <param name="size">ウィンドウのサイズ (px)</param>
+		/// <remarks>メソッドチェーン可</remarks>
+		public CommonPopupWindow SetSize(Vector2 size)
+		{
+			// ウィンドウサイズをセット
+			this.windowRect.sizeDelta = size;
 
 			return this;
 		}
