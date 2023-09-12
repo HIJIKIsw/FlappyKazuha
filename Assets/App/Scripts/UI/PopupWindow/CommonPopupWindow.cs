@@ -19,18 +19,6 @@ namespace Flappy.UI
 		CanvasGroup canvasGroup;
 
 		/// <summary>
-		/// ボタン
-		/// </summary>
-		[SerializeField]
-		Button[] buttons;
-
-		/// <summary>
-		/// ボタンテキスト
-		/// </summary>
-		[SerializeField]
-		TextMeshProUGUI[] buttonTexts;
-
-		/// <summary>
 		/// タイトル
 		/// </summary>
 		[SerializeField]
@@ -43,19 +31,24 @@ namespace Flappy.UI
 		TextMeshProUGUI message;
 
 		/// <summary>
-		/// SetButton~ 系で対象のボタン指定に使う
+		/// ボタングループ
 		/// </summary>
-		public enum Buttons
-		{
-			Primary = 0,
-			Secondary,
-			Tertiary
-		}
+		[SerializeField]
+		GameObject buttonGroup;
 
 		/// <summary>
-		/// 指定したボタンが見つからなかった場合のエラーメッセージ
+		/// Footerオブジェクト
 		/// </summary>
-		private const string missingButtonError = "指定されたボタンが見つかりませんでした。Inspector で対象のボタンへの参照が設定されているか確認してください。";
+		/// <remarks>ボタンを追加した場合こちらが有効になる</remarks>
+		[SerializeField]
+		GameObject footer;
+
+		/// <summary>
+		/// EmptyFooterオブジェクト
+		/// </summary>
+		/// <remarks>ボタンを追加しない場合こちらが有効になる</remarks>
+		[SerializeField]
+		GameObject emptyFooter;
 
 		/// <summary>
 		/// フェードイン/フェードアウト時間
@@ -63,11 +56,16 @@ namespace Flappy.UI
 		private const float defaultFadeTime = 0.2f;
 
 		/// <summary>
-		/// インスタンス化しただけでは表示されないように非アクティブにする
+		/// 初期化処理
 		/// </summary>
 		private void Awake()
 		{
+			// インスタンス化しただけでは表示されないように非アクティブにする
 			this.gameObject.SetActive(false);
+
+			// Footer オブジェクトを無効に、EmptyFooterを有効にする (デフォルトではボタンがないため)
+			this.footer.gameObject.SetActive(false);
+			this.emptyFooter.gameObject.SetActive(true);
 		}
 
 		/// <summary>
@@ -123,7 +121,9 @@ namespace Flappy.UI
 		/// <remarks>メソッドチェーン可</remarks>
 		public CommonPopupWindow SetTitle(string title)
 		{
+			// タイトル文言をセットする
 			this.title.text = title;
+
 			return this;
 		}
 
@@ -133,74 +133,33 @@ namespace Flappy.UI
 		/// <remarks>メソッドチェーン可</remarks>
 		public CommonPopupWindow SetMessage(string message)
 		{
+			// メッセージ文言をセットする
 			this.message.text = message;
+
 			return this;
 		}
 
 		/// <summary>
-		/// ボタンの文言をセット
+		/// ボタンを追加
 		/// </summary>
-		/// <param name="target">対象のボタン</param>
 		/// <remarks>メソッドチェーン可</remarks>
-		public CommonPopupWindow SetButtonText(Buttons target, string text)
+		public CommonPopupWindow AddButton(CommonButton button)
 		{
-			// 指定されたボタンが見つからなかったらエラー
-			var index = (int)target;
-			if (index >= this.buttonTexts.Length)
+			// 引数で渡されたオブジェクトが不適切な場合
+			if( button == null )
 			{
-				Debug.LogAssertion(CommonPopupWindow.missingButtonError);
+				// エラーログを出力して処理終了
+				Debug.LogAssertion("ボタンの追加に失敗しました。");
 				return this;
 			}
 
-			// 文言をセット
-			this.buttonTexts[index].text = text;
-			return this;
-		}
+			// ボタングループの配下にボタンを配置する
+			button.gameObject.transform.parent = this.buttonGroup.transform;
 
-		/// <summary>
-		/// ボタンの状態をセット
-		/// </summary>
-		/// <param name="target">対象のボタン</param>
-		/// <param name="isVisible">ボタンを表示するか</param>
-		/// <param name="isIntaractable">ボタンを押下可能にするか</param>
-		/// <remarks>メソッドチェーン可</remarks>
-		public CommonPopupWindow SetButtonState(Buttons target, bool isVisible, bool isIntaractable = true)
-		{
-			// 指定されたボタンが見つからなかったらエラー
-			var index = (int)target;
-			if (index >= this.buttonTexts.Length)
-			{
-				Debug.LogAssertion(CommonPopupWindow.missingButtonError);
-				return this;
-			}
+			// ボタンが1つでも追加されたら、Footer オブジェクトを有効に、EmptyFooterを無効にする
+			this.footer.gameObject.SetActive(false);
+			this.emptyFooter.gameObject.SetActive(true);
 
-			// 表示・非表示
-			this.buttons[index].gameObject.SetActive(isVisible);
-			// 押下可能・不可能
-			this.buttons[index].interactable = isIntaractable;
-			return this;
-		}
-
-		/// <summary>
-		/// ボタンクリック時のアクションを設定
-		/// </summary>
-		/// <param name="target">対象のボタン</param>
-		/// <param name="onClick">クリック時のアクション</param>
-		/// <returns></returns>
-		public CommonPopupWindow SetButtonClickEvent(Buttons target, UnityAction onClick)
-		{
-			// 指定されたボタンが見つからなかったらエラー
-			var index = (int)target;
-			if (index >= this.buttonTexts.Length)
-			{
-				Debug.LogAssertion(CommonPopupWindow.missingButtonError);
-				return this;
-			}
-
-			// 既存のイベントを削除
-			this.buttons[index].onClick.RemoveAllListeners();
-			// イベントを登録
-			this.buttons[index].onClick.AddListener(onClick);
 			return this;
 		}
 	}

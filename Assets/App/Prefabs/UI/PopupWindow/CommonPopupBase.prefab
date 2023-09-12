@@ -1058,8 +1058,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9091692639475971570}
   m_HandleRect: {fileID: 4107656343944693745}
   m_Direction: 2
-  m_Value: 0.5
-  m_Size: 0.8622234
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1415,14 +1415,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 4160088581966336290}
-  buttons:
-  - {fileID: 0}
-  - {fileID: 0}
-  buttonTexts:
-  - {fileID: 0}
-  - {fileID: 0}
   title: {fileID: 7321560541326998289}
   message: {fileID: 4617209046955915407}
+  buttonGroup: {fileID: 3668462294685044424}
+  footer: {fileID: 2115568353744645082}
+  emptyFooter: {fileID: 4884326034746957228}
 --- !u!1001 &2048421109887116097
 PrefabInstance:
   m_ObjectHideFlags: 0
