@@ -108,10 +108,50 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4283777595
       objectReference: {fileID: 0}
+    - target: {fileID: 3151294510494997422, guid: bd1e5c961e29cec47a371adc895dbfbd, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151294510494997422, guid: bd1e5c961e29cec47a371adc895dbfbd, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151294510494997422, guid: bd1e5c961e29cec47a371adc895dbfbd, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151294510494997422, guid: bd1e5c961e29cec47a371adc895dbfbd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151294510494997422, guid: bd1e5c961e29cec47a371adc895dbfbd, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4571524521926629984, guid: bd1e5c961e29cec47a371adc895dbfbd, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 84a727cfee4b16c47ba5cc7005c6bfcc, type: 2}
+    - target: {fileID: 4994518261754938273, guid: bd1e5c961e29cec47a371adc895dbfbd, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4994518261754938273, guid: bd1e5c961e29cec47a371adc895dbfbd, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4994518261754938273, guid: bd1e5c961e29cec47a371adc895dbfbd, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4994518261754938273, guid: bd1e5c961e29cec47a371adc895dbfbd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4994518261754938273, guid: bd1e5c961e29cec47a371adc895dbfbd, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5326886843686927340, guid: bd1e5c961e29cec47a371adc895dbfbd, type: 3}
       propertyPath: m_Color.b
       value: 0.84705883
