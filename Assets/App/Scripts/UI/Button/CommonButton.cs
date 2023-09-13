@@ -1,5 +1,7 @@
+using Flappy.Common;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
@@ -41,14 +43,23 @@ namespace Flappy.UI
 		/// アイコン画像をセット
 		/// </summary>
 		/// <remarks>メソッドチェーン可</remarks>
-		// TODO: Sprite渡すんじゃなくてアイコン指定する定数を渡すようにする
-		public CommonButton SetIcon(Sprite icon)
+		public CommonButton SetIcon(Constants.Assets.Sprite.ButtonIcon icon)
 		{
-			// アイコンの画像をセット
-			this.icon.sprite = icon;
+			// 意図しない画像が見えるのを防ぐため、アイコンが指定されたら読み込み完了まで一旦消す
+			this.icon.gameObject.SetActive(false);
 
-			// アイコン画像がnullの場合はIconオブジェクトを無効にする
-			this.icon.gameObject.SetActive(icon != null);
+			// TODO: Addressablesのマネージャ的なものを実装する
+			var assetAddress = "Sprite/ButtonIcon/" + icon.ToString();
+			var asyncOperationHandle = Addressables.LoadAssetAsync<Sprite>(assetAddress);
+			asyncOperationHandle.Completed += (handle) =>
+			{
+				// アイコンの画像をセット
+				var sprite = handle.Result;
+				this.icon.sprite = sprite;
+
+				// アイコンを有効にする
+				this.icon.gameObject.SetActive(true);
+			};
 
 			return this;
 		}
