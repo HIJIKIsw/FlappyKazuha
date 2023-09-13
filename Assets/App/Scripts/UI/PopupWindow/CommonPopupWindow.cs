@@ -171,8 +171,8 @@ namespace Flappy.UI
 			button.gameObject.transform.SetParent(this.buttonGroup.transform);
 
 			// ボタンが1つでも追加されたら、Footer オブジェクトを有効に、EmptyFooterを無効にする
-			this.footer.gameObject.SetActive(false);
-			this.emptyFooter.gameObject.SetActive(true);
+			this.footer.gameObject.SetActive(true);
+			this.emptyFooter.gameObject.SetActive(false);
 
 			return this;
 		}
