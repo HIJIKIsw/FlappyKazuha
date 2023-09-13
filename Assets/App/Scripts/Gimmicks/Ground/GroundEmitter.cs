@@ -25,7 +25,7 @@ namespace Flappy.Gimmicks
 		//メンバー変数・最後に生成した地面オブジェクトを保持する　これは一つしかない
 		Ground latestGround;
 
-		float emittingOffsetX = 1488;
+		const float emittingOffsetX = 1488;
 
 		void Update()
 		{	
