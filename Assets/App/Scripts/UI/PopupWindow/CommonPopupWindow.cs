@@ -62,6 +62,11 @@ namespace Flappy.UI
 		private const float defaultFadeTime = 0.2f;
 
 		/// <summary>
+		/// ウィンドウが閉じられた時に実行されるアクション
+		/// </summary>
+		private UnityAction onClose;
+
+		/// <summary>
 		/// 初期化処理
 		/// </summary>
 		private void Awake()
@@ -104,6 +109,9 @@ namespace Flappy.UI
 		/// <param name="isFadeout">フェードアウトするか</param>
 		public void Close(bool isFadeout = true)
 		{
+			// onClose アクションが登録されていたら呼び出す
+			this.onClose?.Invoke();
+
 			// フェードアウトする場合
 			if (isFadeout == true)
 			{
@@ -179,6 +187,18 @@ namespace Flappy.UI
 			// ウィンドウサイズをセット
 			this.windowRect.sizeDelta = size;
 
+			return this;
+		}
+
+		/// <summary>
+		/// ウィンドウが閉じられた時のアクションをセット
+		/// </summary>
+		/// <remarks>メソッドチェーン可</remarks>
+		public CommonPopupWindow SetOnCloseAction(UnityAction action)
+		{
+			// ウィンドウが閉じられた時のアクションをセット
+			this.onClose = action;
+			
 			return this;
 		}
 	}
