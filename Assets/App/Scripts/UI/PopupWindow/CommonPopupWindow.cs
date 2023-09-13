@@ -168,7 +168,7 @@ namespace Flappy.UI
 			}
 
 			// ボタングループの配下にボタンを配置する
-			button.gameObject.transform.parent = this.buttonGroup.transform;
+			button.gameObject.transform.SetParent(this.buttonGroup.transform);
 
 			// ボタンが1つでも追加されたら、Footer オブジェクトを有効に、EmptyFooterを無効にする
 			this.footer.gameObject.SetActive(false);
