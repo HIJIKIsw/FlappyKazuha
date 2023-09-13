@@ -5,45 +5,45 @@ using UnityEngine;
 
 namespace Flappy.Gimmicks
 {
-    /// <summary>
-    /// 地面エミッター
-    /// </summary>
-    public class GroundEmmiter : MonoBehaviour
+	/// <summary>
+	/// 地面エミッター
+	/// </summary>
+	public class GroundEmmiter : MonoBehaviour
 	{
-    	[SerializeField]
-		GameObject GroundPrefab;
+		[SerializeField]
+		Ground groundPrefab;
 
 		[SerializeField]
-		float GroundSpeed;
+		float groundSpeed;
 
 		[SerializeField]
-		Vector2 StartupGroundPosition;
+		Vector2 startupGroundPosition;
 
 		[SerializeField]
-		GameObject GroundContainer;
+		GameObject groundContainer;
 
-		GameObject latestGround;
+		//メンバー変数・最後に生成した地面オブジェクトを保持する　これは一つしかない
+		Ground latestGround;
 
-		float emittingPositionX = 1488;
+		float emittingOffsetX = 1488;
 
-        void Update()
-		{
-			
+		void Update()
+		{	
 			if ( this.latestGround == null || this.latestGround.transform.position.x <= 0 )
 			{
 				Vector2 groundBornPosition;
 				if ( this.latestGround == null )
 				{
-					groundBornPosition = this.StartupGroundPosition;
+					groundBornPosition = this.startupGroundPosition;
 				}
 				else
 				{
-					groundBornPosition = new Vector2(this.latestGround.transform.position.x+emittingPositionX, this.latestGround.transform.position.y);
+					groundBornPosition = new Vector2(this.latestGround.transform.position.x+emittingOffsetX, this.latestGround.transform.position.y);
 				}
-				this.latestGround = GameObject.Instantiate(this.GroundPrefab, groundBornPosition, Quaternion.identity);
-				this.latestGround.GetComponent<Rigidbody2D>().velocity = Vector2.left * this.GroundSpeed;
-
-            }
-        }
-    }
+				//オブジェクト生成時に「latestGround」変数に代入することにより、常に最後に生成した地面オブジェクトを参照できる
+				this.latestGround = GameObject.Instantiate(this.groundPrefab, groundBornPosition, Quaternion.identity, groundContainer.transform);
+				this.latestGround.SetSpeed(Vector2.left * this.groundSpeed);
+			}
+		}
+	}
 }
