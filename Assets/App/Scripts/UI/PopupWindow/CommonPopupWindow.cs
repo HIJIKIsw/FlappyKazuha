@@ -31,13 +31,19 @@ namespace Flappy.UI
 		TextMeshProUGUI title;
 
 		/// <summary>
+		/// 閉じるボタンオブジェクト
+		/// </summary>
+		[SerializeField]
+		GameObject closeButton;
+
+		/// <summary>
 		/// メッセージ
 		/// </summary>
 		[SerializeField]
 		TextMeshProUGUI message;
 
 		/// <summary>
-		/// ボタングループ
+		/// ボタングループオブジェクト
 		/// </summary>
 		[SerializeField]
 		GameObject buttonGroup;
@@ -198,7 +204,19 @@ namespace Flappy.UI
 		{
 			// ウィンドウが閉じられた時のアクションをセット
 			this.onClose = action;
-			
+
+			return this;
+		}
+
+		/// <summary>
+		/// 閉じるボタンの有効/無効を切り替える
+		/// </summary>
+		/// <remarks>メソッドチェーン可</remarks>
+		public CommonPopupWindow SetCloseButtonActive(bool value = true)
+		{
+			// 閉じるボタンの有効/無効を切り替える
+			this.closeButton.SetActive(value);
+
 			return this;
 		}
 	}
