@@ -125,7 +125,7 @@ namespace Flappy.UI
 			else
 			{
 				// ゲームオブジェクトを削除
-				GameObject.Destroy(this);
+				GameObject.Destroy(this.gameObject);
 			}
 		}
 
