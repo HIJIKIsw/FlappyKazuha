@@ -6,8 +6,6 @@ namespace Flappy.Gimmicks
 {
 	public class GroundDestroyer : MonoBehaviour
 	{
-		[SerializeField]
-		BoxCollider2D collider;
 
 		/// <summary>
 		/// Groundを消すための当たり判定
@@ -21,8 +19,8 @@ namespace Flappy.Gimmicks
 			{
 				case "Ground":
 					{
-						var GroundComponent = collider.gameObject.GetComponent<Ground>();
-						GroundComponent.Remove();
+						var groundComponent = collider.gameObject.GetComponent<Ground>();
+						groundComponent.Remove();
 						break;
 					}
 				default:

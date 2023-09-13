@@ -13,17 +13,15 @@ namespace Flappy.Gimmicks
     	[SerializeField]
 		GameObject GroundPrefab;
 
-		float currentTime = 0f;
-
 		[SerializeField]
 		float GroundSpeed;
 
 		[SerializeField]
 		Vector2 StartupGroundPosition;
 
-		//var otherLayer = collider.gameObject.layer;
-		//var otherLayerName = LayerMask.LayerToName(otherLayer);
 		GameObject latestGround;
+
+		float emittingPositionX = 1488;
 
         void Update()
 		{
@@ -37,7 +35,7 @@ namespace Flappy.Gimmicks
 				}
 				else
 				{
-					GroundBornX = new Vector2(this.latestGround.transform.position.x+1488, this.latestGround.transform.position.y);
+					GroundBornX = new Vector2(this.latestGround.transform.position.x+emittingPositionX, this.latestGround.transform.position.y);
 				}
 				this.latestGround = GameObject.Instantiate(this.GroundPrefab, GroundBornX, Quaternion.identity);
 				this.latestGround.GetComponent<Rigidbody2D>().velocity = Vector2.left * this.GroundSpeed;
