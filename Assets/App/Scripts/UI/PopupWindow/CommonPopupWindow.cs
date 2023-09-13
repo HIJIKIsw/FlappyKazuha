@@ -116,7 +116,7 @@ namespace Flappy.UI
 			if (isFadeout == true)
 			{
 				// フェードアウト処理
-				this.canvasGroup.DOFade(0f, CommonPopupWindow.defaultFadeTime).OnComplete(() => 
+				this.canvasGroup.DOFade(0f, CommonPopupWindow.defaultFadeTime).OnComplete(() =>
 				{
 					this.Close(false);
 				});
@@ -160,7 +160,7 @@ namespace Flappy.UI
 		public CommonPopupWindow AddButton(CommonButton button)
 		{
 			// 引数で渡されたオブジェクトが不適切な場合
-			if( button == null )
+			if (button == null)
 			{
 				// エラーログを出力して処理終了
 				Debug.LogAssertion("ボタンの追加に失敗しました。");
