@@ -19,6 +19,9 @@ namespace Flappy.Gimmicks
 		[SerializeField]
 		Vector2 StartupGroundPosition;
 
+		[SerializeField]
+		GameObject GroundContainer;
+
 		GameObject latestGround;
 
 		float emittingPositionX = 1488;
@@ -28,16 +31,16 @@ namespace Flappy.Gimmicks
 			
 			if ( this.latestGround == null || this.latestGround.transform.position.x <= 0 )
 			{
-				Vector2 GroundBornX;
+				Vector2 groundBornPosition;
 				if ( this.latestGround == null )
 				{
-					GroundBornX = this.StartupGroundPosition;
+					groundBornPosition = this.StartupGroundPosition;
 				}
 				else
 				{
-					GroundBornX = new Vector2(this.latestGround.transform.position.x+emittingPositionX, this.latestGround.transform.position.y);
+					groundBornPosition = new Vector2(this.latestGround.transform.position.x+emittingPositionX, this.latestGround.transform.position.y);
 				}
-				this.latestGround = GameObject.Instantiate(this.GroundPrefab, GroundBornX, Quaternion.identity);
+				this.latestGround = GameObject.Instantiate(this.GroundPrefab, groundBornPosition, Quaternion.identity);
 				this.latestGround.GetComponent<Rigidbody2D>().velocity = Vector2.left * this.GroundSpeed;
 
             }
