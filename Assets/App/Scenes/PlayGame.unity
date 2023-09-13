@@ -749,7 +749,15 @@ PrefabInstance:
       value: GroundEmitter
       objectReference: {fileID: 0}
     - target: {fileID: 8931879344550465409, guid: 64ff1f1206e57dc458d2155e1cdbad6b, type: 3}
+      propertyPath: groundPrefab
+      value: 
+      objectReference: {fileID: 2570739911830786330, guid: 082cc884a2e13b24bb6517f34f01747c, type: 3}
+    - target: {fileID: 8931879344550465409, guid: 64ff1f1206e57dc458d2155e1cdbad6b, type: 3}
       propertyPath: GroundContainer
+      value: 
+      objectReference: {fileID: 1302813218}
+    - target: {fileID: 8931879344550465409, guid: 64ff1f1206e57dc458d2155e1cdbad6b, type: 3}
+      propertyPath: groundContainer
       value: 
       objectReference: {fileID: 1302813218}
     - target: {fileID: 8931879344550465409, guid: 64ff1f1206e57dc458d2155e1cdbad6b, type: 3}

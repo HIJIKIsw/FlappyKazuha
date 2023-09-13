@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d49e9a3a5d572114d9fb1b1eff864458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GroundPrefab: {fileID: 2646937592493523933, guid: 082cc884a2e13b24bb6517f34f01747c, type: 3}
-  GroundSpeed: 250
-  StartupGroundPosition: {x: 0, y: -320}
-  GroundContainer: {fileID: 0}
+  groundPrefab: {fileID: 0}
+  groundSpeed: 250
+  startupGroundPosition: {x: 0, y: -340}
+  groundContainer: {fileID: 0}
