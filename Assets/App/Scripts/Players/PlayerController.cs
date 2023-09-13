@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using Flappy.Manager;
 using UnityEngine;
 
 namespace Flappy
 {
 	public class PlayerController : MonoBehaviour
 	{
+		[SerializeField]
 		new Rigidbody2D rigidbody2D;
 
 		/// <summary>
@@ -15,7 +14,12 @@ namespace Flappy
 		[SerializeField]
 		float jumpForce;
 
+		[SerializeField]
+		PlayGameScene playGameScene;
+
 		bool isJump = false;
+
+		bool isDead = false;
 
 		/// <summary>
 		/// 初期化
@@ -30,7 +34,7 @@ namespace Flappy
 		/// </summary>
 		void Update()
 		{
-			if (Input.GetKeyDown(KeyCode.Space))
+			if (Input.GetMouseButtonDown(0))
 			{
 				this.isJump = true;
 			}
@@ -38,13 +42,58 @@ namespace Flappy
 
 		void FixedUpdate()
 		{
-			if (this.isJump)
+			// TODO: いちいち操作ごとに死亡フラグを確認するのは面倒なのでイケてる方法考える
+			if (this.isJump && this.isDead == false)
 			{
 				this.rigidbody2D.velocity = Vector2.up * jumpForce;
 				this.isJump = false;
 			}
+		}
 
+		void SetSpeed(Vector2 speed)
+		{
+			this.rigidbody2D.velocity = speed;
+		}
+
+		void OnTriggerEnter2D(Collider2D collider)
+		{
+			var otherLayer = collider.gameObject.layer;
+			var otherLayerName = LayerMask.LayerToName(otherLayer);
+
+			switch (otherLayerName)
+			{
+				case "Pillar":
+					{
+						this.OnTriggerPillar();
+						break;
+					}
+				default:
+					{
+						// Nothing to do.
+						break;
+					}
+			}
+		}
+
+		void OnTriggerPillar()
+		{
+			// TODO: 死亡フラグで扱うよりPillar側の BoxCollider を無効にしたほうがよさそう
+			if (isDead == true)
+			{
+				return;
+			}
+
+			AudioManager.Instance.PlaySE(Common.Constants.Assets.Audio.SE.boyon, 0.5f, 1.5f);
+
+			this.isDead = true;
+			this.playGameScene.GameOver();
+			this.SetSpeed(Vector2.up * this.jumpForce);
+		}
+
+		public void SetPosition(Vector2 position)
+		{
+			// this.transform.positionがプレイヤーに直通するフィールドなので、それに引数として位置情報を渡す
+			this.transform.position = position;
 		}
 	}
-
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 namespace Flappy.Gimmicks
@@ -10,7 +11,7 @@ namespace Flappy.Gimmicks
 	public class PillarEmmiter : MonoBehaviour
 	{
 		[SerializeField]
-		GameObject pillarPrefab;
+		Pillar pillarPrefab;
 
 		[SerializeField]
 		float span;
@@ -26,6 +27,9 @@ namespace Flappy.Gimmicks
 		[SerializeField]
 		GameObject primogemPrefab;
 
+		[SerializeField]
+		GameObject pillarContainer;
+
 		void Update()
 		{
 			this.currentTime += Time.deltaTime;
@@ -37,11 +41,10 @@ namespace Flappy.Gimmicks
 				var pillarPosition = this.transform.position + (Vector3.up * randY);
 				
 				// TODO: パフォーマンス改善のため、GetComponentではなくPillarクラス側にpublicなメンバを作ってそこから参照する
-				var pillar = GameObject.Instantiate(this.pillarPrefab, pillarPosition, Quaternion.identity);
-				pillar.GetComponent<Rigidbody2D>().velocity = Vector2.left * this.pillarSpeed;
+				var pillar = GameObject.Instantiate(this.pillarPrefab, pillarPosition, Quaternion.identity, pillarContainer.transform);
+				pillar.SetSpeed(Vector2.left * this.pillarSpeed);
 
 				var primogem = GameObject.Instantiate(this.primogemPrefab, pillar.transform);
-				primogem.transform.localPosition = Vector2.zero;
 				
 				// TODO: 柱のY座標から独立した乱数を生成して原石のY座標を設定する
 				// TODO: Vector2やVector3のメンバに大して直接加算減算できる拡張メソッドを作る

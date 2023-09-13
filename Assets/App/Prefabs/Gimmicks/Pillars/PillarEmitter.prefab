@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7469438405708381978}
   - component: {fileID: 2375960906258716270}
-  - component: {fileID: -6994934903551879593}
   m_Layer: 0
   m_Name: PillarEmitter
   m_TagString: Untagged
@@ -45,53 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de3895c946a08dd488fc5fa025b966a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pillarPrefab: {fileID: 2207589625095704608, guid: 2d85bf89d4452074a8853798b066c42b, type: 3}
+  pillarPrefab: {fileID: -9113069398032769977, guid: 2d85bf89d4452074a8853798b066c42b, type: 3}
   span: 1.5
   pillarSpeed: 250
   pillarYRandomRange: 150
   primogemPrefab: {fileID: 6014284129322135983, guid: c415d62c44f872846aafb9c4615dbd9f, type: 3}
---- !u!61 &-6994934903551879593
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2089900323272996263}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 3.69, y: 3.89}
-  m_EdgeRadius: 0
+  pillarContainer: {fileID: 0}

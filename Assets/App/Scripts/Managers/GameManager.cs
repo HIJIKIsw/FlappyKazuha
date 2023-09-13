@@ -1,3 +1,4 @@
+using System;
 using Flappy.Common;
 using UnityEngine;
 
@@ -30,6 +31,23 @@ namespace Flappy.Manager
 		/// </summary>
 		/// TODO: 所持品クラスみたいなものを作ってそっちにまとめる (原石、ネームプレート、称号など)
 		public int PrimogemCount { get; set; } = 0;
+
+		/// <summary>
+		/// 自己ベストスコア
+		/// </summary>
+		/// <remarks>値は常に少数第一位までで丸めて出し入れされる (四捨五入)</remarks>
+		public float BestScore
+		{
+			get
+			{
+				return (float)Math.Round(this.bestScore, 1);
+			}
+			set
+			{
+				this.bestScore = (float)Math.Round(value, 1);
+			}
+		}
+		private float bestScore = 0f;
 	}
 }
 
