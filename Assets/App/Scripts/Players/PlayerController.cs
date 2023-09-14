@@ -83,11 +83,17 @@ namespace Flappy
 				return;
 			}
 
-			AudioManager.Instance.PlaySE(Common.Constants.Assets.Audio.SE.boyon, 0.3f, 1.5f);
+			AudioManager.Instance.PlaySE(Common.Constants.Assets.Audio.SE.boyon, 0.5f, 1.5f);
 
 			this.isDead = true;
 			this.playGameScene.GameOver();
 			this.SetSpeed(Vector2.up * this.jumpForce);
+		}
+
+		public void SetPosition(Vector2 position)
+		{
+			// this.transform.positionがプレイヤーに直通するフィールドなので、それに引数として位置情報を渡す
+			this.transform.position = position;
 		}
 	}
 }
