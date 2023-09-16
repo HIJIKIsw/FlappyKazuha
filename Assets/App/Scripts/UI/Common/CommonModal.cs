@@ -12,7 +12,7 @@ using UnityEditor.UI;
 namespace Flappy.UI
 {
 	// RaycastTargetとして機能させるだけのクラス
-	public class Modal : Image
+	public class CommonModal : Image
 	{
 		public bool IsDrawing = true;
 
@@ -29,7 +29,7 @@ namespace Flappy.UI
 	}
 
 #if UNITY_EDITOR
-	[CanEditMultipleObjects, CustomEditor(typeof(Modal), true)]
+	[CanEditMultipleObjects, CustomEditor(typeof(CommonModal), true)]
 	public class ModalEditor : ImageEditor
 	{
 		public override void OnInspectorGUI()

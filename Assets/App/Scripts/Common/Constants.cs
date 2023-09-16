@@ -22,6 +22,21 @@ namespace Flappy.Common
 		public static class Assets
 		{
 			/// <summary>
+			/// 画像アセット
+			/// </summary>
+			public static class Sprite
+			{
+				/// <summary>
+				/// ボタンアイコン
+				/// </summary>
+				public enum ButtonIcon
+				{
+					Circle,
+					Cross,
+				}
+			}
+
+			/// <summary>
 			/// 音アセット
 			/// </summary>
 			public static class Audio
