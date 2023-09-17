@@ -16,66 +16,66 @@ namespace Flappy.UI
 		/// キャンバスグループ
 		/// </summary>
 		[SerializeField]
-		CanvasGroup canvasGroup;
+		protected CanvasGroup canvasGroup;
 
 		/// <summary>
 		/// WindowオブジェクトのRectTransform
 		/// </summary>
 		[SerializeField]
-		RectTransform windowRect;
+		protected RectTransform windowRect;
 
 		/// <summary>
 		/// タイトル
 		/// </summary>
 		[SerializeField]
-		TextMeshProUGUI title;
+		protected TextMeshProUGUI title;
 
 		/// <summary>
 		/// 閉じるボタンオブジェクト
 		/// </summary>
 		[SerializeField]
-		GameObject closeButton;
+		protected GameObject closeButton;
 
 		/// <summary>
 		/// メッセージ
 		/// </summary>
 		[SerializeField]
-		TextMeshProUGUI message;
+		protected TextMeshProUGUI message;
 
 		/// <summary>
 		/// ボタングループオブジェクト
 		/// </summary>
 		[SerializeField]
-		GameObject buttonGroup;
+		protected GameObject buttonGroup;
 
 		/// <summary>
 		/// Footerオブジェクト
 		/// </summary>
 		/// <remarks>ボタンを追加した場合こちらが有効になる</remarks>
 		[SerializeField]
-		GameObject footer;
+		protected GameObject footer;
 
 		/// <summary>
 		/// EmptyFooterオブジェクト
 		/// </summary>
 		/// <remarks>ボタンを追加しない場合こちらが有効になる</remarks>
 		[SerializeField]
-		GameObject emptyFooter;
+		protected GameObject emptyFooter;
 
 		/// <summary>
 		/// フェードイン/フェードアウト時間
 		/// </summary>
-		private const float defaultFadeTime = 0.2f;
+		protected const float defaultFadeTime = 0.2f;
 
 		/// <summary>
 		/// ウィンドウが閉じられた時に実行されるアクション
 		/// </summary>
-		private UnityAction onClose;
+		protected UnityAction onClose;
 
 		/// <summary>
 		/// 初期化処理
 		/// </summary>
-		private void Awake()
+		protected void Awake()
 		{
 			// インスタンス化しただけでは表示されないように非アクティブにする
 			this.gameObject.SetActive(false);
