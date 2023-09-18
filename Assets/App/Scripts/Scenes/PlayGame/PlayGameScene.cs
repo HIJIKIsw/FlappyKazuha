@@ -9,6 +9,9 @@ using Flappy.Manager;
 
 namespace Flappy
 {
+	/// <summary>
+	/// PlayGameシーン
+	/// </summary>
 	public class PlayGameScene : SceneBase
 	{
 		/// <summary>
@@ -16,23 +19,48 @@ namespace Flappy
 		/// </summary>
 		public override string Name => "PlayGame";
 
+		/// <summary>
+		/// PillartContainerオブジェクト
+		/// </summary>
 		[SerializeField]
 		private GameObject pillarContainer;
 
+		/// <summary>
+		/// PillarEmitterオブジェクト
+		/// </summary>
 		[SerializeField]
 		private PillarEmmiter pillarEmmiter;
 
+		/// <summary>
+		/// CurrentScore -> Valueオブジェクト
+		/// </summary>
 		[SerializeField]
 		private TextMeshProUGUI currentScoreText;
 
+		/// <summary>
+		/// BestScore -> Valueオブジェクト
+		/// </summary>
 		[SerializeField]
 		private TextMeshProUGUI bestScoreText;
 
+		/// <summary>
+		/// スコア加算フラグ
+		/// </summary>
 		public bool IsProceedScoreCount { get; set; } = false;
 
+		/// <summary>
+		/// 現在スコア
+		/// </summary>
 		private float currentScore = 0f;
+
+		/// <summary>
+		/// 自己ベスト
+		/// </summary>
 		private float bestScore = 0f;
 
+		/// <summary>
+		/// 初期化
+		/// </summary>
 		private void Start()
 		{
 			// TODO: タップでスタート実装後はタップするまでカウント始まらないようにする
@@ -42,6 +70,9 @@ namespace Flappy
 			this.bestScoreText.text = this.scoreToText(this.bestScore);
 		}
 
+		/// <summary>
+		/// 更新 (1フレーム)
+		/// </summary>
 		private void Update()
 		{
 			if (this.IsProceedScoreCount == true)
@@ -50,6 +81,9 @@ namespace Flappy
 			}
 		}
 
+		/// <summary>
+		/// 更新 (固定時間)
+		/// </summary>
 		private void FixedUpdate()
 		{
 			currentScoreText.text = this.scoreToText(this.currentScore);
