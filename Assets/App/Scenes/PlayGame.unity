@@ -142,7 +142,7 @@ PrefabInstance:
       objectReference: {fileID: 661008219}
     - target: {fileID: 4379040375103320704, guid: 412ed52ee28df8948bfe46ec2becddf5, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Kazuha
       objectReference: {fileID: 0}
     - target: {fileID: 6138896914313040945, guid: 412ed52ee28df8948bfe46ec2becddf5, type: 3}
       propertyPath: m_LocalPosition.x
