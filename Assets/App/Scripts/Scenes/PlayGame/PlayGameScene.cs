@@ -9,6 +9,9 @@ using Flappy.Manager;
 
 namespace Flappy
 {
+	/// <summary>
+	/// PlayGameシーン
+	/// </summary>
 	public class PlayGameScene : SceneBase
 	{
 		/// <summary>
@@ -16,23 +19,60 @@ namespace Flappy
 		/// </summary>
 		public override string Name => "PlayGame";
 
+		/// <summary>
+		/// PillartContainerオブジェクト
+		/// </summary>
 		[SerializeField]
 		private GameObject pillarContainer;
 
+		/// <summary>
+		/// PillarEmitterオブジェクト
+		/// </summary>
 		[SerializeField]
 		private PillarEmmiter pillarEmmiter;
 
+		/// <summary>
+		/// GroundContainerオブジェクト
+		/// </summary>
+		[SerializeField]
+		private GameObject groundContainer;
+
+		/// <summary>
+		/// GroundEmitterオブジェクト
+		/// </summary>
+		[SerializeField]
+		private GroundEmmiter groundEmmiter;
+
+		/// <summary>
+		/// CurrentScore -> Valueオブジェクト
+		/// </summary>
 		[SerializeField]
 		private TextMeshProUGUI currentScoreText;
 
+		/// <summary>
+		/// BestScore -> Valueオブジェクト
+		/// </summary>
 		[SerializeField]
 		private TextMeshProUGUI bestScoreText;
 
+		/// <summary>
+		/// スコア加算フラグ
+		/// </summary>
 		public bool IsProceedScoreCount { get; set; } = false;
 
+		/// <summary>
+		/// 現在スコア
+		/// </summary>
 		private float currentScore = 0f;
+
+		/// <summary>
+		/// 自己ベスト
+		/// </summary>
 		private float bestScore = 0f;
 
+		/// <summary>
+		/// 初期化
+		/// </summary>
 		private void Start()
 		{
 			// TODO: タップでスタート実装後はタップするまでカウント始まらないようにする
@@ -42,6 +82,9 @@ namespace Flappy
 			this.bestScoreText.text = this.scoreToText(this.bestScore);
 		}
 
+		/// <summary>
+		/// 更新 (1フレーム)
+		/// </summary>
 		private void Update()
 		{
 			if (this.IsProceedScoreCount == true)
@@ -50,6 +93,9 @@ namespace Flappy
 			}
 		}
 
+		/// <summary>
+		/// 更新 (固定時間)
+		/// </summary>
 		private void FixedUpdate()
 		{
 			currentScoreText.text = this.scoreToText(this.currentScore);
@@ -72,12 +118,21 @@ namespace Flappy
 				GameManager.Instance.BestScore = this.currentScore;
 			}
 
+			// 全ての柱を停止させ、出現しないようにする
 			var pillars = this.GetAllPillars();
 			foreach (var pillar in pillars)
 			{
 				pillar.SetSpeed(Vector2.zero);
 			}
 			this.pillarEmmiter.gameObject.SetActive(false);
+
+			// 全ての地面を停止させ、出現しないようにする
+			var grounds = this.GetAllGrounds();
+			foreach (var ground in grounds)
+			{
+				ground.SetSpeed(Vector2.zero);
+			}
+			this.groundEmmiter.gameObject.SetActive(false);
 
 			// TODO: リザルト画面
 			DOVirtual.DelayedCall(2f, () =>
@@ -102,6 +157,24 @@ namespace Flappy
 				}
 			}
 			return pillars;
+		}
+
+		/// <summary>
+		/// 全ての地面を取得
+		/// </summary>
+		private List<Ground> GetAllGrounds()
+		{
+			var grounds = new List<Ground>();
+			var groundCount = this.groundContainer.transform.childCount;
+			for (int i = 0; i < groundCount; i++)
+			{
+				var ground = this.groundContainer.transform.GetChild(i).GetComponent<Ground>();
+				if (ground != null)
+				{
+					grounds.Add(ground);
+				}
+			}
+			return grounds;
 		}
 
 		/// <summary>
