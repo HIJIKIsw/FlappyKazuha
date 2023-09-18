@@ -62,6 +62,11 @@ namespace Flappy
 						this.OnTriggerPillar();
 						break;
 					}
+				case "Ground":
+					{
+						this.OnTriggerPillar();
+						break;
+					}
 				default:
 					{
 						// Nothing to do.
