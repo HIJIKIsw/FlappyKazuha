@@ -32,6 +32,18 @@ namespace Flappy
 		private PillarEmmiter pillarEmmiter;
 
 		/// <summary>
+		/// GroundContainerオブジェクト
+		/// </summary>
+		[SerializeField]
+		private GameObject groundContainer;
+
+		/// <summary>
+		/// GroundEmitterオブジェクト
+		/// </summary>
+		[SerializeField]
+		private GroundEmmiter groundEmmiter;
+
+		/// <summary>
 		/// CurrentScore -> Valueオブジェクト
 		/// </summary>
 		[SerializeField]
@@ -106,12 +118,21 @@ namespace Flappy
 				GameManager.Instance.BestScore = this.currentScore;
 			}
 
+			// 全ての柱を停止させ、出現しないようにする
 			var pillars = this.GetAllPillars();
 			foreach (var pillar in pillars)
 			{
 				pillar.SetSpeed(Vector2.zero);
 			}
 			this.pillarEmmiter.gameObject.SetActive(false);
+
+			// 全ての地面を停止させ、出現しないようにする
+			var grounds = this.GetAllGrounds();
+			foreach (var ground in grounds)
+			{
+				ground.SetSpeed(Vector2.zero);
+			}
+			this.groundEmmiter.gameObject.SetActive(false);
 
 			// TODO: リザルト画面
 			DOVirtual.DelayedCall(2f, () =>
@@ -136,6 +157,24 @@ namespace Flappy
 				}
 			}
 			return pillars;
+		}
+
+		/// <summary>
+		/// 全ての地面を取得
+		/// </summary>
+		private List<Ground> GetAllGrounds()
+		{
+			var grounds = new List<Ground>();
+			var groundCount = this.groundContainer.transform.childCount;
+			for (int i = 0; i < groundCount; i++)
+			{
+				var ground = this.groundContainer.transform.GetChild(i).GetComponent<Ground>();
+				if (ground != null)
+				{
+					grounds.Add(ground);
+				}
+			}
+			return grounds;
 		}
 
 		/// <summary>
