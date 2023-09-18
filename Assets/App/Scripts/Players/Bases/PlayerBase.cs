@@ -52,19 +52,24 @@ namespace Flappy
 		/// <param name="collider">接触相手のコライダ</param>
 		protected void OnTriggerEnter2D(Collider2D collider)
 		{
+			// 死んでたら当たり判定を処理しない
+			if (this.IsDead == true)
+			{
+				return;
+			}
+
+			// レイヤー名を取得
 			var otherLayer = collider.gameObject.layer;
 			var otherLayerName = LayerMask.LayerToName(otherLayer);
 
+			// レイヤー名に応じて処理を場合分け
 			switch (otherLayerName)
 			{
+				// 柱または地面に触れた
 				case "Pillar":
-					{
-						this.OnTriggerPillar();
-						break;
-					}
 				case "Ground":
 					{
-						this.OnTriggerPillar();
+						this.Damage();
 						break;
 					}
 				default:
@@ -76,18 +81,10 @@ namespace Flappy
 		}
 
 		/// <summary>
-		/// 柱に接触した時
+		/// ダメージを受けた時の処理
 		/// </summary>
-		/// TOOD: Damage() みたいな関数名にして、ダメージを受けた時の処理をここに集約する
-		///       今後、Pillar以外のギミックが増えることもあるし、シールドの処理が挟まったりもするため。
-		protected void OnTriggerPillar()
+		protected void Damage()
 		{
-			// TODO: 死亡フラグで扱うよりPillar側の BoxCollider を無効にしたほうがよさそう
-			if (isDead == true)
-			{
-				return;
-			}
-
 			AudioManager.Instance.PlaySE(Common.Constants.Assets.Audio.SE.boyon, 0.5f, 1.5f);
 
 			// TODO: 必要に応じて定数化する
