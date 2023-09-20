@@ -314,8 +314,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa79bd631a581064bb0a2655abdaf2fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasGroup: {fileID: 0}
-  animator: {fileID: 0}
+  canvasGroup: {fileID: 6148969764067926654}
+  animator: {fileID: 6954368413662943978}
 --- !u!95 &6954368413662943978
 Animator:
   serializedVersion: 5
