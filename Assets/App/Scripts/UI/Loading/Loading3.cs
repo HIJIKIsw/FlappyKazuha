@@ -34,6 +34,12 @@ namespace Flappy.UI
 		const float minDisplayTime = 1.5f;
 
 		/// <summary>
+		/// 元素の種類
+		/// </summary>
+		/// TODO: 別の箇所で定数を持つようになったらそれに置き換える
+		const int elementsCount = 7;
+
+		/// <summary>
 		/// 経過時間
 		/// </summary>
 		float elapsedTime = 0f;
@@ -53,8 +59,12 @@ namespace Flappy.UI
 		/// </summary>
 		private void Start()
 		{
+			// 1元素の表示時間(割合)を取得
+			var elementDisplayTime = 1f / Loading3.elementsCount;
+
 			// アニメーションをランダムな位置から再生する
-			animator.Play(animator.GetCurrentAnimatorStateInfo(0).shortNameHash, 0, Random.Range(0f, 1f));
+			var animationStartTime = elementDisplayTime * Random.Range(0, elementsCount);
+			animator.Play(animator.GetCurrentAnimatorStateInfo(0).shortNameHash, 0, animationStartTime);
 		}
 
 		/// <summary>
