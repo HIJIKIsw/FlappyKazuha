@@ -11,12 +11,16 @@ namespace Flappy.Manager
 	public class LoadingManager : SingletonMonoBehaviour<LoadingManager>
 	{
 		[SerializeField]
-		Loading1 overlayLoadingPrefab;
-		Loading1 overlayLoadingInstance;
+		Loading1 loading1Prefab;
+		Loading1 loading1Instance;
 
 		[SerializeField]
-		Loading2 fullscreenLoadingPrefab;
-		Loading2 fullscreenLoadingInstance;
+		Loading2 loading2Prefab;
+		Loading2 loading2Instance;
+
+		[SerializeField]
+		Loading3 loading3Prefab;
+		Loading3 loading3Instance;
 
 		// フルスクリーンロード画面の進捗状況管理用
 		int tasksCount;
@@ -29,7 +33,7 @@ namespace Flappy.Manager
 		{
 			get
 			{
-				return this.overlayLoadingInstance != null || this.fullscreenLoadingInstance != null;
+				return this.loading1Instance != null || this.loading2Instance != null;
 			}
 		}
 
@@ -38,13 +42,13 @@ namespace Flappy.Manager
 		/// </summary>
 		public void ShowOverlay()
 		{
-			if (this.overlayLoadingInstance != null)
+			if (this.loading1Instance != null)
 			{
 				return;
 			}
 
-			this.overlayLoadingInstance = GameObject.Instantiate(this.overlayLoadingPrefab, this.transform);
-			this.overlayLoadingInstance.Show();
+			this.loading1Instance = GameObject.Instantiate(this.loading1Prefab, this.transform);
+			this.loading1Instance.Show();
 		}
 
 		/// <summary>
@@ -52,13 +56,13 @@ namespace Flappy.Manager
 		/// </summary>
 		public void HideOverlay()
 		{
-			if (this.overlayLoadingInstance == null)
+			if (this.loading1Instance == null)
 			{
 				return;
 			}
 
-			this.overlayLoadingInstance.Hide();
-			this.overlayLoadingInstance = null;
+			this.loading1Instance.Hide();
+			this.loading1Instance = null;
 		}
 
 		/// <summary>
@@ -69,7 +73,7 @@ namespace Flappy.Manager
 		/// <remarks>フルスクリーンロードは直接非表示にできず、タスクが完了するたびに CompleteTask を呼び出して、LoadingManager 側で非表示にする。</remarks>
 		public void ShowFullscreen(int tasksCount, UnityAction onBeginLoad = null, UnityAction onCompleteLoad = null)
 		{
-			if (this.fullscreenLoadingInstance != null)
+			if (this.loading2Instance != null)
 			{
 				// 複数箇所から同時にロード画面を使用する場合はすべてのタスクを合計する
 				this.tasksCount += tasksCount;
@@ -79,8 +83,8 @@ namespace Flappy.Manager
 			this.tasksCount = tasksCount;
 			this.completedTasks = 0;
 
-			this.fullscreenLoadingInstance = GameObject.Instantiate(this.fullscreenLoadingPrefab, this.transform);
-			this.fullscreenLoadingInstance.Show(onBeginLoad: onBeginLoad, onCompleteLoad: onCompleteLoad);
+			this.loading2Instance = GameObject.Instantiate(this.loading2Prefab, this.transform);
+			this.loading2Instance.Show(onBeginLoad: onBeginLoad, onCompleteLoad: onCompleteLoad);
 		}
 
 		/// <summary>
@@ -89,17 +93,17 @@ namespace Flappy.Manager
 		/// <param name="count">完了したタスクの個数</param>
 		public void CompleteTask(int count = 1)
 		{
-			if (count < 1 || this.fullscreenLoadingInstance == null)
+			if (count < 1 || this.loading2Instance == null)
 			{
 				return;
 			}
 
 			this.completedTasks += count;
 			var progress = (float)this.completedTasks / (float)this.tasksCount;
-			this.fullscreenLoadingInstance.SetProgress(progress);
+			this.loading2Instance.SetProgress(progress);
 			if (progress >= 1f)
 			{
-				this.fullscreenLoadingInstance = null;
+				this.loading2Instance = null;
 			}
 		}
 	}
