@@ -32,6 +32,7 @@ namespace Flappy.Common
 		/// <param name="parameter">シーンに渡すパラメータ</param>
 		public virtual void Initialize(SceneParameter parameter = null)
 		{
+			// TODO: 初期化が完了したことをSceneManagerに知らせるデリゲートを持たせる
 			this.parameter = parameter ?? new SceneParameter();
 		}
 

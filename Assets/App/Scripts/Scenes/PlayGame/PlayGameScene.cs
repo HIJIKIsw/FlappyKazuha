@@ -6,6 +6,7 @@ using DG.Tweening;
 using Flappy.Common;
 using Flappy.Gimmicks;
 using Flappy.Manager;
+using Flappy.UI;
 
 namespace Flappy
 {
@@ -56,6 +57,18 @@ namespace Flappy
 		private TextMeshProUGUI bestScoreText;
 
 		/// <summary>
+		/// CommonPopupプレハブ
+		/// </summary>
+		[SerializeField]
+		private CommonPopupWindow poopupWindowPrefab;
+
+		/// <summary>
+		/// CommonButtonプレハブ
+		/// </summary>
+		[SerializeField]
+		private CommonButton buttonPrefab;
+
+		/// <summary>
 		/// スコア加算フラグ
 		/// </summary>
 		public bool IsProceedScoreCount { get; set; } = false;
@@ -83,10 +96,11 @@ namespace Flappy
 		}
 
 		/// <summary>
-		/// 更新 (1フレーム)
+		/// 更新 (固定時間)
 		/// </summary>
-		private void Update()
+		private void FixedUpdate()
 		{
+			// スコア加算
 			if (this.IsProceedScoreCount == true)
 			{
 				this.currentScore += Time.deltaTime * Constants.Game.ScorePerSecond;
@@ -94,10 +108,11 @@ namespace Flappy
 		}
 
 		/// <summary>
-		/// 更新 (固定時間)
+		/// 更新 (後処理)
 		/// </summary>
-		private void FixedUpdate()
+		private void LateUpdate()
 		{
+			// スコア表示を更新
 			currentScoreText.text = this.scoreToText(this.currentScore);
 			if (Math.Round(this.currentScore, 1) > GameManager.Instance.BestScore)
 			{
@@ -113,6 +128,7 @@ namespace Flappy
 			this.IsProceedScoreCount = false;
 
 			// 自己ベストは少数第一位までで保持されているので丸めてから比較する
+			// TODO: 共通化する
 			if (Math.Round(this.currentScore, 1) > GameManager.Instance.BestScore)
 			{
 				GameManager.Instance.BestScore = this.currentScore;
@@ -134,10 +150,34 @@ namespace Flappy
 			}
 			this.groundEmmiter.gameObject.SetActive(false);
 
-			// TODO: リザルト画面
-			DOVirtual.DelayedCall(2f, () =>
+			// リザルト画面 (仮)
+			// TODO: ちゃんとしたやつ
+			DOVirtual.DelayedCall(1f, () =>
 			{
-				SceneManager.Instance.Load<TitleScene>();
+				var button1 = GameObject.Instantiate(this.buttonPrefab);
+				button1.SetLabel("タイトルへ戻る")
+				.SetClickAction(() =>
+				{
+					SceneManager.Instance.Load<TitleScene>();
+				});
+
+				var button2 = GameObject.Instantiate(this.buttonPrefab);
+				button2.SetLabel("リトライ")
+				.SetClickAction(() =>
+				{
+					AudioManager.Instance.PlaySE(Constants.Assets.Audio.SE.pico22, 0.5f);
+					SceneManager.Instance.Load<PlayGameScene>(this.parameter, LoadingManager.Types.FullscreenWithoutProgressbar);
+				});
+
+				var newRecord = Math.Round(this.currentScore, 1) > GameManager.Instance.BestScore ? "<br><color=red>自己ベスト更新！</color>" : string.Empty;
+
+				var popup = GameObject.Instantiate(this.poopupWindowPrefab, this.transform);
+				popup.SetTitle("リザルト画面 (仮)")
+				.AddButton(button1)
+				.AddButton(button2)
+				.SetCloseButtonActive(false)
+				.SetMessage($"自己ベスト：{this.bestScoreText.text}<br>今回のスコア：{this.currentScoreText.text}{newRecord}")
+				.Open();
 			});
 		}
 

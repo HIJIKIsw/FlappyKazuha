@@ -266,8 +266,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 709e46a9fc4cfd046b0f26df41636eed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overlayLoadingPrefab: {fileID: 6424757719531921749, guid: 2694dcc6ba486b14a985b8451a367f7f, type: 3}
-  fullscreenLoadingPrefab: {fileID: 6532663508198493513, guid: 4f8418cf931c91c42a81afffc67cdfce, type: 3}
+  loading1Prefab: {fileID: 6424757719531921749, guid: 2694dcc6ba486b14a985b8451a367f7f, type: 3}
+  loading2Prefab: {fileID: 6532663508198493513, guid: 4f8418cf931c91c42a81afffc67cdfce, type: 3}
+  loading3Prefab: {fileID: 2836133189466359180, guid: 96b54b9b405566640a6042e7ac215d15, type: 3}
 --- !u!1001 &962161778
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -434,6 +435,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultAudioInstances: 8
+  maxAudioInstances: 12
+  masterVolume: 0.5
+  seVolume: 0.5
+  bgmVolume: 0.5
 --- !u!81 &1796343026
 AudioListener:
   m_ObjectHideFlags: 0
