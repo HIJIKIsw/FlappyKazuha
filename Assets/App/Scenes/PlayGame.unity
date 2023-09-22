@@ -259,6 +259,8 @@ MonoBehaviour:
   groundEmmiter: {fileID: 2113492118}
   currentScoreText: {fileID: 5998899727290277377}
   bestScoreText: {fileID: 4486084394833340003}
+  poopupWindowPrefab: {fileID: 6105321494164830259, guid: ed3b5b3614991e34aa227bfab2bedf1d, type: 3}
+  buttonPrefab: {fileID: 7860801696687286342, guid: bd1e5c961e29cec47a371adc895dbfbd, type: 3}
 --- !u!1001 &778844437
 PrefabInstance:
   m_ObjectHideFlags: 0
