@@ -25,6 +25,7 @@ namespace Flappy.UI
 		/// プログレスバーの進捗をセット
 		/// </summary>
 		/// <param name="progress">進捗状況: 0f-1f</param>
+		/// TODO: バーを巻き戻すようなことができないようにする
 		public override void SetProgress(float progress)
 		{
 			progress = Mathf.Clamp(progress, 0f, 1f);
