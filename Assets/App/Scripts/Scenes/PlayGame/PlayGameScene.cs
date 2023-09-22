@@ -96,10 +96,11 @@ namespace Flappy
 		}
 
 		/// <summary>
-		/// 更新 (1フレーム)
+		/// 更新 (固定時間)
 		/// </summary>
-		private void Update()
+		private void FixedUpdate()
 		{
+			// スコア加算
 			if (this.IsProceedScoreCount == true)
 			{
 				this.currentScore += Time.deltaTime * Constants.Game.ScorePerSecond;
@@ -107,10 +108,11 @@ namespace Flappy
 		}
 
 		/// <summary>
-		/// 更新 (固定時間)
+		/// 更新 (後処理)
 		/// </summary>
-		private void FixedUpdate()
+		private void LateUpdate()
 		{
+			// スコア表示を更新
 			currentScoreText.text = this.scoreToText(this.currentScore);
 			if (Math.Round(this.currentScore, 1) > GameManager.Instance.BestScore)
 			{
