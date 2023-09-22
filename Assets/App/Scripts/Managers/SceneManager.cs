@@ -79,13 +79,6 @@ namespace Flappy.Manager
 			// シーン名を取得
 			var sceneName = this.GetSceneName<T>();
 
-			// 同名シーンは読み込み不可
-			if (sceneName == this.CurrentScene.Name)
-			{
-				Debug.LogAssertion($"The specified scene \"{sceneName}\" is already loaded.");
-				return;
-			}
-
 			// 指定した名前のシーンが見つからなかった
 			if (this.ExistsSceneFile(sceneName) == false)
 			{
@@ -116,43 +109,42 @@ namespace Flappy.Manager
 			var unloadAsynOperation = USceneManager.UnloadSceneAsync(this.CurrentScene.Name);
 			unloadAsynOperation.completed += (op) =>
 			{
-				// アンロードが完了したらLoadingManagerに通知する
+				// アンロードが完了したことをLoadingManagerに通知する
 				LoadingManager.Instance.CompleteTask();
-			};
 
-			// 現在シーンへの参照を切る
-			this.CurrentScene = null;
+				// 現在シーンへの参照を切る
+				this.CurrentScene = null;
 
-			// 遷移先シーンのロード
-			var loadAsyncOperation = USceneManager.LoadSceneAsync(sceneName, UnityEngine.SceneManagement.LoadSceneMode.Additive);
-			loadAsyncOperation.completed += (op) =>
-			{
-				// ロードが完了したら遷移先シーンのインスタンスを取得
-				var scene = USceneManager.GetSceneByName(sceneName);
-				var rootGameObjects = scene.GetRootGameObjects();
-				foreach (var rootGameObject in rootGameObjects)
+				// 遷移先シーンのロード
+				var loadAsyncOperation = USceneManager.LoadSceneAsync(sceneName, UnityEngine.SceneManagement.LoadSceneMode.Additive);
+				loadAsyncOperation.completed += (op) =>
 				{
-					this.CurrentScene = rootGameObject.GetComponent<SceneBase>();
+					// ロードが完了したら遷移先シーンのインスタンスを取得
+					var scene = USceneManager.GetSceneByName(sceneName);
+					var rootGameObjects = scene.GetRootGameObjects();
+					foreach (var rootGameObject in rootGameObjects)
+					{
+						this.CurrentScene = rootGameObject.GetComponent<SceneBase>();
+						if (this.CurrentScene != null)
+						{
+							break;
+						}
+					}
+
+					// シーンを初期化する
 					if (this.CurrentScene != null)
 					{
-						break;
+						this.CurrentScene.SetActive(false);
+						this.CurrentScene.Initialize(parameter);
 					}
-				}
+					else
+					{
+						Debug.LogAssertion("Scene loaded but Failed to get the instance of scene.");
+					}
 
-				// シーンを初期化する
-				if (this.CurrentScene != null)
-				{
-					this.CurrentScene.SetActive(false);
-					this.CurrentScene.Initialize(parameter);
-				}
-				else
-				{
-					Debug.LogAssertion("Scene loaded but Failed to get the instance of scene.");
-				}
-
-				LoadingManager.Instance.CompleteTask();
+					LoadingManager.Instance.CompleteTask();
+				};
 			};
-
 		}
 
 		/// <summary>
