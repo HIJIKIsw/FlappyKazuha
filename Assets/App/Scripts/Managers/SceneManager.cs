@@ -92,7 +92,7 @@ namespace Flappy.Manager
 			AudioManager.Instance.PlaySE(Constants.Assets.Audio.SE.kaifuku2, 0.7f, 2.5f);
 
 			// TODO: メソッド抽出などしてきれいに書き直す
-			LoadingManager.Instance.ShowFullscreen(2, () =>
+			LoadingManager.Instance.Show(LoadingManager.Types.FullscreenWithoutProgressbar, 2, () =>
 			{
 				var unloadAsynOperation = USceneManager.UnloadSceneAsync(this.CurrentScene.Name);
 				var loadAsyncOperation = USceneManager.LoadSceneAsync(sceneName, UnityEngine.SceneManagement.LoadSceneMode.Additive);
