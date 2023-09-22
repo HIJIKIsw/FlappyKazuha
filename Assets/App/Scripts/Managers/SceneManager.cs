@@ -108,8 +108,8 @@ namespace Flappy.Manager
 		/// <summary>
 		/// シーンを遷移
 		/// </summary>
-		/// <param name="sceneName"></param>
-		/// <param name="parameter"></param>
+		/// <param name="sceneName">シーン名</param>
+		/// <param name="parameter">シーンに渡すパラメータ</param>
 		private void ChangeScene(string sceneName, SceneParameter parameter)
 		{
 			// 既存シーンのアンロード

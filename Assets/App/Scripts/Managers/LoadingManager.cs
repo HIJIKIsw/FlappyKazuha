@@ -59,8 +59,17 @@ namespace Flappy.Manager
 		/// </summary>
 		public enum Types
 		{
+			/// <summary>
+			/// オーバーレイ表示：ぐるぐる。画面遷移しないような軽いロードに使用。
+			/// </summary>
 			Overlay,
+			/// <summary>
+			/// フルスクリーン表示：基本の画面遷移に使用。
+			/// </summary>
 			Fullscreen,
+			/// <summary>
+			/// フルスクリーン進捗バーなし表示：軽い画面遷移する際に使用。
+			/// </summary>
 			FullscreenWithoutProgressbar
 		}
 
