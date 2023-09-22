@@ -93,9 +93,6 @@ namespace Flappy.Manager
 				return;
 			}
 
-			AudioManager.Instance.PlaySE(Constants.Assets.Audio.SE.kaifuku1, 0.3f, 0.8f);
-			AudioManager.Instance.PlaySE(Constants.Assets.Audio.SE.kaifuku2, 0.7f, 2.5f);
-
 			// 既存シーンのアンロードと遷移先シーンのロードなのでタスク数は2
 			int loadingTasksCount = 2;
 
