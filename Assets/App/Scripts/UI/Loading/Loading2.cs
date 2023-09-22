@@ -15,6 +15,9 @@ namespace Flappy.UI
 		Image progressBarFill;
 
 		[SerializeField]
+		Color loading_bgcolor;
+
+		[SerializeField]
 		CanvasGroup canvasGroup;
 
 		const float defaultFadeTime = 0.4f;
