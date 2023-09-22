@@ -15,15 +15,13 @@ namespace Flappy.UI
 		Image progressBarFill;
 
 		[SerializeField]
-		Color loading_bgcolor;
-
-		[SerializeField]
 		CanvasGroup canvasGroup;
 
 		const float defaultFadeTime = 0.4f;
 		const float minDisplayTime = 1.5f;
 
 		float elapsedTime = 0f;
+		Color32 loadingBgcolor;
 
 		UnityAction onBeginLoad;
 		UnityAction onCompleteLoad;
@@ -31,6 +29,23 @@ namespace Flappy.UI
 		private void Update()
 		{
 			this.elapsedTime += Time.deltaTime;
+
+			/// <summary>
+			/// 時間帯によって色を帰る
+			/// </summary>
+			
+			//時
+			int hour = System.DateTime.Now.Hour;
+			if ( hour >= 7 & hour <= 19 )
+			{
+				this.loadingBgcolor = new Color32(255,255,255,255);
+			}
+			else
+			{
+				this.loadingBgcolor = new Color32(0,0,0,255);
+			}
+			
+
 		}
 
 		/// <summary>
@@ -99,5 +114,6 @@ namespace Flappy.UI
 			}
 			completed?.Invoke();
 		}
+		
 	}
 }
