@@ -96,52 +96,85 @@ namespace Flappy.Manager
 			AudioManager.Instance.PlaySE(Constants.Assets.Audio.SE.kaifuku1, 0.3f, 0.8f);
 			AudioManager.Instance.PlaySE(Constants.Assets.Audio.SE.kaifuku2, 0.7f, 2.5f);
 
-			// TODO: メソッド抽出などしてきれいに書き直す
-			LoadingManager.Instance.Show(LoadingManager.Types.Fullscreen, 2, () =>
+			// 既存シーンのアンロードと遷移先シーンのロードなのでタスク数は2
+			int loadingTasksCount = 2;
+
+			// ロード画面を表示
+			LoadingManager.Instance.Show(
+				loadingType,
+				loadingTasksCount,
+				() => { this.ChangeScene(sceneName, parameter); },
+				() => { this.ActivateScene(); }
+			);
+		}
+
+		/// <summary>
+		/// シーンを遷移
+		/// </summary>
+		/// <param name="sceneName"></param>
+		/// <param name="parameter"></param>
+		private void ChangeScene(string sceneName, SceneParameter parameter)
+		{
+			// 既存シーンのアンロード
+			var unloadAsynOperation = USceneManager.UnloadSceneAsync(this.CurrentScene.Name);
+			unloadAsynOperation.completed += (op) =>
 			{
-				var unloadAsynOperation = USceneManager.UnloadSceneAsync(this.CurrentScene.Name);
-				var loadAsyncOperation = USceneManager.LoadSceneAsync(sceneName, UnityEngine.SceneManagement.LoadSceneMode.Additive);
+				// アンロードが完了したらLoadingManagerに通知する
+				LoadingManager.Instance.CompleteTask();
+			};
 
-				this.CurrentScene = null;
+			// 現在シーンへの参照を切る
+			this.CurrentScene = null;
 
-				// TODO: メソッド抽出などしてきれいに書き直す
-				unloadAsynOperation.completed += (op) =>
+			// 遷移先シーンのロード
+			var loadAsyncOperation = USceneManager.LoadSceneAsync(sceneName, UnityEngine.SceneManagement.LoadSceneMode.Additive);
+			loadAsyncOperation.completed += (op) =>
+			{
+				// ロードが完了したら遷移先シーンのインスタンスを取得
+				var scene = USceneManager.GetSceneByName(sceneName);
+				var rootGameObjects = scene.GetRootGameObjects();
+				foreach (var rootGameObject in rootGameObjects)
 				{
-					LoadingManager.Instance.CompleteTask();
-				};
-				loadAsyncOperation.completed += (op) =>
-				{
-					var scene = USceneManager.GetSceneByName(sceneName);
-					var rootGameObjects = scene.GetRootGameObjects();
-					foreach (var rootGameObject in rootGameObjects)
-					{
-						this.CurrentScene = rootGameObject.GetComponent<SceneBase>();
-						if (this.CurrentScene != null)
-						{
-							break;
-						}
-					}
-
+					this.CurrentScene = rootGameObject.GetComponent<SceneBase>();
 					if (this.CurrentScene != null)
 					{
-						this.CurrentScene.SetActive(false);
-						this.CurrentScene.Initialize(parameter);
+						break;
 					}
-					else
-					{
-						Debug.LogAssertion("Failed to get the loaded scene.");
-					}
+				}
 
-					LoadingManager.Instance.CompleteTask();
-				};
-			}, () =>
-			{
+				// シーンを初期化する
 				if (this.CurrentScene != null)
 				{
-					this.CurrentScene.SetActive(true);
-					USceneManager.SetActiveScene(this.CurrentScene.Scene);
+					this.CurrentScene.SetActive(false);
+					this.CurrentScene.Initialize(parameter);
 				}
-			});
+				else
+				{
+					Debug.LogAssertion("Scene loaded but Failed to get the instance of scene.");
+				}
+
+				LoadingManager.Instance.CompleteTask();
+			};
+
+		}
+
+		/// <summary>
+		/// シーンを有効にする
+		/// </summary>
+		private void ActivateScene()
+		{
+			if (this.CurrentScene != null)
+			{
+				// 現在のシーンを有効にする
+				this.CurrentScene.SetActive(true);
+
+				// 現在のシーンをアクティブなシーンとしてUnityに認識させる
+				USceneManager.SetActiveScene(this.CurrentScene.Scene);
+			}
+			else
+			{
+				Debug.LogAssertion("Failed to Activate Scene.");
+			}
 		}
 
 		/// <summary>
