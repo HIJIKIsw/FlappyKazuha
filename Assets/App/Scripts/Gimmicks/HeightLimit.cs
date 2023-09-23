@@ -7,7 +7,7 @@ namespace Flappy.Gimmicks
     public class HeightLimit : MonoBehaviour
     {
         [SerializeField]
-        PlayerController player;
+        PlayerBase player;
         [SerializeField]
         BoxCollider2D limiterCollider;
         // コライダーにコライダーがぶつかった時に始める処理

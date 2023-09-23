@@ -10,17 +10,38 @@ namespace Flappy.Manager
 	/// </summary>
 	public class LoadingManager : SingletonMonoBehaviour<LoadingManager>
 	{
+		/// <summary>
+		/// Loading1 プレハブ
+		/// </summary>
 		[SerializeField]
-		Loading1 overlayLoadingPrefab;
-		Loading1 overlayLoadingInstance;
+		private Loading1 loading1Prefab;
 
+		/// <summary>
+		/// Loading2 プレハブ
+		/// </summary>
 		[SerializeField]
-		Loading2 fullscreenLoadingPrefab;
-		Loading2 fullscreenLoadingInstance;
+		private Loading2 loading2Prefab;
 
-		// フルスクリーンロード画面の進捗状況管理用
-		int tasksCount;
-		int completedTasks;
+		/// <summary>
+		/// Loading3 プレハブ
+		/// </summary>
+		[SerializeField]
+		private Loading3 loading3Prefab;
+
+		/// <summary>
+		/// ロード画面インスタンス
+		/// </summary>
+		private LoadingBase loadingInstance;
+
+		/// <summary>
+		/// ロード完了までの合計タスク数
+		/// </summary>
+		private int tasksCount;
+
+		/// <summary>
+		/// 完了済タスク数
+		/// </summary>
+		private int completedTasks;
 
 		/// <summary>
 		/// ロード中か
@@ -29,78 +50,137 @@ namespace Flappy.Manager
 		{
 			get
 			{
-				return this.overlayLoadingInstance != null || this.fullscreenLoadingInstance != null;
+				return this.loadingInstance != null;
 			}
 		}
 
 		/// <summary>
-		/// オーバーレイロード画面を表示
+		/// ローディング表示タイプ
 		/// </summary>
-		public void ShowOverlay()
+		public enum Types
 		{
-			if (this.overlayLoadingInstance != null)
-			{
-				return;
-			}
-
-			this.overlayLoadingInstance = GameObject.Instantiate(this.overlayLoadingPrefab, this.transform);
-			this.overlayLoadingInstance.Show();
+			/// <summary>
+			/// オーバーレイ表示：ぐるぐる。画面遷移しないような軽いロードに使用。
+			/// </summary>
+			Overlay,
+			/// <summary>
+			/// フルスクリーン表示：基本の画面遷移に使用。
+			/// </summary>
+			Fullscreen,
+			/// <summary>
+			/// フルスクリーン進捗バーなし表示：軽い画面遷移する際に使用。
+			/// </summary>
+			FullscreenWithoutProgressbar
 		}
 
 		/// <summary>
-		/// オーバーレイロード画面を非表示
+		/// ロード画面を表示
 		/// </summary>
-		public void HideOverlay()
-		{
-			if (this.overlayLoadingInstance == null)
-			{
-				return;
-			}
-
-			this.overlayLoadingInstance.Hide();
-			this.overlayLoadingInstance = null;
-		}
-
-		/// <summary>
-		/// フルスクリーンロード画面を表示
-		/// </summary>
+		/// <param name="type">表示するロード画面タイプ</param>
 		/// <param name="tasksCount">ロード完了までのタスクの個数</param>
-		/// <param name="onBeginLoad">フェードイン完了後に実行するアクション</param>
-		/// <remarks>フルスクリーンロードは直接非表示にできず、タスクが完了するたびに CompleteTask を呼び出して、LoadingManager 側で非表示にする。</remarks>
-		public void ShowFullscreen(int tasksCount, UnityAction onBeginLoad = null, UnityAction onCompleteLoad = null)
+		/// <param name="onBeginLoad">ロード開始時に実行するアクション</param>
+		/// <param name="onCompleteLoad">ロード完了時に実行するアクション</param>
+		/// <remarks>
+		/// 通常は既存のロード画面がある状態でこのメソッドを呼ばないように注意しながら実装する想定。
+		/// 仮に、既に表示中のロードが存在する場合はタスクのカウンターだけが足されてロード画面は既存のもののまま。
+		/// onBeginLoadは即座に実行され、onCompleteLoadは既存のロード完了時アクションに追加される。
+		/// onBeginLoadは即座に実行されるので、ロード画面のフェードインが終わっているかどうかを考慮しない点にも注意。
+		/// </remarks>
+		public void Show(Types type = Types.Overlay, int tasksCount = 1, UnityAction onBeginLoad = null, UnityAction onCompleteLoad = null)
 		{
-			if (this.fullscreenLoadingInstance != null)
+			// 不正なタスク数
+			if (tasksCount < 1)
 			{
-				// 複数箇所から同時にロード画面を使用する場合はすべてのタスクを合計する
-				this.tasksCount += tasksCount;
+				Debug.LogAssertion("指定されたタスク数が不正なためロードをキャンセルしました。");
 				return;
 			}
 
+			if (this.IsLoading == true)
+			{
+				// ロード開始時アクションは即座に実行
+				onBeginLoad?.Invoke();
+
+				// ロード終了時アクションは既存のロード画面に追加する
+				if (onCompleteLoad != null)
+				{
+					this.loadingInstance.SetOnCompleteLoad(onCompleteLoad);
+				}
+
+				// ロード完了までのタスク数を加算する
+				this.tasksCount += tasksCount;
+
+				// 既にロード中の場合は新たにロード画面を表示しない
+				return;
+			}
+
+			// タスク状況をリセット
 			this.tasksCount = tasksCount;
 			this.completedTasks = 0;
 
-			this.fullscreenLoadingInstance = GameObject.Instantiate(this.fullscreenLoadingPrefab, this.transform);
-			this.fullscreenLoadingInstance.Show(onBeginLoad: onBeginLoad, onCompleteLoad: onCompleteLoad);
+			// ローディングタイプによって読み込むプレハブを場合分け
+			switch (type)
+			{
+				case Types.Overlay:
+					this.loadingInstance = GameObject.Instantiate(this.loading1Prefab, this.transform);
+					break;
+				case Types.Fullscreen:
+					this.loadingInstance = GameObject.Instantiate(this.loading2Prefab, this.transform);
+					break;
+				case Types.FullscreenWithoutProgressbar:
+					this.loadingInstance = GameObject.Instantiate(this.loading3Prefab, this.transform);
+					break;
+			}
+
+			// ロード画面を表示
+			this.loadingInstance.Show(onBeginLoad, onCompleteLoad);
 		}
 
 		/// <summary>
-		/// タスクが完了したら呼び出す
+		/// タスクが1つ完了するごとに1回呼び出す
 		/// </summary>
-		/// <param name="count">完了したタスクの個数</param>
-		public void CompleteTask(int count = 1)
+		public void CompleteTask()
 		{
-			if (count < 1 || this.fullscreenLoadingInstance == null)
+			// ロード中でなければ無視する
+			if (this.IsLoading == false)
 			{
+				Debug.Log("ロード中でないため無視しました。");
 				return;
 			}
 
-			this.completedTasks += count;
-			var progress = (float)this.completedTasks / (float)this.tasksCount;
-			this.fullscreenLoadingInstance.SetProgress(progress);
+			// 完了タスク数を1つ進める
+			this.completedTasks++;
+
+			// 進捗をセット
+			var progress = Mathf.Clamp01((float)this.completedTasks / (float)this.tasksCount);
+			this.loadingInstance.SetProgress(progress);
+
+			// ロード完了したらインスタンスへの参照を切る
 			if (progress >= 1f)
 			{
-				this.fullscreenLoadingInstance = null;
+				this.loadingInstance = null;
 			}
+		}
+
+		/// <summary>
+		/// ロードを強制的に完了させる
+		/// </summary>
+		/// <remarks>扱いに注意。通常は使用しないが、通信エラー時などにロード画面を非表示にしたりするのに使う。</remarks>
+		public void CompleteDirty()
+		{
+			// ロード中でなければ無視する
+			if (this.IsLoading == false)
+			{
+				Debug.Log("ロード中でないため無視しました。");
+				return;
+			}
+
+			// タスク状況をリセット
+			this.tasksCount = 0;
+			this.completedTasks = 0;
+
+			// ロードを強制的に完了してインスタンスへの参照を切る
+			this.loadingInstance.SetProgress(1f);
+			this.loadingInstance = null;
 		}
 	}
 }

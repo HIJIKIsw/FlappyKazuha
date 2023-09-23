@@ -30,7 +30,7 @@ namespace Flappy.Manager
 		GameObject sceneComponentContainer;
 
 		/// <summary>
-		/// シーン遷移中にシーン内カメラの代わりに使用するカメラ
+		/// 代替カメラ：シーン遷移中にシーン内カメラの代わりに使用する
 		/// </summary>
 		[SerializeField]
 		Camera alternativeCamera;
@@ -40,7 +40,10 @@ namespace Flappy.Manager
 		/// </summary>
 		public SceneBase CurrentScene { get; private set; }
 
-		void Start()
+		/// <summary>
+		/// 初期化
+		/// </summary>
+		private void Start()
 		{
 			// 初期シーン自動取得
 			var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
@@ -70,42 +73,53 @@ namespace Flappy.Manager
 		/// </summary>
 		/// <typeparam name="T">読み込むシーンクラス</typeparam>
 		/// <param name="parameter">シーンに渡すパラメータ</param>
-		public void Load<T>(SceneParameter parameter = null) where T : SceneBase
+		/// <param name="loadingType">ロード画面の表示タイプ</param>
+		public void Load<T>(SceneParameter parameter = null, LoadingManager.Types loadingType = LoadingManager.Types.Fullscreen) where T : SceneBase
 		{
 			// シーン名を取得
 			var sceneName = this.GetSceneName<T>();
 
-			// 同名シーンは読み込み不可
-			if (sceneName == this.CurrentScene.Name)
-			{
-				Debug.LogAssertion($"The specified scene \"{sceneName}\" is already loaded.");
-				return;
-			}
-
+			// 指定した名前のシーンが見つからなかった
 			if (this.ExistsSceneFile(sceneName) == false)
 			{
 				Debug.LogAssertion($"Could not find scene \"{sceneName}\".");
 				return;
 			}
 
-			AudioManager.Instance.PlaySE(Constants.Assets.Audio.SE.kaifuku1, 0.3f, 0.8f);
-			AudioManager.Instance.PlaySE(Constants.Assets.Audio.SE.kaifuku2, 0.7f, 2.5f);
+			// 既存シーンのアンロードと遷移先シーンのロードなのでタスク数は2
+			int loadingTasksCount = 2;
 
-			// TODO: メソッド抽出などしてきれいに書き直す
-			LoadingManager.Instance.ShowFullscreen(2, () =>
+			// ロード画面を表示
+			LoadingManager.Instance.Show(
+				loadingType,
+				loadingTasksCount,
+				() => { this.ChangeScene(sceneName, parameter); },
+				() => { this.ActivateScene(); }
+			);
+		}
+
+		/// <summary>
+		/// シーンを遷移
+		/// </summary>
+		/// <param name="sceneName">シーン名</param>
+		/// <param name="parameter">シーンに渡すパラメータ</param>
+		private void ChangeScene(string sceneName, SceneParameter parameter)
+		{
+			// 既存シーンのアンロード
+			var unloadAsynOperation = USceneManager.UnloadSceneAsync(this.CurrentScene.Name);
+			unloadAsynOperation.completed += (op) =>
 			{
-				var unloadAsynOperation = USceneManager.UnloadSceneAsync(this.CurrentScene.Name);
-				var loadAsyncOperation = USceneManager.LoadSceneAsync(sceneName, UnityEngine.SceneManagement.LoadSceneMode.Additive);
+				// アンロードが完了したことをLoadingManagerに通知する
+				LoadingManager.Instance.CompleteTask();
 
+				// 現在シーンへの参照を切る
 				this.CurrentScene = null;
 
-				// TODO: メソッド抽出などしてきれいに書き直す
-				unloadAsynOperation.completed += (op) =>
-				{
-					LoadingManager.Instance.CompleteTask();
-				};
+				// 遷移先シーンのロード
+				var loadAsyncOperation = USceneManager.LoadSceneAsync(sceneName, UnityEngine.SceneManagement.LoadSceneMode.Additive);
 				loadAsyncOperation.completed += (op) =>
 				{
+					// ロードが完了したら遷移先シーンのインスタンスを取得
 					var scene = USceneManager.GetSceneByName(sceneName);
 					var rootGameObjects = scene.GetRootGameObjects();
 					foreach (var rootGameObject in rootGameObjects)
@@ -117,6 +131,7 @@ namespace Flappy.Manager
 						}
 					}
 
+					// シーンを初期化する
 					if (this.CurrentScene != null)
 					{
 						this.CurrentScene.SetActive(false);
@@ -124,21 +139,36 @@ namespace Flappy.Manager
 					}
 					else
 					{
-						Debug.LogAssertion("Failed to get the loaded scene.");
+						Debug.LogAssertion("Scene loaded but Failed to get the instance of scene.");
 					}
 
 					LoadingManager.Instance.CompleteTask();
 				};
-			}, () =>
-			{
-				if (this.CurrentScene != null)
-				{
-					this.CurrentScene.SetActive(true);
-					USceneManager.SetActiveScene(this.CurrentScene.Scene);
-				}
-			});
+			};
 		}
 
+		/// <summary>
+		/// シーンを有効にする
+		/// </summary>
+		private void ActivateScene()
+		{
+			if (this.CurrentScene != null)
+			{
+				// 現在のシーンを有効にする
+				this.CurrentScene.SetActive(true);
+
+				// 現在のシーンをアクティブなシーンとしてUnityに認識させる
+				USceneManager.SetActiveScene(this.CurrentScene.Scene);
+			}
+			else
+			{
+				Debug.LogAssertion("Failed to Activate Scene.");
+			}
+		}
+
+		/// <summary>
+		/// シーンクラスからシーン名を取得
+		/// </summary>
 		private string GetSceneName<T>() where T : SceneBase
 		{
 			// TODO: もっと良いやり方があったら直す
@@ -149,13 +179,16 @@ namespace Flappy.Manager
 			return sceneName;
 		}
 
-		private bool ExistsSceneFile(string name)
+		/// <summary>
+		/// シーンファイルが存在するか
+		/// </summary>
+		private bool ExistsSceneFile(string fileName)
 		{
 			for (int i = 0; i < USceneManager.sceneCountInBuildSettings; i++)
 			{
 				string scenePath = UnityEngine.SceneManagement.SceneUtility.GetScenePathByBuildIndex(i);
 				string sceneNameFromPath = System.IO.Path.GetFileNameWithoutExtension(scenePath);
-				if (sceneNameFromPath == name)
+				if (sceneNameFromPath == fileName)
 				{
 					return true;
 				}
@@ -164,6 +197,9 @@ namespace Flappy.Manager
 			return false;
 		}
 
+		/// <summary>
+		/// 代替カメラの有効・無効をセットする
+		/// </summary>
 		public void SetAlternativeCameraActive(bool value)
 		{
 			this.alternativeCamera.gameObject.SetActive(value);
