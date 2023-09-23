@@ -40,14 +40,25 @@ namespace Flappy.Manager
 		{
 			get
 			{
-				return (float)Math.Round(this.bestScore, 1);
+				return this.RoundScore(this.bestScore);
 			}
 			set
 			{
-				this.bestScore = (float)Math.Round(value, 1);
+				this.bestScore = this.RoundScore(value);
 			}
 		}
 		private float bestScore = 0f;
+
+		/// <summary>
+		/// スコアを処理で扱える値に丸める
+		/// スコアを比較したり保存したりする時は必ずこの処理を通すこと
+		/// </summary>
+		/// <param name="score">スコア</param>
+		/// <remarks>少数第二位以下が四捨五入される</remarks>
+		public float RoundScore(float score)
+		{
+			return (float)Math.Round(score, 1);
+		}
 	}
 }
 

@@ -90,7 +90,7 @@ namespace Flappy
 			get
 			{
 				// 自己ベストは少数第一位までで保持されているので丸めてから比較する
-				return (float)Math.Round(this.currentScore, 1) > GameManager.Instance.BestScore;
+				return GameManager.Instance.RoundScore(this.currentScore) > GameManager.Instance.BestScore;
 			}
 		}
 
@@ -241,7 +241,7 @@ namespace Flappy
 		/// </summary>
 		private string ScoreToText(float score)
 		{
-			var roundScore = Math.Round(score, 1);
+			var roundScore = GameManager.Instance.RoundScore(score);
 			return roundScore.ToString("F1") + " m";
 		}
 	}
