@@ -1,4 +1,6 @@
 using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
 
 namespace Flappy.Editor
 {
@@ -33,6 +35,13 @@ namespace Flappy.Editor
 		/// <param name="buildPath">ビルドパス</param>
 		private static void BuildApplication(BuildTarget buildTarget, BuildOptions buildOptions, string buildPath)
 		{
+			if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo() == false)
+			{
+				// 未保存のシーンがある場合、エラーメッセージを表示します
+				Debug.LogError("ビルドを中止しました。未保存のシーンがあります。");
+				return;
+			}
+
 			string[] scenePaths = GetScenePaths();
 
 			BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
