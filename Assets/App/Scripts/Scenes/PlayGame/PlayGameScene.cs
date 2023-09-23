@@ -141,6 +141,9 @@ namespace Flappy
 			if (this.isExceededBestScore)
 			{
 				GameManager.Instance.BestScore = this.currentScore;
+
+				// ゲームオーバーになるタイミングによっては自己ベスト表示を更新できてない場合があるので確実に更新する
+				this.UpdateBestScore();
 			}
 
 			// 全ての柱を停止させ、出現しないようにする
