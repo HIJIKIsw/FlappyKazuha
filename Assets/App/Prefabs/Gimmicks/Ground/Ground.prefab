@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a20ce026b8aa7b34e8281013341499ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody2D: {fileID: 8227314202905759721}
+  rb2D: {fileID: 8227314202905759721}
 --- !u!1 &7336320404505325259
 GameObject:
   m_ObjectHideFlags: 0
