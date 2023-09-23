@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.26198578, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -88,6 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d6eec55fb9573d4c975f30b5dc36339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loading_bgcolor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &391355537837439544
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,8 +286,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dfe9bfe223eaf743ae77dd92200c6f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progressBarFill: {fileID: 4226560013733814741}
   canvasGroup: {fileID: 3162459879359405297}
+  progressBarFill: {fileID: 4226560013733814741}
+  loadingBg: {fileID: 107750981463401560}
+  progressBarLineLeft: {fileID: 369415825123345777}
+  progressBarLineRight: {fileID: 5121481352019520826}
+  progressBarTips: {fileID: 1898267191035616100}
+  progressBarBase: {fileID: 2978033712623918760}
 --- !u!1 &2318241116857965036
 GameObject:
   m_ObjectHideFlags: 0
@@ -626,15 +632,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -835,15 +843,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
