@@ -79,9 +79,20 @@ namespace Flappy
 		private float currentScore = 0f;
 
 		/// <summary>
-		/// 自己ベスト
+		/// 現在スコアが自己ベストを超えているか
 		/// </summary>
-		private float bestScore = 0f;
+		/// <remarks>
+		/// 自己ベストを超えているかどうかの比較には必ずこのプロパティを使う
+		/// 自己ベストは少数第一位までで保持されているので普通に比較すると正しい結果が得られないため
+		/// </remarks>
+		private bool isExceededBestScore
+		{
+			get
+			{
+				// 自己ベストは少数第一位までで保持されているので丸めてから比較する
+				return Math.Round(this.currentScore, 1) > GameManager.Instance.BestScore;
+			}
+		}
 
 		/// <summary>
 		/// 初期化
@@ -91,8 +102,7 @@ namespace Flappy
 			// TODO: タップでスタート実装後はタップするまでカウント始まらないようにする
 			this.IsProceedScoreCount = true;
 
-			this.bestScore = GameManager.Instance.BestScore;
-			this.bestScoreText.text = this.scoreToText(this.bestScore);
+			this.bestScoreText.text = this.ScoreToText(GameManager.Instance.BestScore);
 		}
 
 		/// <summary>
@@ -113,11 +123,10 @@ namespace Flappy
 		private void LateUpdate()
 		{
 			// スコア表示を更新
-			currentScoreText.text = this.scoreToText(this.currentScore);
-			if (Math.Round(this.currentScore, 1) > GameManager.Instance.BestScore)
-			{
-				this.bestScoreText.text = this.scoreToText(this.currentScore);
-			}
+			currentScoreText.text = this.ScoreToText(this.currentScore);
+
+			// 自己ベスト表示を更新
+			this.UpdateBestScore();
 		}
 
 		/// <summary>
@@ -127,11 +136,14 @@ namespace Flappy
 		{
 			this.IsProceedScoreCount = false;
 
-			// 自己ベストは少数第一位までで保持されているので丸めてから比較する
-			// TODO: 共通化する
-			if (Math.Round(this.currentScore, 1) > GameManager.Instance.BestScore)
+			// 自己ベストを超えている場合は更新する
+			// TODO: サーバーに送信する処理
+			if (this.isExceededBestScore)
 			{
 				GameManager.Instance.BestScore = this.currentScore;
+
+				// ゲームオーバーになるタイミングによっては自己ベスト表示を更新できてない場合があるので確実に更新する
+				this.UpdateBestScore();
 			}
 
 			// 全ての柱を停止させ、出現しないようにする
@@ -218,9 +230,22 @@ namespace Flappy
 		}
 
 		/// <summary>
+		/// 自己ベストの表示を更新する
+		/// </summary>
+		/// <remarks>現在スコアが自己ベストを超えていなければ何もしない</remarks>
+		private void UpdateBestScore()
+		{
+			// 自己ベストは少数第一位までで保持されているので丸めてから比較する
+			if (this.isExceededBestScore == true)
+			{
+				this.bestScoreText.text = this.ScoreToText(this.currentScore);
+			}
+		}
+
+		/// <summary>
 		/// スコアを画面に表示する形式の文字列に変換
 		/// </summary>
-		private string scoreToText(float score)
+		private string ScoreToText(float score)
 		{
 			var roundScore = Math.Round(score, 1);
 			return roundScore.ToString("F1") + " m";
