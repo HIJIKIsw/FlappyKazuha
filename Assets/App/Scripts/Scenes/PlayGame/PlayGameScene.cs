@@ -90,7 +90,7 @@ namespace Flappy
 			get
 			{
 				// 自己ベストは少数第一位までで保持されているので丸めてから比較する
-				return Math.Round(this.currentScore, 1) > GameManager.Instance.BestScore;
+				return GameManager.Instance.RoundScore(this.currentScore) > GameManager.Instance.BestScore;
 			}
 		}
 
@@ -110,23 +110,17 @@ namespace Flappy
 		/// </summary>
 		private void FixedUpdate()
 		{
-			// スコア加算
 			if (this.IsProceedScoreCount == true)
 			{
+				// スコア加算
 				this.currentScore += Time.deltaTime * Constants.Game.ScorePerSecond;
+
+				// スコア表示を更新
+				currentScoreText.text = this.ScoreToText(this.currentScore);
+
+				// 自己ベスト表示を更新
+				this.UpdateBestScore();
 			}
-		}
-
-		/// <summary>
-		/// 更新 (後処理)
-		/// </summary>
-		private void LateUpdate()
-		{
-			// スコア表示を更新
-			currentScoreText.text = this.ScoreToText(this.currentScore);
-
-			// 自己ベスト表示を更新
-			this.UpdateBestScore();
 		}
 
 		/// <summary>
@@ -135,16 +129,6 @@ namespace Flappy
 		public void GameOver()
 		{
 			this.IsProceedScoreCount = false;
-
-			// 自己ベストを超えている場合は更新する
-			// TODO: サーバーに送信する処理
-			if (this.isExceededBestScore)
-			{
-				GameManager.Instance.BestScore = this.currentScore;
-
-				// ゲームオーバーになるタイミングによっては自己ベスト表示を更新できてない場合があるので確実に更新する
-				this.UpdateBestScore();
-			}
 
 			// 全ての柱を停止させ、出現しないようにする
 			var pillars = this.GetAllPillars();
@@ -161,6 +145,16 @@ namespace Flappy
 				ground.SetSpeed(Vector2.zero);
 			}
 			this.groundEmmiter.gameObject.SetActive(false);
+
+			// リザルト画面で表示するために自己ベストの更新があったかを保持しておく
+			bool isUpdateBestScore = this.isExceededBestScore;
+
+			// 自己ベストを超えている場合は更新する
+			// TODO: サーバーに送信する処理
+			if (isUpdateBestScore == true)
+			{
+				GameManager.Instance.BestScore = this.currentScore;
+			}
 
 			// リザルト画面 (仮)
 			// TODO: ちゃんとしたやつ
@@ -181,7 +175,7 @@ namespace Flappy
 					SceneManager.Instance.Load<PlayGameScene>(this.parameter, LoadingManager.Types.FullscreenWithoutProgressbar);
 				});
 
-				var newRecord = Math.Round(this.currentScore, 1) > GameManager.Instance.BestScore ? "<br><color=red>自己ベスト更新！</color>" : string.Empty;
+				var newRecord = isUpdateBestScore ? "<br><color=red>自己ベスト更新！</color>" : string.Empty;
 
 				var popup = GameObject.Instantiate(this.poopupWindowPrefab, this.transform);
 				popup.SetTitle("リザルト画面 (仮)")
@@ -247,7 +241,7 @@ namespace Flappy
 		/// </summary>
 		private string ScoreToText(float score)
 		{
-			var roundScore = Math.Round(score, 1);
+			var roundScore = GameManager.Instance.RoundScore(score);
 			return roundScore.ToString("F1") + " m";
 		}
 	}
