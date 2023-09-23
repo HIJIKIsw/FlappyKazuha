@@ -6,7 +6,6 @@ namespace Flappy.Gimmicks
 {
 	public class GroundDestroyer : MonoBehaviour
 	{
-
 		/// <summary>
 		/// Groundを消すための当たり判定
 		/// </summary>
