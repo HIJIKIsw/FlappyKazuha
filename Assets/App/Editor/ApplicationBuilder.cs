@@ -50,7 +50,9 @@ namespace Flappy.Editor
 			buildPlayerOptions.target = buildTarget;
 			buildPlayerOptions.options = buildOptions;
 
+			Debug.Log("Build started.");
 			BuildPipeline.BuildPlayer(buildPlayerOptions);
+			Debug.Log("Build finished.");
 		}
 
 		/// <summary>
