@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace Flappy.Common
@@ -29,11 +30,14 @@ namespace Flappy.Common
 		/// <summary>
 		/// シーンを初期化
 		/// </summary>
+		/// <param name="notification">初期化結果を通知するデリゲート</param>
 		/// <param name="parameter">シーンに渡すパラメータ</param>
-		public virtual void Initialize(SceneParameter parameter = null)
+		public virtual void Initialize(UnityAction<SceneState> notification, SceneParameter parameter = null)
 		{
-			// TODO: 初期化が完了したことをSceneManagerに知らせるデリゲートを持たせる
 			this.parameter = parameter ?? new SceneParameter();
+
+			// 初期化が完了したことをSceneManagerに知らせる
+			notification(SceneState.Success);
 		}
 
 		/// <summary>

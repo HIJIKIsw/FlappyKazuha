@@ -135,14 +135,18 @@ namespace Flappy.Manager
 					if (this.CurrentScene != null)
 					{
 						this.CurrentScene.SetActive(false);
-						this.CurrentScene.Initialize(parameter);
+						this.CurrentScene.Initialize((result) =>
+						{
+							if (result == SceneState.Success)
+							{
+								LoadingManager.Instance.CompleteTask();
+							}
+						}, parameter);
 					}
 					else
 					{
 						Debug.LogAssertion("Scene loaded but Failed to get the instance of scene.");
 					}
-
-					LoadingManager.Instance.CompleteTask();
 				};
 			};
 		}
