@@ -6,7 +6,7 @@ namespace Flappy
 	public class PlayerController : MonoBehaviour
 	{
 		[SerializeField]
-		new Rigidbody2D rigidbody2D;
+		private Rigidbody2D rb2D;
 
 		/// <summary>
 		/// ジャンプ初速
@@ -26,7 +26,7 @@ namespace Flappy
 		/// </summary>
 		void Start()
 		{
-			this.rigidbody2D = this.GetComponent<Rigidbody2D>();
+			this.rb2D = this.GetComponent<Rigidbody2D>();
 		}
 
 		/// <summary>
@@ -45,14 +45,14 @@ namespace Flappy
 			// TODO: いちいち操作ごとに死亡フラグを確認するのは面倒なのでイケてる方法考える
 			if (this.isJump && this.isDead == false)
 			{
-				this.rigidbody2D.velocity = Vector2.up * jumpForce;
+				this.rb2D.velocity = Vector2.up * jumpForce;
 				this.isJump = false;
 			}
 		}
 
 		void SetSpeed(Vector2 speed)
 		{
-			this.rigidbody2D.velocity = speed;
+			this.rb2D.velocity = speed;
 		}
 
 		void OnTriggerEnter2D(Collider2D collider)

@@ -8,7 +8,7 @@ namespace Flappy.Gimmicks
 	public class Pillar : MonoBehaviour
 	{
 		[SerializeField]
-		new Rigidbody2D rigidbody2D;
+		private Rigidbody2D rb2D;
 
 		/// <summary>
 		/// 柱を消す処理
@@ -23,7 +23,7 @@ namespace Flappy.Gimmicks
 		/// </summary>
 		public void SetSpeed(Vector2 speed)
 		{
-			this.rigidbody2D.velocity = speed;
+			this.rb2D.velocity = speed;
 		}
 	}
 }

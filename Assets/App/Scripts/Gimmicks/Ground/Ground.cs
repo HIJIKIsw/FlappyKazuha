@@ -8,7 +8,7 @@ namespace Flappy.Gimmicks
 	public class Ground : MonoBehaviour
 	{
 		[SerializeField]
-		new Rigidbody2D rigidbody2D;
+		private Rigidbody2D rb2D;
 
 		/// <summary>
 		/// 地面を消す処理
@@ -22,7 +22,7 @@ namespace Flappy.Gimmicks
 		/// </summary>
 		public void SetSpeed(Vector2 speed)
 		{
-			this.rigidbody2D.velocity = speed;
+			this.rb2D.velocity = speed;
 		}
 	}
 }

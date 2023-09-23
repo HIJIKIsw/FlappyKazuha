@@ -12,7 +12,7 @@ namespace Flappy
 		/// Rigidbody2Dコンポーネント
 		/// </summary>
 		[SerializeField]
-		protected new Rigidbody2D rigidbody2D;
+		protected Rigidbody2D rb2D;
 
 		/// <summary>
 		/// 死亡フラグ
@@ -33,7 +33,7 @@ namespace Flappy
 		/// <param name="speed">速度 (Rigidbody2Dのvelocityに渡す値)</param>
 		protected void SetSpeed(Vector2 speed)
 		{
-			this.rigidbody2D.velocity = speed;
+			this.rb2D.velocity = speed;
 		}
 
 		/// <summary>

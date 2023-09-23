@@ -40,7 +40,7 @@ namespace Flappy
 			//       入力に関わる処理をメソッド抽出して、IsDeadがfalseの間しかそのメソッドを呼ばないなど
 			if (this.isJump && this.IsDead == false)
 			{
-				this.rigidbody2D.velocity = Vector2.up * jumpForce;
+				this.rb2D.velocity = Vector2.up * jumpForce;
 				this.isJump = false;
 			}
 		}
