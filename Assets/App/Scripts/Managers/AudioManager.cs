@@ -4,6 +4,7 @@ using UnityEngine;
 using Unity.VisualScripting;
 using UnityEngine.AddressableAssets;
 using Flappy.Common;
+using Flappy.Utility;
 
 namespace Flappy.Manager
 {
@@ -91,16 +92,20 @@ namespace Flappy.Manager
 
 		public void PlaySE(Constants.Assets.Audio.SE se, float volume = 1f, float pitch = 1f)
 		{
-			var assetAddress = "Audio/SE/" + se.ToString();
+			// アセットを取得
+			var assetAddress = AssetAddressUtility.GetAssetAddress(se);
 			var asyncOperationHandle = Addressables.LoadAssetAsync<AudioClip>(assetAddress);
 			asyncOperationHandle.Completed += (handle) =>
 			{
+				// 使用可能なAudioSourceインスタンスを取得(なければ作成)
 				var audioClip = handle.Result;
 				var audioSource = this.GetAvailableAudioSource();
 				if (audioSource == null)
 				{
 					return;
 				}
+
+				// SEを再生
 				audioSource.clip = audioClip;
 				audioSource.volume = volume * this.masterVolume * this.seVolume;
 				audioSource.pitch = pitch;
