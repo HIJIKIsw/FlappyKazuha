@@ -1,4 +1,5 @@
 using Flappy.Common;
+using Flappy.Utility;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -48,8 +49,8 @@ namespace Flappy.UI
 			// 意図しない画像が見えるのを防ぐため、アイコンが指定されたら読み込み完了まで一旦消す
 			this.icon.gameObject.SetActive(false);
 
-			// TODO: Addressablesのマネージャ的なものを実装する
-			var assetAddress = "Sprite/ButtonIcon/" + icon.ToString();
+			// アイコンの画像アセットを取得
+			var assetAddress = AssetAddressUtility.GetAssetAddress(icon);
 			var asyncOperationHandle = Addressables.LoadAssetAsync<Sprite>(assetAddress);
 			asyncOperationHandle.Completed += (handle) =>
 			{
