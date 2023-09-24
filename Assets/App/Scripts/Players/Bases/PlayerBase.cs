@@ -91,7 +91,6 @@ namespace Flappy
 			float deathJumpForce = 600f;
 			this.SetSpeed(Vector2.up * deathJumpForce);
 			this.isDead = true;
-			this.playGameScene.GameOver();
 		}
 	}
 }

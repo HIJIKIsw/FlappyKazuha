@@ -15,6 +15,7 @@ namespace Flappy.Utility
 		/// </summary>
 		private static readonly Dictionary<Type, string> directoryMap = new()
 		{
+			{typeof(Constants.Assets.Prefab.Player),                "Prefab/Player/"},
 			{typeof(Constants.Assets.Sprite.ButtonIcon),            "Sprite/ButtonIcon/"},
 			{typeof(Constants.Assets.Audio.SE),                     "Audio/SE/"},
 		};

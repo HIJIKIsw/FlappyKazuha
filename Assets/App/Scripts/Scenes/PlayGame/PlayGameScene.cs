@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using TMPro;
 using DG.Tweening;
 using Flappy.Common;
 using Flappy.Gimmicks;
 using Flappy.Manager;
 using Flappy.UI;
+using Flappy.Utility;
 
 namespace Flappy
 {
@@ -45,6 +47,12 @@ namespace Flappy
 		private GroundEmmiter groundEmmiter;
 
 		/// <summary>
+		/// HeightLimitオブジェクト
+		/// </summary>
+		[SerializeField]
+		private HeightLimit heightLimit;
+
+		/// <summary>
 		/// CurrentScore -> Valueオブジェクト
 		/// </summary>
 		[SerializeField]
@@ -69,9 +77,19 @@ namespace Flappy
 		private CommonButton buttonPrefab;
 
 		/// <summary>
+		/// Playerオブジェクト
+		/// </summary>
+		private PlayerBase player;
+
+		/// <summary>
 		/// スコア加算フラグ
 		/// </summary>
-		public bool IsProceedScoreCount { get; set; } = false;
+		public bool IsProceedScoreCount { get; private set; } = false;
+
+		/// <summary>
+		/// ゲームオーバーフラグ
+		/// </summary>
+		public bool IsGameOver { get; private set; } = false;
 
 		/// <summary>
 		/// 現在スコア
@@ -102,7 +120,36 @@ namespace Flappy
 			// TODO: タップでスタート実装後はタップするまでカウント始まらないようにする
 			this.IsProceedScoreCount = true;
 
+			// TODO: Playerのインスタンス生成はInitializeで処理するようにする (そうなったらシーンの無効→有効は要らない)
+			// TODO: パラメータによってPlayerの種類を変えるようにする
+			this.SetActive(false);
+			var address = AssetAddressUtility.GetAssetAddress(Constants.Assets.Prefab.Player.Kazuha);
+			var handle = Addressables.LoadAssetAsync<GameObject>(address);
+			handle.Completed += (op) =>
+			{
+				// Playerインスタンスを生成
+				this.player = GameObject.Instantiate(op.Result, this.transform).GetComponent<PlayerBase>();
+
+				// HeightLimitにPlayerインスタンスへの参照を通知
+				this.heightLimit.SetPlayerInstance(this.player);
+
+				this.SetActive(true);
+			};
+
 			this.bestScoreText.text = this.ScoreToText(GameManager.Instance.BestScore);
+		}
+
+		/// <summary>
+		/// 更新 (1フレーム)
+		/// </summary>
+		private void Update()
+		{
+			// プレイヤーが死んでいたらゲームオーバーにする
+			if (this.IsGameOver == false && this.player.IsDead == true)
+			{
+				this.IsGameOver = true;
+				this.GameOver();
+			}
 		}
 
 		/// <summary>
