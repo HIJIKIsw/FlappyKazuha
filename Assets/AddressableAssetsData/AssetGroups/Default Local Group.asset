@@ -47,6 +47,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 412ed52ee28df8948bfe46ec2becddf5
+    m_Address: Prefab/Player/Kazuha
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: defd891a142de174b9cf34444c33dfa0, type: 2}
   m_SchemaSet:

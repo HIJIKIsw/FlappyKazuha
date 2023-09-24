@@ -21,6 +21,22 @@ namespace Flappy.Common
 		/// </summary>
 		public static class Assets
 		{
+			// MEMO: ここにenumを追加した場合、AssetAddressUtility.directoryMapにも対応する定義を追加すること
+
+			/// <summary>
+			/// プレハブ
+			/// </summary>
+			public static class Prefab
+			{
+				/// <summary>
+				/// プレイヤー
+				/// </summary>
+				public enum Player
+				{
+					Kazuha,
+				}
+			}
+
 			/// <summary>
 			/// 画像アセット
 			/// </summary>
