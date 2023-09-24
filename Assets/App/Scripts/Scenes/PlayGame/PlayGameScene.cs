@@ -47,6 +47,12 @@ namespace Flappy
 		private GroundEmmiter groundEmmiter;
 
 		/// <summary>
+		/// HeightLimitオブジェクト
+		/// </summary>
+		[SerializeField]
+		private HeightLimit heightLimit;
+
+		/// <summary>
 		/// CurrentScore -> Valueオブジェクト
 		/// </summary>
 		[SerializeField]
@@ -123,6 +129,9 @@ namespace Flappy
 			{
 				// Playerインスタンスを生成
 				this.player = GameObject.Instantiate(op.Result, this.transform).GetComponent<PlayerBase>();
+
+				// HeightLimitにPlayerインスタンスへの参照を通知
+				this.heightLimit.SetPlayerInstance(this.player);
 
 				this.SetActive(true);
 			};
