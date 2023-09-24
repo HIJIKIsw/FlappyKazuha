@@ -128,76 +128,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 140242873976306184, guid: 64ff1f1206e57dc458d2155e1cdbad6b, type: 3}
   m_PrefabInstance: {fileID: 1208879487}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &181614412
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 661008218}
-    m_Modifications:
-    - target: {fileID: 1083791387230228714, guid: 412ed52ee28df8948bfe46ec2becddf5, type: 3}
-      propertyPath: playGameScene
-      value: 
-      objectReference: {fileID: 661008219}
-    - target: {fileID: 4379040375103320704, guid: 412ed52ee28df8948bfe46ec2becddf5, type: 3}
-      propertyPath: m_Name
-      value: Kazuha
-      objectReference: {fileID: 0}
-    - target: {fileID: 6138896914313040945, guid: 412ed52ee28df8948bfe46ec2becddf5, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6138896914313040945, guid: 412ed52ee28df8948bfe46ec2becddf5, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6138896914313040945, guid: 412ed52ee28df8948bfe46ec2becddf5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6138896914313040945, guid: 412ed52ee28df8948bfe46ec2becddf5, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6138896914313040945, guid: 412ed52ee28df8948bfe46ec2becddf5, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6138896914313040945, guid: 412ed52ee28df8948bfe46ec2becddf5, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6138896914313040945, guid: 412ed52ee28df8948bfe46ec2becddf5, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6138896914313040945, guid: 412ed52ee28df8948bfe46ec2becddf5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6138896914313040945, guid: 412ed52ee28df8948bfe46ec2becddf5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6138896914313040945, guid: 412ed52ee28df8948bfe46ec2becddf5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8102728413969849363, guid: 412ed52ee28df8948bfe46ec2becddf5, type: 3}
-      propertyPath: playGameScene
-      value: 
-      objectReference: {fileID: 661008219}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 412ed52ee28df8948bfe46ec2becddf5, type: 3}
---- !u!4 &181614413 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6138896914313040945, guid: 412ed52ee28df8948bfe46ec2becddf5, type: 3}
-  m_PrefabInstance: {fileID: 181614412}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &661008217
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,7 +159,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1146258332}
-  - {fileID: 181614413}
   - {fileID: 8884928608654799346}
   - {fileID: 1089734117}
   - {fileID: 7777630808677347140}
@@ -318,17 +247,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2671711a5cd12242a5a2c59d96d9fe1, type: 3}
---- !u!114 &975199606 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8102728413969849363, guid: 412ed52ee28df8948bfe46ec2becddf5, type: 3}
-  m_PrefabInstance: {fileID: 181614412}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c02ea54ff9948b4590b576f22d4de0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1089734116
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,7 +651,7 @@ PrefabInstance:
     - target: {fileID: 6363616787514459053, guid: f5256620c7f09b94d99b96d568288e02, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 975199606}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
