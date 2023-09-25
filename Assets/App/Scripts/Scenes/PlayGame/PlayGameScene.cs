@@ -136,7 +136,7 @@ namespace Flappy
 				this.SetActive(true);
 			};
 
-			this.bestScoreText.text = this.ScoreToText(GameManager.Instance.BestScore);
+			this.bestScoreText.text = GameManager.Instance.ScoreToText(GameManager.Instance.BestScore);
 		}
 
 		/// <summary>
@@ -163,7 +163,7 @@ namespace Flappy
 				this.currentScore += Time.deltaTime * Constants.Game.ScorePerSecond;
 
 				// スコア表示を更新
-				currentScoreText.text = this.ScoreToText(this.currentScore);
+				currentScoreText.text = GameManager.Instance.ScoreToText(this.currentScore);
 
 				// 自己ベスト表示を更新
 				this.UpdateBestScore();
@@ -279,17 +279,8 @@ namespace Flappy
 			// 自己ベストは少数第一位までで保持されているので丸めてから比較する
 			if (this.isExceededBestScore == true)
 			{
-				this.bestScoreText.text = this.ScoreToText(this.currentScore);
+				this.bestScoreText.text = GameManager.Instance.ScoreToText(this.currentScore);
 			}
-		}
-
-		/// <summary>
-		/// スコアを画面に表示する形式の文字列に変換
-		/// </summary>
-		private string ScoreToText(float score)
-		{
-			var roundScore = GameManager.Instance.RoundScore(score);
-			return roundScore.ToString("F1") + " m";
 		}
 	}
 }

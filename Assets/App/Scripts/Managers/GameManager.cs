@@ -59,6 +59,15 @@ namespace Flappy.Manager
 		{
 			return (float)Math.Round(score, 1);
 		}
+
+		/// <summary>
+		/// スコアを画面に表示する形式の文字列に変換
+		/// </summary>
+		public string ScoreToText(float score)
+		{
+			var roundScore = GameManager.Instance.RoundScore(score);
+			return roundScore.ToString("F1") + " m";
+		}
 	}
 }
 
