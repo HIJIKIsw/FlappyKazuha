@@ -79,7 +79,7 @@ namespace Flappy.PlayGame
 		private void UpdateGaugeFill(float currentScore)
 		{
 			// 最高スコアがない時は何もしない
-			if (GameManager.Instance.IsRecordedBestScore == true)
+			if (GameManager.Instance.IsRecordedBestScore == false)
 			{
 				return;
 			}
