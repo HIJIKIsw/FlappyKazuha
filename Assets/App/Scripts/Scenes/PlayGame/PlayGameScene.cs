@@ -9,6 +9,7 @@ using Flappy.Gimmicks;
 using Flappy.Manager;
 using Flappy.UI;
 using Flappy.Utility;
+using Flappy.PlayGame;
 
 namespace Flappy
 {
@@ -51,18 +52,6 @@ namespace Flappy
 		/// </summary>
 		[SerializeField]
 		private HeightLimit heightLimit;
-
-		/// <summary>
-		/// CurrentScore -> Valueオブジェクト
-		/// </summary>
-		[SerializeField]
-		private TextMeshProUGUI currentScoreText;
-
-		/// <summary>
-		/// BestScore -> Valueオブジェクト
-		/// </summary>
-		[SerializeField]
-		private TextMeshProUGUI bestScoreText;
 
 		/// <summary>
 		/// CommonPopupプレハブ
@@ -135,8 +124,6 @@ namespace Flappy
 
 				this.SetActive(true);
 			};
-
-			this.bestScoreText.text = GameManager.Instance.ScoreToText(GameManager.Instance.BestScore);
 		}
 
 		/// <summary>
@@ -162,11 +149,7 @@ namespace Flappy
 				// スコア加算
 				this.currentScore += Time.deltaTime * Constants.Game.ScorePerSecond;
 
-				// スコア表示を更新
-				currentScoreText.text = GameManager.Instance.ScoreToText(this.currentScore);
-
-				// 自己ベスト表示を更新
-				this.UpdateBestScore();
+				// TODO: スコア表示を更新
 			}
 		}
 
@@ -195,6 +178,9 @@ namespace Flappy
 
 			// リザルト画面で表示するために自己ベストの更新があったかを保持しておく
 			bool isUpdateBestScore = this.isExceededBestScore;
+
+			// 超える前の自己ベストを保持しておく (リザルト用)
+			var oldBestScore = GameManager.Instance.BestScore;
 
 			// 自己ベストを超えている場合は更新する
 			// TODO: サーバーに送信する処理
@@ -229,7 +215,7 @@ namespace Flappy
 				.AddButton(button1)
 				.AddButton(button2)
 				.SetCloseButtonActive(false)
-				.SetMessage($"自己ベスト：{this.bestScoreText.text}<br>今回のスコア：{this.currentScoreText.text}{newRecord}")
+				.SetMessage($"自己ベスト：{GameManager.Instance.ScoreToText(oldBestScore)}<br>今回のスコア：{GameManager.Instance.ScoreToText(this.currentScore)}{newRecord}")
 				.Open();
 			});
 		}
@@ -268,19 +254,6 @@ namespace Flappy
 				}
 			}
 			return grounds;
-		}
-
-		/// <summary>
-		/// 自己ベストの表示を更新する
-		/// </summary>
-		/// <remarks>現在スコアが自己ベストを超えていなければ何もしない</remarks>
-		private void UpdateBestScore()
-		{
-			// 自己ベストは少数第一位までで保持されているので丸めてから比較する
-			if (this.isExceededBestScore == true)
-			{
-				this.bestScoreText.text = GameManager.Instance.ScoreToText(this.currentScore);
-			}
 		}
 	}
 }
