@@ -50,6 +50,18 @@ namespace Flappy.Manager
 		private float bestScore = 0f;
 
 		/// <summary>
+		/// 最高スコアが記録されているか
+		/// </summary>
+		public bool IsRecordedBestScore
+		{
+			get
+			{
+				// MEMO: 条件を0.1以上としているのは、floatの丸め誤差による誤判定を防ぐため。0.1m以内の記録が残る想定がないためこれで必要十分。
+				return this.BestScore >= 0.1f;
+			}
+		}
+
+		/// <summary>
 		/// スコアを処理で扱える値に丸める
 		/// スコアを比較したり保存したりする時は必ずこの処理を通すこと
 		/// </summary>
@@ -63,6 +75,7 @@ namespace Flappy.Manager
 		/// <summary>
 		/// スコアを画面に表示する形式の文字列に変換
 		/// </summary>
+		/// TODO: 丸め済みのスコアを渡した場合は改めて丸めないように第2引数で指定できるようにする。第2引数省略時は丸める。
 		public string ScoreToText(float score)
 		{
 			var roundScore = GameManager.Instance.RoundScore(score);
