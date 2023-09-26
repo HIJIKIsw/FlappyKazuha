@@ -194,6 +194,7 @@ MonoBehaviour:
   bestScoreText: {fileID: 4248498680671704780}
   currentScoreMask: {fileID: 2219771254694691044}
   bestScoreMask: {fileID: 1137024366330315723}
+  bestIcon: {fileID: 9066388031652149230}
 --- !u!1 &1139560040452345258
 GameObject:
   m_ObjectHideFlags: 0

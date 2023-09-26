@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Flappy.Manager;
+using Unity.VisualScripting;
 
 namespace Flappy.PlayGame
 {
@@ -35,6 +36,12 @@ namespace Flappy.PlayGame
 		private Image bestScoreMask;
 
 		/// <summary>
+		/// BestIconのRectTransformコンポーネント
+		/// </summary>
+		[SerializeField]
+		private RectTransform bestIcon;
+
+		/// <summary>
 		/// ゲージの横幅
 		/// </summary>
 		private float gaugeWidth;
@@ -44,13 +51,22 @@ namespace Flappy.PlayGame
 		/// </summary>
 		private void Start()
 		{
-			// 最高スコアが0の時の表示
-
 			// ゲージの横幅を取得
 			this.gaugeWidth = (this.transform as RectTransform).sizeDelta.x;
 
-			// 最高スコア表示は初期化時にセット
-			this.SetBestScoreText(GameManager.Instance.BestScore);
+			if (GameManager.Instance.IsRecordedBestScore == true)
+			{
+				// 最高スコア表示は初期化時にセット
+				this.SetBestScoreText(GameManager.Instance.BestScore);
+			}
+			else
+			{
+				// 最高スコアが0の時は最高スコアアイコンを非表示にする
+				this.bestIcon.gameObject.SetActive(false);
+
+				// 最高スコアが0の時は固定テキストを表示する
+				this.bestScoreText.text = "記録なし";
+			}
 		}
 
 		/// <summary>
@@ -59,24 +75,18 @@ namespace Flappy.PlayGame
 		/// <param name="currentScore">現在スコア</param>
 		public void SetCurrentScore(float currentScore)
 		{
-			// スコアを少数第一位まで丸める
-			currentScore = GameManager.Instance.RoundScore(currentScore);
-
-			// ゲージの塗りつぶし状態を更新
-			this.UpdateGaugeFill(currentScore);
-
-			// 最高スコアアイコンの位置を更新
-			this.UpdateBestIconPosition(currentScore);
+			// ゲージ表示を更新
+			this.UpdateDisplay(currentScore);
 
 			// 現在スコアテキストをセット
 			this.SetCurrentScoreText(currentScore);
 		}
 
 		/// <summary>
-		/// ゲージの塗りつぶし状態を更新
+		/// ゲージ表示を更新
 		/// </summary>
-		/// <param name="currentScore">現在スコア (丸めてから渡す)</param>
-		private void UpdateGaugeFill(float currentScore)
+		/// <param name="currentScore">現在スコア</param>
+		private void UpdateDisplay(float currentScore)
 		{
 			// 最高スコアがない時は何もしない
 			if (GameManager.Instance.IsRecordedBestScore == false)
@@ -84,27 +94,37 @@ namespace Flappy.PlayGame
 				return;
 			}
 
+			// スコアを少数第一位まで丸める
+			currentScore = GameManager.Instance.RoundScore(currentScore);
+
 			// 最高スコアに対する現在スコアの割合
 			var currentToBestRatio = currentScore / GameManager.Instance.BestScore;
 
-			// 最高スコアに到達するまでのゲージ塗りつぶし
-			this.currentScoreMask.fillAmount = Mathf.Clamp01(currentToBestRatio);
-
-			// 現在スコアが最高スコアをどれくらい超えているか
-			if (currentScore > GameManager.Instance.BestScore)
+			if (currentScore <= GameManager.Instance.BestScore)
 			{
-				// 超えた割合の分だけ右から塗りつぶされる
-				this.bestScoreMask.fillAmount = 1f - (1f / currentToBestRatio);
+				// 最高スコアに到達するまでのゲージ塗りつぶし
+				this.currentScoreMask.fillAmount = Mathf.Clamp01(currentToBestRatio);
+			}
+			else
+			{
+				// 最高スコアを超えてからのゲージ塗りつぶし
+				var fillAmount = 1f - (1f / currentToBestRatio);
+				this.bestScoreMask.fillAmount = fillAmount;
+
+				// 最高スコアアイコン座標を更新
+				this.UpdateBestIconPosition(fillAmount);
 			}
 		}
 
 		/// <summary>
 		/// 最高スコアアイコンの位置を更新
 		/// </summary>
-		/// <param name="currentScore">現在スコア (丸めてから渡す)</param>
-		private void UpdateBestIconPosition(float currentScore)
+		/// <param name="positionRatioX">横幅に対する位置割合 (0-1f)</param>
+		private void UpdateBestIconPosition(float positionRatioX)
 		{
-
+			var newPosition = this.bestIcon.anchoredPosition;
+			newPosition.x = -this.gaugeWidth * positionRatioX;
+			this.bestIcon.anchoredPosition = newPosition;
 		}
 
 		/// <summary>

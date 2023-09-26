@@ -54,6 +54,12 @@ namespace Flappy
 		private HeightLimit heightLimit;
 
 		/// <summary>
+		/// ScoreGaugeオブジェクト
+		/// </summary>
+		[SerializeField]
+		private ScoreGauge scoreGauge;
+
+		/// <summary>
 		/// CommonPopupプレハブ
 		/// </summary>
 		[SerializeField]
@@ -149,7 +155,8 @@ namespace Flappy
 				// スコア加算
 				this.currentScore += Time.deltaTime * Constants.Game.ScorePerSecond;
 
-				// TODO: スコア表示を更新
+				// スコアゲージを更新
+				this.scoreGauge.SetCurrentScore(this.currentScore);
 			}
 		}
 
