@@ -61,6 +61,9 @@ namespace Flappy.PlayGame
 			}
 			else
 			{
+				// 最高スコアが0の時はゲージを緑に塗りつぶしておく
+				this.currentScoreMask.fillAmount = 1f;
+
 				// 最高スコアが0の時は最高スコアアイコンを非表示にする
 				this.bestIcon.gameObject.SetActive(false);
 
