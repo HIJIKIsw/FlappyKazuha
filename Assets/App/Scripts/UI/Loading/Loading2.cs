@@ -58,7 +58,6 @@ namespace Flappy.UI
 				this.tips.color = new Color32(207,189,144,255);
 				this.progressBarFill.color = new Color32(234,228,213,255);
 			}
-
 		}
 
 		/// <summary>
