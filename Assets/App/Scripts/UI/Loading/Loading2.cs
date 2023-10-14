@@ -38,6 +38,8 @@ namespace Flappy.UI
 
 		int currentTipsNumber;
 
+		float timeCount;
+
 		protected override float fadeTime => 0.4f;
 		protected override float minDisplayTime => 1.5f;
 
@@ -61,7 +63,6 @@ namespace Flappy.UI
 				this.progressBarFill.color = new Color32(234,228,213,255);
 			}
 
-			//Tipsテキスト内容をセット
 			SetTips();
 		}
 
@@ -72,10 +73,17 @@ namespace Flappy.UI
 		{
 			base.Update();
 
-			//左クリックを受け付ける
 			if (Input.GetMouseButtonDown(0))
 			{
 				SetTips();
+				timeCount = 0;
+			}
+
+			timeCount += Time.deltaTime;
+			if (timeCount >= 5)
+			{
+				SetTips();
+				timeCount = 0;
 			}
 		}
 
@@ -84,11 +92,11 @@ namespace Flappy.UI
 		/// </summary>
 		private void SetTips()
 		{
-			int rnd = Random.Range(1, 4);
+			int rnd = Random.Range(1, 6);
 
 			if (rnd == currentTipsNumber)
 			{
-				if (rnd == 3)
+				if (rnd == 5)
 				{
 					rnd--;
 				}
@@ -108,6 +116,12 @@ namespace Flappy.UI
 					break;
 				case 3:
 					tips.text = "<size=22>璃月</size>\n大陸の束にある豊かな港湾地域。\nそぴえ立つ山と石の林、広い平原と生き生きとした川など、豊富な地形を有する。\n\n璃月の土地には古代の遣跡が点在している。そのうち、極めて高い技術で作られた巨大弩砲「帰終機」が存在する。";
+					break;
+				case 4:
+					tips.text = "<size=22>胡桃</size>\n炎アタッカー";
+					break;
+				case 5:
+					tips.text = "<size=22>草の胡桃</size>\n水アタッカー";
 					break;
 				default:
 					tips.text = "<size=22></size>\n";
