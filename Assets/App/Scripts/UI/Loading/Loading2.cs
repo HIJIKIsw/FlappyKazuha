@@ -31,7 +31,7 @@ namespace Flappy.UI
 		Image progressBarLineRight;
 
 		[SerializeField]
-		TextMeshProUGUI progressBarTips;
+		TextMeshProUGUI tips;
 
 		[SerializeField]
 		Image progressBarBase;
@@ -55,7 +55,7 @@ namespace Flappy.UI
 				this.loadingBg.color = new Color32(26,28,32,255);
 				this.progressBarLineLeft.color = this.progressBarLineRight.color = new Color32(56,58,62,255);
 				this.progressBarBase.color = new Color32(48,50,54,255);
-				this.progressBarTips.color = new Color32(207,189,144,255);
+				this.tips.color = new Color32(207,189,144,255);
 				this.progressBarFill.color = new Color32(234,228,213,255);
 			}
 
