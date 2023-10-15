@@ -7,6 +7,7 @@ using Flappy.Common;
 using Flappy.Manager;
 using Unity.VisualScripting;
 using TMPro;
+using System.Collections.Generic;
 
 namespace Flappy.UI
 {
@@ -38,7 +39,9 @@ namespace Flappy.UI
 
 		int currentTipsNumber;
 
-		float timeCount;
+		float tipsChangeInterval;
+
+		List<string> tipsList = new List<string>();
 
 		protected override float fadeTime => 0.4f;
 		protected override float minDisplayTime => 1.5f;
@@ -63,7 +66,20 @@ namespace Flappy.UI
 				this.progressBarFill.color = new Color32(234,228,213,255);
 			}
 
-			SetTips();
+			this.InitTipsList();
+			this.ChangeTips();
+		}
+
+		/// <summary>
+		/// Tipsリスト
+		/// </summary>
+		private void InitTipsList()
+		{
+			this.tipsList.Add("<size=22>胡桃</size>\n炎アタッカー");
+			this.tipsList.Add("<size=22>ヨォーヨ</size>\n水アタッカー");
+			this.tipsList.Add("<size=22>放浪者</size>\n笠っち");
+			this.tipsList.Add("<size=22>アルレッキーノ</size>\n気になる");
+			this.tipsList.Add("<size=22>フォンテーヌ</size>\n地理の性質から言えば、フォンテーヌの地上大湖は「湖」であるが、フォンテーヌの人々はそれを「海」と呼んでいる。");
 		}
 
 		/// <summary>
@@ -75,28 +91,29 @@ namespace Flappy.UI
 
 			if (Input.GetMouseButtonDown(0))
 			{
-				SetTips();
-				timeCount = 0;
+				this.ChangeTips();
+				this.tipsChangeInterval = 0;
 			}
 
-			timeCount += Time.deltaTime;
-			if (timeCount >= 5)
+			this.tipsChangeInterval += Time.deltaTime;
+			if (this.tipsChangeInterval >= 5)
 			{
-				SetTips();
-				timeCount = 0;
+				this.ChangeTips();
+				this.tipsChangeInterval = 0;
 			}
 		}
 
 		/// <summary>
 		/// Tipsテキストを変更する関数
 		/// </summary>
-		private void SetTips()
+		private void ChangeTips()
 		{
-			int rnd = Random.Range(1, 6);
+			int listCount = tipsList.Count;
+			int rnd = Random.Range(0, listCount);
 
-			if (rnd == currentTipsNumber)
+			if (rnd == this.currentTipsNumber)
 			{
-				if (rnd == 5)
+				if (rnd == listCount-1)
 				{
 					rnd--;
 				}
@@ -106,28 +123,8 @@ namespace Flappy.UI
 				}
 			}
 
-			switch (rnd)
-			{
-				case 1:
-					tips.text = "<size=22>フォンテーヌ</size>\n地理の性質から言えば、フォンテーヌの地上大湖は「湖」であるが、フォンテーヌの人々はそれを「海」と呼んでいる。";
-					break;
-				case 2:
-					tips.text = "<size=22>モンド</size>\nかつて、この土地にはデカラビアンという名の魔神が存在していた。\n\n大陵の北東にある自由の都。\n山と荒野の間で、自由の風が蒲公英の種と共にシードル湖を渡り、湖の中心にあるモンド城に風神の祝福と恩恵をもたらす。";
-					break;
-				case 3:
-					tips.text = "<size=22>璃月</size>\n大陸の束にある豊かな港湾地域。\nそぴえ立つ山と石の林、広い平原と生き生きとした川など、豊富な地形を有する。\n\n璃月の土地には古代の遣跡が点在している。そのうち、極めて高い技術で作られた巨大弩砲「帰終機」が存在する。";
-					break;
-				case 4:
-					tips.text = "<size=22>胡桃</size>\n炎アタッカー";
-					break;
-				case 5:
-					tips.text = "<size=22>草の胡桃</size>\n水アタッカー";
-					break;
-				default:
-					tips.text = "<size=22></size>\n";
-					break;
-			}
-			currentTipsNumber = rnd;
+			this.tips.text = this.tipsList[rnd];
+			this.currentTipsNumber = rnd;
 		}
 
 		/// <summary>
