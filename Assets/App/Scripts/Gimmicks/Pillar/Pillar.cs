@@ -10,6 +10,52 @@ namespace Flappy.Gimmicks
 		[SerializeField]
 		private Rigidbody2D rb2D;
 
+		[SerializeField]
+		private float iterationRangeY;
+
+		private bool isMovingUp;
+
+		private float generatedY;
+
+		private void Start()
+		{
+			this.generatedY = this.transform.localPosition.y;
+			this.isMovingUp = true;
+		}
+
+		private void Update()
+		{
+			if(this.isMovingUp == true)
+			{
+				if(this.transform.localPosition.y > this.generatedY + this.iterationRangeY)
+				{
+					this.isMovingUp = false;
+				}
+			}
+			else
+			{
+				if(this.transform.localPosition.y < this.generatedY - this.iterationRangeY)
+				{
+					this.isMovingUp = true;
+				}
+			}
+		}
+
+		private void FixedUpdate()
+		{
+			Vector2 speed = this.rb2D.velocity;
+			if(this.isMovingUp == true)
+			{
+				speed.y = 300f;
+			}
+			else
+			{
+				speed.y = -300f;
+			}
+			
+			this.SetSpeed(speed);
+		}
+
 		/// <summary>
 		/// 柱を消す処理
 		/// </summary>
