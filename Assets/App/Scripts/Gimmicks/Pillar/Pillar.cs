@@ -23,7 +23,15 @@ namespace Flappy.Gimmicks
 		private void Start()
 		{
 			this.generatedY = this.transform.localPosition.y;
-			this.isMovingUp = true;
+
+			if (Random.Range(0, 2) == 0)
+			{
+				this.isMovingUp = false;
+			}
+			else
+			{
+				this.isMovingUp = true;
+			}
 		}
 
 		private void Update()
