@@ -13,6 +13,9 @@ namespace Flappy.Gimmicks
 		[SerializeField]
 		private float iterationRangeY;
 
+		[SerializeField]
+		private float iterationSpeedY;
+
 		private bool isMovingUp;
 
 		private float generatedY;
@@ -46,11 +49,11 @@ namespace Flappy.Gimmicks
 			Vector2 speed = this.rb2D.velocity;
 			if(this.isMovingUp == true)
 			{
-				speed.y = 300f;
+				speed.y = iterationSpeedY;
 			}
 			else
 			{
-				speed.y = -300f;
+				speed.y = -iterationSpeedY;
 			}
 			
 			this.SetSpeed(speed);

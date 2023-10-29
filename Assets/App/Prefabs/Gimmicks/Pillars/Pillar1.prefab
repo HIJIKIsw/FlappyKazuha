@@ -49,7 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb2D: {fileID: 1463837982502058976}
-  iterationRangeY: 300
+  iterationRangeY: 100
+  iterationSpeedY: 100
 --- !u!50 &1463837982502058976
 Rigidbody2D:
   serializedVersion: 4
