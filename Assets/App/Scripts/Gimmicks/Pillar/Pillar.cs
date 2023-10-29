@@ -52,15 +52,14 @@ namespace Flappy.Gimmicks
 
 			// 往復幅をランダムで決定
 			this.iterationRangeY = Random.Range(0f, 100f);
-			if (this.iterationRangeY < 10f)
-			{
-				this.iterationRangeY = 0f;
-			}
 
 			// 往復速度をランダムで決定
 			this.iterationSpeedY = Random.Range(0f, 50f);
-			if (this.iterationSpeedY < 10f)
+
+			// 往復速度と幅が特定の値以下の場合は0にする
+			if(this.iterationRangeY < 10f || this.iterationSpeedY < 10f)
 			{
+				this.iterationRangeY = 0f;
 				this.iterationSpeedY = 0f;
 			}
 		}
