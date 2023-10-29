@@ -32,20 +32,33 @@ namespace Flappy.Gimmicks
 			{
 				this.isMovingUp = true;
 			}
+
+			this.iterationRangeY = Random.Range(0f, 100f);
+			this.iterationSpeedY = Random.Range(0f, 50f);
+
+			if (this.iterationRangeY < 10f)
+			{
+				this.iterationRangeY = 0f;
+			}
+			if (this.iterationSpeedY < 10f)
+			{
+				this.iterationSpeedY = 0f;
+			}
+
 		}
 
 		private void Update()
 		{
-			if(this.isMovingUp == true)
+			if (this.isMovingUp == true)
 			{
-				if(this.transform.localPosition.y > this.generatedY + this.iterationRangeY)
+				if (this.transform.localPosition.y > this.generatedY + this.iterationRangeY)
 				{
 					this.isMovingUp = false;
 				}
 			}
 			else
 			{
-				if(this.transform.localPosition.y < this.generatedY - this.iterationRangeY)
+				if (this.transform.localPosition.y < this.generatedY - this.iterationRangeY)
 				{
 					this.isMovingUp = true;
 				}
@@ -55,7 +68,7 @@ namespace Flappy.Gimmicks
 		private void FixedUpdate()
 		{
 			Vector2 speed = this.rb2D.velocity;
-			if(this.isMovingUp == true)
+			if (this.isMovingUp == true)
 			{
 				speed.y = iterationSpeedY;
 			}
@@ -63,7 +76,7 @@ namespace Flappy.Gimmicks
 			{
 				speed.y = -iterationSpeedY;
 			}
-			
+
 			this.SetSpeed(speed);
 		}
 
