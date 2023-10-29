@@ -49,6 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb2D: {fileID: 1463837982502058976}
+  iterationRangeY: 100
+  iterationSpeedY: 100
 --- !u!50 &1463837982502058976
 Rigidbody2D:
   serializedVersion: 4
@@ -75,7 +77,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 6
+  m_Constraints: 4
 --- !u!66 &8419930438513009881
 CompositeCollider2D:
   m_ObjectHideFlags: 0
