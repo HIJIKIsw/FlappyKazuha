@@ -15,16 +15,28 @@ namespace Flappy.Editor
 		[MenuItem("Build/WebGL/Development")]
 		private static void BuildWebGLDevelopment()
 		{
+			EnvironmentSwitcher.SwitchDevelopmentEnvironment();
 			ApplicationBuilder.BuildApplication(BuildTarget.WebGL, BuildOptions.Development, "Build/WebGL/Development");
+		}
+
+		/// <summary>
+		/// テスト用ビルドを実行
+		/// </summary>
+		[MenuItem("Build/WebGL/Test")]
+		private static void BuildWebGLTest()
+		{
+			EnvironmentSwitcher.SwitchTestEnvironment();
+			ApplicationBuilder.BuildApplication(BuildTarget.WebGL, BuildOptions.CleanBuildCache, "Build/WebGL/Test");
 		}
 
 		/// <summary>
 		/// 本番用ビルドを実行
 		/// </summary>
-		[MenuItem("Build/WebGL/Product")]
-		private static void BuildWebGLProduct()
+		[MenuItem("Build/WebGL/Production")]
+		private static void BuildWebGLProduction()
 		{
-			ApplicationBuilder.BuildApplication(BuildTarget.WebGL, BuildOptions.CleanBuildCache, "Build/WebGL/Product");
+			EnvironmentSwitcher.SwitchProductionEnvironment();
+			ApplicationBuilder.BuildApplication(BuildTarget.WebGL, BuildOptions.CleanBuildCache, "Build/WebGL/Production");
 		}
 
 		/// <summary>
