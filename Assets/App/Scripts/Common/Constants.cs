@@ -34,6 +34,7 @@ namespace Flappy.Common
 				public enum Player
 				{
 					Kazuha,
+					Wanderer,
 				}
 			}
 
