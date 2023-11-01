@@ -28,6 +28,11 @@ namespace Flappy
 			{
 				this.isJump = true;
 			}
+			// 画面クリックしてない時にジャンプフラグをfalseにする
+			if (Input.GetMouseButtonUp(0))
+			{
+				this.isJump = false;
+			}
 		}
 
 		/// <summary>
@@ -41,7 +46,7 @@ namespace Flappy
 			if (this.isJump && this.IsDead == false)
 			{
 				this.rb2D.velocity = Vector2.up * jumpForce;
-				this.isJump = false;
+				//this.rb2D.AddForce
 			}
 		}
 	}
