@@ -33,6 +33,9 @@ namespace Flappy
 			{
 				this.isApplyForceY = false;
 			}
+			
+			// 上下移動によるプレイヤーの回転
+			this.transform.rotation = Quaternion.Euler(0, 0, this.rb2D.velocity.y * 0.05f);
 		}
 
 		/// <summary>
