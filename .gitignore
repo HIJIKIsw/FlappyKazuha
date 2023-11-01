@@ -78,5 +78,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Aa]pp/[Ss]and[Bb]ox.meta
 /[Aa]ssets/[Aa]pp/[Ss]and[Bb]ox/*
 
-# WebRequestConstantsOverride
-[Ww]eb[Rr]equest[Cc]onstants[Oo]verride.cs*
+# ApiConstantsOverride
+[Aa]pi[Cc]onstants[Oo]verride.cs*

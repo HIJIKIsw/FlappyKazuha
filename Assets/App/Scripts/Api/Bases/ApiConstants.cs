@@ -2,31 +2,31 @@ using System;
 using System.Reflection;
 using UnityEngine;
 
-namespace Flappy.WebRequest
+namespace Flappy.Api
 {
 	/// <summary>
-	/// WebRequestで使用する定数
+	/// Apiで使用する定数
 	/// </summary>
-	public class WebRequestConstants
+	public class ApiConstants
 	{
-		// WebRequestConstantsOverrideで上書きすることを前提にしている
+		// ApiOverrideで上書きすることを前提にしている
 		/// <summary>
 		/// APIのURL
 		/// </summary>
-		public static string ApiHttpRoot { private set; get; } = string.Empty;
+		public static string HttpRoot { private set; get; } = string.Empty;
 		/// <summary>
 		/// APIの認証キー
 		/// </summary>
-		public static string ApiAuthKey { private set; get; } = string.Empty;
+		public static string AuthKey { private set; get; } = string.Empty;
 		/// <summary>
 		/// APIのボディ暗号化キー
 		/// </summary>
-		public static string ApiBodyEncryptKey { private set; get; } = string.Empty;
+		public static string BodyEncryptKey { private set; get; } = string.Empty;
 
 		/// <summary>
 		/// オーバーライドするクラス名
 		/// </summary>
-		private const string OverrideClassFullName = "Flappy.WebRequest.WebRequestConstantsOverride";
+		private const string OverrideClassFullName = "Flappy.Api.ApiConstantsOverride";
 
 		/// <summary>
 		/// ゲーム開始時にOverrideクラスの定義をチェックして、定義されていたらOverrideクラスで定義した値を保持しておく
@@ -34,16 +34,16 @@ namespace Flappy.WebRequest
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 		private static void Initialize()
 		{
-			Type overrideClassType = Type.GetType(WebRequestConstants.OverrideClassFullName);
+			Type overrideClassType = Type.GetType(ApiConstants.OverrideClassFullName);
 			if (overrideClassType == null)
 			{
 				return;
 			}
 
 			// 各フィールドの値をオーバーライド
-			WebRequestConstants.ApiHttpRoot = WebRequestConstants.GetStaticPropertyValueFromType(overrideClassType, nameof(ApiHttpRoot));
-			WebRequestConstants.ApiAuthKey = WebRequestConstants.GetStaticPropertyValueFromType(overrideClassType, nameof(ApiAuthKey));
-			WebRequestConstants.ApiBodyEncryptKey = WebRequestConstants.GetStaticPropertyValueFromType(overrideClassType, nameof(ApiBodyEncryptKey));
+			ApiConstants.HttpRoot = ApiConstants.GetStaticPropertyValueFromType(overrideClassType, nameof(HttpRoot));
+			ApiConstants.AuthKey = ApiConstants.GetStaticPropertyValueFromType(overrideClassType, nameof(AuthKey));
+			ApiConstants.BodyEncryptKey = ApiConstants.GetStaticPropertyValueFromType(overrideClassType, nameof(BodyEncryptKey));
 		}
 
 		/// <summary>
