@@ -2,7 +2,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Flappy.WebRequest
+namespace Flappy.Api
 {
 	/// <summary>
 	/// 暗号化/復号
