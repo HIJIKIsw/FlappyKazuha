@@ -178,7 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb2D: {fileID: 8492820422519441252}
   playGameScene: {fileID: 0}
-  jumpForce: 600
+  addForceY: 3000
 --- !u!50 &8492820422519441252
 Rigidbody2D:
   serializedVersion: 4
@@ -194,7 +194,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 200
+  m_GravityScale: 160
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

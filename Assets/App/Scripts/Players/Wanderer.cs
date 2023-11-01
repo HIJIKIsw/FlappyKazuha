@@ -11,7 +11,7 @@ namespace Flappy
 		/// ジャンプ初速
 		/// </summary>
 		[SerializeField]
-		private float jumpForce;
+		private float addForceY;
 
 		/// <summary>
 		/// ジャンプが入力されたらtrueになる、ジャンプ実行時にfalseにする
@@ -24,12 +24,12 @@ namespace Flappy
 		private void Update()
 		{
 			// 画面クリック時にジャンプフラグをtrueにする
-			if (Input.GetMouseButtonDown(0))
+			if (Input.GetMouseButton(0))
 			{
 				this.isJump = true;
 			}
 			// 画面クリックしてない時にジャンプフラグをfalseにする
-			if (Input.GetMouseButtonUp(0))
+			else
 			{
 				this.isJump = false;
 			}
@@ -45,8 +45,7 @@ namespace Flappy
 			//       入力に関わる処理をメソッド抽出して、IsDeadがfalseの間しかそのメソッドを呼ばないなど
 			if (this.isJump && this.IsDead == false)
 			{
-				this.rb2D.velocity = Vector2.up * jumpForce;
-				//this.rb2D.AddForce
+				this.rb2D.AddForce(Vector2.up * this.addForceY, ForceMode2D.Force);
 			}
 		}
 	}
