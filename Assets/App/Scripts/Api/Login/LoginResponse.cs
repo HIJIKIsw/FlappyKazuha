@@ -9,7 +9,7 @@ namespace Flappy.Api
 	[Serializable]
 	public class LoginResponse : ApiResponse
 	{
-		public string UserId;
+		public int UserId;
 		public string Name;
 	}
 }
