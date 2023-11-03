@@ -15,9 +15,9 @@ namespace Flappy.Api
 		/// virtualにして必要に応じてoverrideしたいのでstaticにはできない
 		/// もし今後のバージョンアップでC# 11.0以上になったらできる
 		/// </remarks>
-		public virtual ApiResponse FromJson(string json)
+		public virtual T FromJson<T>(string json) where T : ApiResponse
 		{
-			return JsonUtility.FromJson<ApiResponse>(json);
+			return JsonUtility.FromJson<T>(json);
 		}
 
 		/// <summary>

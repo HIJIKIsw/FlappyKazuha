@@ -15,10 +15,10 @@ namespace Flappy.Api
 		/// <summary>
 		/// FromJsonをオーバーライドする場合はこう書く
 		/// </summary>
-		public override ApiResponse FromJson(string json)
+		public override T FromJson<T>(string json)
 		{
 			// ここでResponseタイプに応じた処理
-			return JsonUtility.FromJson<HelloWorldResponse>(json);
+			return JsonUtility.FromJson<T>(json);
 		}
 	}
 }

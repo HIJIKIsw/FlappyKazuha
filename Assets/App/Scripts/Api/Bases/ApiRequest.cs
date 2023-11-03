@@ -66,7 +66,7 @@ namespace Flappy.Api
 						using (T response = new T())
 						{
 							Debug.Log("APIリクエスト成功: " + post.downloadHandler.text);
-							onSuccess?.Invoke(response.FromJson(post.downloadHandler.text) as T);
+							onSuccess?.Invoke(response.FromJson<T>(post.downloadHandler.text));
 						}
 						break;
 					default:
