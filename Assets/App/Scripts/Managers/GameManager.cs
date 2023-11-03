@@ -33,6 +33,11 @@ namespace Flappy.Manager
 		public int AccumulatedGemScore { get; set; }
 
 		/// <summary>
+		/// ユーザID
+		/// </summary>
+		public int UserId { get; set; }
+
+		/// <summary>
 		/// コンストラクタを隠蔽する
 		/// </summary>
 		GameManager()
@@ -53,6 +58,7 @@ namespace Flappy.Manager
 		/// 原石の所持数
 		/// </summary>
 		/// TODO: 所持品クラスみたいなものを作ってそっちにまとめる (原石、ネームプレート、称号など)
+		/// TODO: そもそもこれはゲームプレイ中のカウントなのでPlayGameScene側に持たせる
 		public int PrimogemCount { get; set; } = 0;
 
 		/// <summary>

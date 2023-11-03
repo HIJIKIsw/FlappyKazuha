@@ -10,6 +10,7 @@ using Flappy.Manager;
 using Flappy.UI;
 using Flappy.Utility;
 using Flappy.PlayGame;
+using Flappy.Api;
 
 namespace Flappy
 {
@@ -167,6 +168,9 @@ namespace Flappy
 		{
 			this.IsProceedScoreCount = false;
 
+			// ユーザ統計情報を更新
+			this.UpdateUserStats();
+
 			// 全ての柱を停止させ、出現しないようにする
 			var pillars = this.GetAllPillars();
 			foreach (var pillar in pillars)
@@ -261,6 +265,27 @@ namespace Flappy
 				}
 			}
 			return grounds;
+		}
+
+		/// <summary>
+		/// ユーザ統計情報を更新
+		/// </summary>
+		/// TODO: 汚いので書き直す。そもそもここでやるべきかどうか。
+		private void UpdateUserStats()
+		{
+			GameManager.Instance.AccumulatedScore += this.currentScore;
+			GameManager.Instance.AccumulatedGemScore += GameManager.Instance.PrimogemCount;
+			GameManager.Instance.PrimogemCount = 0;
+
+			// TODO: この時点ではLoadingを表示しないようにして、リザルト画面表示前にリクストが終わってなかったらLoadingを表示するようにする
+			LoadingManager.Instance.Show();
+			new UserStatsUpdateRequest(
+				GameManager.Instance.AccumulatedScore,
+				GameManager.Instance.AccumulatedGemScore
+			).Request<UserStatsUpdateResponse>((response) =>
+			{
+				LoadingManager.Instance.CompleteTask();
+			});
 		}
 	}
 }

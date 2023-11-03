@@ -27,6 +27,7 @@ namespace Flappy
 			LoadingManager.Instance.Show();
 			new LoginRequest().Request<LoginResponse>((loginResponse) =>
 			{
+				GameManager.Instance.UserId = loginResponse.UserId;
 				new UserStatsRequest(loginResponse.UserId).Request<UserStatsResponse>((statsResponse) =>
 				{
 					GameManager.Instance.AccumulatedScore = statsResponse.AccumulatedScore;
