@@ -9,6 +9,11 @@ namespace Flappy.Manager
 	/// </summary>
 	public class GameManager : SingletonMonoBehaviour<GameManager>
 	{
+		// TODO: メンバー変数の量が増えてきたらUserInfoみたいなものを作ってそっちにまとめる。
+		//       もしくはAPIのプロキシクラスを持たせたらメンバー自体が必要ない？
+		public float AccumulatedScore { get; set; }
+		public int AccumulatedGemScore { get; set; }
+
 		/// <summary>
 		/// コンストラクタを隠蔽する
 		/// </summary>

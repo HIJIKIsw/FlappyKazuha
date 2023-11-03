@@ -181,7 +181,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Name :'
+  m_text: "\u540D\u524D :"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0f6cec8b7d910144e9be42a32898cdac, type: 2}
   m_sharedMaterial: {fileID: -7497238006248586934, guid: 0f6cec8b7d910144e9be42a32898cdac, type: 2}
@@ -613,7 +613,7 @@ GameObject:
   - component: {fileID: 980142076}
   - component: {fileID: 980142075}
   m_Layer: 0
-  m_Name: BestScore
+  m_Name: AccumulatedScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -659,7 +659,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'BestScore :'
+  m_text: "\u7D2F\u8A08\u8DDD\u96E2 :"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0f6cec8b7d910144e9be42a32898cdac, type: 2}
   m_sharedMaterial: {fileID: -7497238006248586934, guid: 0f6cec8b7d910144e9be42a32898cdac, type: 2}
@@ -1457,7 +1457,7 @@ GameObject:
   - component: {fileID: 1643986541}
   - component: {fileID: 1643986540}
   m_Layer: 0
-  m_Name: Gem
+  m_Name: AccumulatedGemScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1503,7 +1503,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Gems :'
+  m_text: "\u7D2F\u8A08\u539F\u77F3 :"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0f6cec8b7d910144e9be42a32898cdac, type: 2}
   m_sharedMaterial: {fileID: -7497238006248586934, guid: 0f6cec8b7d910144e9be42a32898cdac, type: 2}

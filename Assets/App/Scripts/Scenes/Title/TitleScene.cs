@@ -25,10 +25,18 @@ namespace Flappy
 		private void Start()
 		{
 			LoadingManager.Instance.Show();
-			new LoginRequest().Request<LoginResponse>((response) =>
+			new LoginRequest().Request<LoginResponse>((loginResponse) =>
 			{
-				this.playerName.text = response.Name;
-				LoadingManager.Instance.CompleteTask();
+				new UserStatsRequest(loginResponse.UserId).Request<UserStatsResponse>((statsResponse) =>
+				{
+					GameManager.Instance.AccumulatedScore = statsResponse.AccumulatedScore;
+					GameManager.Instance.AccumulatedGemScore = statsResponse.AccumulatedGemScore;
+
+					this.playerName.text = loginResponse.Name;
+					this.playerBestScore.text = GameManager.Instance.ScoreToText(statsResponse.AccumulatedScore);
+					this.playerGems.text = statsResponse.AccumulatedGemScore.ToString();
+					LoadingManager.Instance.CompleteTask();
+				});
 			});
 		}
 
