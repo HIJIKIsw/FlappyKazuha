@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using Flappy.Api;
+using System.Text;
 using Flappy.Utility;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -42,10 +42,14 @@ namespace Flappy.Api
 		{
 			var bodyJson = new RequestBody(this.Parameters).ToJson();
 			var encryptedParameter = EncryptionUtility.Encrypt(bodyJson, ApiConstants.BodyEncryptKey);
+			var encryptedParameterBytes = Encoding.UTF8.GetBytes(encryptedParameter);
 			var url = Path.Combine(ApiConstants.HttpRoot, this.Url);
 
-			using (var post = UnityWebRequest.PostWwwForm(url, encryptedParameter))
+			using (var post = new UnityWebRequest(url, "POST"))
 			{
+				post.uploadHandler = (UploadHandler)new UploadHandlerRaw(encryptedParameterBytes);
+				post.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+				post.SetRequestHeader("Content-Type", "text/plain");
 				yield return post.SendWebRequest();
 
 				// リクエストの完了を待つ
