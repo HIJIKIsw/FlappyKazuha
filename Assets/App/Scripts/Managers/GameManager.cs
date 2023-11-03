@@ -11,7 +11,25 @@ namespace Flappy.Manager
 	{
 		// TODO: メンバー変数の量が増えてきたらUserInfoみたいなものを作ってそっちにまとめる。
 		//       もしくはAPIのプロキシクラスを持たせたらメンバー自体が必要ない？
-		public float AccumulatedScore { get; set; }
+		/// <summary>
+		/// 累計スコア
+		/// </summary>
+		public float AccumulatedScore
+		{
+			get
+			{
+				return this.RoundScore(this.accumulatedScore);
+			}
+			set
+			{
+				this.accumulatedScore = this.RoundScore(value);
+			}
+		}
+		private float accumulatedScore;
+
+		/// <summary>
+		/// 累計原石
+		/// </summary>
 		public int AccumulatedGemScore { get; set; }
 
 		/// <summary>
