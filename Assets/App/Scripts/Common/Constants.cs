@@ -17,6 +17,19 @@ namespace Flappy.Common
 		}
 
 		/// <summary>
+		/// PlayerPrefsに使用するキー
+		/// </summary>
+		/// <remarks>summaryコメントに型名(string/int/floatを書くこと)</remarks>
+		/// TODO: PlayerPrefsManager的なクラスを実装したらそちらに移動する
+		public static class PlayerPrefsKeys
+		{
+			/// <summary>
+			/// デバイスUUID: string
+			/// </summary>
+			public const string DeviceUuid = "DeviceUuid";
+		}
+
+		/// <summary>
 		/// アセットアドレス
 		/// </summary>
 		public static class Assets
