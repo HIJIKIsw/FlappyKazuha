@@ -8,6 +8,6 @@ namespace Flappy.Api
 	[Serializable]
 	public class UserStatsUpdateResponse : UserStatsResponse
 	{
-		// 現状はUserStatsResponseと同じ
+		public override Type CacheType => typeof(UserStatsResponse);
 	}
 }
