@@ -18,10 +18,15 @@ namespace Flappy.Gimmicks
 		private PlayerBase playerInstance;
 
 		/// <summary>
+		/// Playerを押し戻す時のY座標補正値
+		/// </summary>
+		private const float pushbackOffsetY = 50f;
+
+		/// <summary>
 		/// コライダーにコライダーがぶつかった時に呼ばれる
 		/// </summary>
 		/// <param name="collider">接触相手のコライダ</param>
-		void OnTriggerEnter2D(Collider2D collider)
+		void OnTriggerStay2D(Collider2D collider)
 		{
 			// コライダーからゲームオブジェクトを経由してレイヤーを見に行く
 			var otherLayer = collider.gameObject.layer;
@@ -34,7 +39,7 @@ namespace Flappy.Gimmicks
 				case "Player":
 					{
 						// transform.positionにはVector2か3のインスタンスしか挿入できないので、positionの新たな値を設定するためのVector2インスタンスをまず作成する
-						Vector2 newPosition = new Vector2(playerInstance.transform.position.x, this.transform.position.y - limiterCollider.size.y);
+						Vector2 newPosition = new Vector2(playerInstance.transform.position.x, this.transform.position.y - limiterCollider.size.y / 2 - HeightLimit.pushbackOffsetY);
 						playerInstance.SetPosition(newPosition);
 						break;
 					}
