@@ -10,14 +10,23 @@ namespace Flappy
 	{
 		public override string Name => "Title";
 
+		/// <summary>
+		/// プレイヤー名
+		/// </summary>
 		[SerializeField]
 		private TextMeshProUGUI playerName;
 
+		/// <summary>
+		/// プレイヤー累計スコア
+		/// </summary>
 		[SerializeField]
-		private TextMeshProUGUI playerBestScore;
+		private TextMeshProUGUI playerAccumulatedScore;
 
+		/// <summary>
+		/// プレイヤー累計原石獲得数
+		/// </summary>
 		[SerializeField]
-		private TextMeshProUGUI playerGems;
+		private TextMeshProUGUI playerAccumulatedGemScore;
 
 		/// <summary>
 		/// 初期化
@@ -34,8 +43,8 @@ namespace Flappy
 					GameManager.Instance.AccumulatedGemScore = statsResponse.AccumulatedGemScore;
 
 					this.playerName.text = loginResponse.Name;
-					this.playerBestScore.text = GameManager.Instance.ScoreToText(statsResponse.AccumulatedScore);
-					this.playerGems.text = statsResponse.AccumulatedGemScore.ToString();
+					this.playerAccumulatedScore.text = GameManager.Instance.ScoreToText(statsResponse.AccumulatedScore);
+					this.playerAccumulatedGemScore.text = statsResponse.AccumulatedGemScore.ToString();
 					LoadingManager.Instance.CompleteTask();
 				});
 			});

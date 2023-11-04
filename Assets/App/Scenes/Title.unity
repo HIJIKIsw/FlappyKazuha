@@ -1307,8 +1307,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: {fileID: 407331741}
-  playerBestScore: {fileID: 1379193597}
-  playerGems: {fileID: 1390172146}
+  playerAccumulatedScore: {fileID: 1379193597}
+  playerAccumulatedGemScore: {fileID: 1390172146}
 --- !u!1 &1390172144
 GameObject:
   m_ObjectHideFlags: 0
