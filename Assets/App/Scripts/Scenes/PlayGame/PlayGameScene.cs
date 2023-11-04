@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using TMPro;
 using DG.Tweening;
 using Flappy.Common;
 using Flappy.Gimmicks;
@@ -22,6 +21,14 @@ namespace Flappy
 		/// シーン名
 		/// </summary>
 		public override string Name => "PlayGame";
+
+		/// <summary>
+		/// PlayGameSceneシーンが取りうるパラメータの種類
+		/// </summary>
+		public enum Parameters
+		{
+			Character,
+		}
 
 		/// <summary>
 		/// PillartContainerオブジェクト
@@ -116,9 +123,12 @@ namespace Flappy
 			this.IsProceedScoreCount = true;
 
 			// TODO: Playerのインスタンス生成はInitializeで処理するようにする (そうなったらシーンの無効→有効は要らない)
-			// TODO: パラメータによってPlayerの種類を変えるようにする
+
 			this.SetActive(false);
-			var address = AssetAddressUtility.GetAssetAddress(Constants.Assets.Prefab.Player.Kazuha);
+
+			// パラメータから値を取り出す
+			var character = this.Parameter[PlayGameScene.Parameters.Character] as Enum;
+			var address = AssetAddressUtility.GetAssetAddress(character);
 			var handle = Addressables.LoadAssetAsync<GameObject>(address);
 			handle.Completed += (op) =>
 			{
