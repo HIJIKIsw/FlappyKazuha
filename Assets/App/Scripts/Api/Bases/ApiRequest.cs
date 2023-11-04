@@ -17,6 +17,11 @@ namespace Flappy.Api
 	public abstract class ApiRequest : IApiRequest
 	{
 		/// <summary>
+		/// タイプごとのレスポンスキャッシュ
+		/// </summary>
+		private static Dictionary<Type, ApiResponse> responseCaches = new Dictionary<Type, ApiResponse>();
+
+		/// <summary>
 		/// APIのエンドポイント
 		/// </summary>
 		public abstract string Url { get; }
@@ -34,6 +39,15 @@ namespace Flappy.Api
 		/// <param name="onError">エラー発生時のコールバック</param>
 		public virtual void Request<T>(UnityAction<T> onSuccess, UnityAction<Exception> onError = null) where T : ApiResponse, IDisposable, new()
 		{
+			// キャッシュ済のレスポンスを使用
+			// MEMO: キャッシュが無効なレスポンスタイプはそもそもキャッシュされないのでここでチェックは不要
+			if (ApiRequest.responseCaches.ContainsKey(typeof(T)) == true)
+			{
+				var response = ApiRequest.responseCaches[typeof(T)] as T;
+				onSuccess(response);
+				return;
+			}
+
 			// TODO: ApiManagerを実装する
 			StaticCoroutine.Start(this.SendRequest<T>(onSuccess, onError));
 		}
@@ -61,12 +75,21 @@ namespace Flappy.Api
 				switch (post.result)
 				{
 					case UnityWebRequest.Result.Success:
-						// responseはFromJsonを実行するためだけのインスタンス
+						// creatorはFromJsonを実行するためだけのインスタンス(FromJsonがstaticでないため)
 						// TODO: もっと良いやり方があったら書き直す
-						using (T response = new T())
+						using (T creator = new T())
 						{
+							var response = creator.FromJson<T>(post.downloadHandler.text);
+
+							// レスポンスをキャッシュ
+							if (response.UseCache == true)
+							{
+								Type type = response.CacheType == null ? typeof(T) : response.CacheType;
+								ApiRequest.responseCaches[type] = response;
+							}
+
 							Debug.Log("APIリクエスト成功: " + post.downloadHandler.text);
-							onSuccess?.Invoke(response.FromJson<T>(post.downloadHandler.text));
+							onSuccess?.Invoke(response);
 						}
 						break;
 					default:
