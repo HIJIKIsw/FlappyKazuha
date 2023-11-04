@@ -212,7 +212,7 @@ namespace Flappy
 				.SetClickAction(() =>
 				{
 					AudioManager.Instance.PlaySE(Constants.Assets.Audio.SE.pico22, 0.5f);
-					SceneManager.Instance.Load<PlayGameScene>(this.parameter, LoadingManager.Types.FullscreenWithoutProgressbar);
+					SceneManager.Instance.Load<PlayGameScene>(this.Parameter, LoadingManager.Types.FullscreenWithoutProgressbar);
 				});
 
 				var newRecord = isUpdateBestScore ? "<br><color=red>自己ベスト更新！</color>" : string.Empty;
