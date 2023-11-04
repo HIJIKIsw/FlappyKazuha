@@ -37,11 +37,12 @@ namespace Flappy.Api
 		/// <typeparam name="T">レスポンスの種類</typeparam>
 		/// <param name="onSuccess">成功時のコールバック</param>
 		/// <param name="onError">エラー発生時のコールバック</param>
-		public virtual void Request<T>(UnityAction<T> onSuccess, UnityAction<Exception> onError = null) where T : ApiResponse, IDisposable, new()
+		/// <param name="isIgnoreCache">キャッシュを無視して強制リクエストする</param>
+		public virtual void Request<T>(UnityAction<T> onSuccess, UnityAction<Exception> onError = null, bool isIgnoreCache = false) where T : ApiResponse, IDisposable, new()
 		{
 			// キャッシュ済のレスポンスを使用
 			// MEMO: キャッシュが無効なレスポンスタイプはそもそもキャッシュされないのでここでチェックは不要
-			if (ApiRequest.responseCaches.ContainsKey(typeof(T)) == true)
+			if (isIgnoreCache == false && ApiRequest.responseCaches.ContainsKey(typeof(T)) == true)
 			{
 				var response = ApiRequest.responseCaches[typeof(T)] as T;
 				onSuccess(response);
@@ -52,7 +53,7 @@ namespace Flappy.Api
 			StaticCoroutine.Start(this.SendRequest<T>(onSuccess, onError));
 		}
 
-		protected IEnumerator SendRequest<T>(UnityAction<T> onSuccess, UnityAction<Exception> onError = null) where T : ApiResponse, IDisposable, new()
+		protected IEnumerator SendRequest<T>(UnityAction<T> onSuccess, UnityAction<Exception> onError) where T : ApiResponse, IDisposable, new()
 		{
 			var bodyJson = new RequestBody(this.Parameters).ToJson();
 			var encryptedParameter = EncryptionUtility.Encrypt(bodyJson, ApiConstants.BodyEncryptKey);
