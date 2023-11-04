@@ -65,6 +65,11 @@ namespace Flappy.Api
 				post.uploadHandler = (UploadHandler)new UploadHandlerRaw(encryptedParameterBytes);
 				post.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
 				post.SetRequestHeader("Content-Type", "text/plain");
+
+				// リクエストにかかった時間を計測する
+				System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
+				stopwatch.Start();
+
 				yield return post.SendWebRequest();
 
 				// リクエストの完了を待つ
@@ -72,6 +77,8 @@ namespace Flappy.Api
 				{
 					yield return null;
 				}
+
+				stopwatch.Stop();
 
 				switch (post.result)
 				{
@@ -89,14 +96,14 @@ namespace Flappy.Api
 								ApiRequest.responseCaches[type] = response;
 							}
 
-							Debug.Log("APIリクエスト成功: " + post.downloadHandler.text);
+							Debug.Log($"[ApiRequest] EndPoint: {this.Url}, Result: Succeeded (" + stopwatch.ElapsedMilliseconds + " ms)\r\n" + post.downloadHandler.text);
 							onSuccess?.Invoke(response);
 						}
 						break;
 					default:
 						//TODO: エラーコードを返す
 						//TODO: onError 設定していない時用の共通エラー処理
-						Debug.Log("APIリクエストエラー: " + post.downloadHandler.text);
+						Debug.LogError($"[ApiRequest] EndPoint: {this.Url}, Result: Failed (" + stopwatch.ElapsedMilliseconds + " ms)\r\n" + post.downloadHandler.text);
 						onError?.Invoke(new Exception(post.downloadHandler.text));
 						break;
 				}
