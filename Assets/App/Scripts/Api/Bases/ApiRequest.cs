@@ -38,7 +38,7 @@ namespace Flappy.Api
 			StaticCoroutine.Start(this.SendRequest<T>(onSuccess, onError));
 		}
 
-		private IEnumerator SendRequest<T>(UnityAction<T> onSuccess, UnityAction<Exception> onError = null) where T : ApiResponse, IDisposable, new()
+		protected IEnumerator SendRequest<T>(UnityAction<T> onSuccess, UnityAction<Exception> onError = null) where T : ApiResponse, IDisposable, new()
 		{
 			var bodyJson = new RequestBody(this.Parameters).ToJson();
 			var encryptedParameter = EncryptionUtility.Encrypt(bodyJson, ApiConstants.BodyEncryptKey);
