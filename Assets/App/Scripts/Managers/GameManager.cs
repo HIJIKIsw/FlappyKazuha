@@ -9,6 +9,34 @@ namespace Flappy.Manager
 	/// </summary>
 	public class GameManager : SingletonMonoBehaviour<GameManager>
 	{
+		// TODO: メンバー変数の量が増えてきたらUserInfoみたいなものを作ってそっちにまとめる。
+		//       もしくはAPIのプロキシクラスを持たせたらメンバー自体が必要ない？
+		/// <summary>
+		/// 累計スコア
+		/// </summary>
+		public float AccumulatedScore
+		{
+			get
+			{
+				return this.RoundScore(this.accumulatedScore);
+			}
+			set
+			{
+				this.accumulatedScore = this.RoundScore(value);
+			}
+		}
+		private float accumulatedScore;
+
+		/// <summary>
+		/// 累計原石
+		/// </summary>
+		public int AccumulatedGemScore { get; set; }
+
+		/// <summary>
+		/// ユーザID
+		/// </summary>
+		public int UserId { get; set; }
+
 		/// <summary>
 		/// コンストラクタを隠蔽する
 		/// </summary>
@@ -30,6 +58,7 @@ namespace Flappy.Manager
 		/// 原石の所持数
 		/// </summary>
 		/// TODO: 所持品クラスみたいなものを作ってそっちにまとめる (原石、ネームプレート、称号など)
+		/// TODO: そもそもこれはゲームプレイ中のカウントなのでPlayGameScene側に持たせる
 		public int PrimogemCount { get; set; } = 0;
 
 		/// <summary>

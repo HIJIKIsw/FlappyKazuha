@@ -77,3 +77,6 @@ crashlytics-build.properties
 # Sandbox folder files
 /[Aa]ssets/[Aa]pp/[Ss]and[Bb]ox.meta
 /[Aa]ssets/[Aa]pp/[Ss]and[Bb]ox/*
+
+# ApiConstantsOverride
+[Aa]pi[Cc]onstants[Oo]verride.cs*

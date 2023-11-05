@@ -9,6 +9,7 @@ using Flappy.Manager;
 using Flappy.UI;
 using Flappy.Utility;
 using Flappy.PlayGame;
+using Flappy.Api;
 
 namespace Flappy
 {
@@ -119,6 +120,10 @@ namespace Flappy
 		/// </summary>
 		private void Start()
 		{
+			// 原石獲得数をリセット
+			// TODO: この変数はPlayGameScene側で持ちたい
+			GameManager.Instance.PrimogemCount = 0;
+
 			// TODO: タップでスタート実装後はタップするまでカウント始まらないようにする
 			this.IsProceedScoreCount = true;
 
@@ -176,6 +181,12 @@ namespace Flappy
 		public void GameOver()
 		{
 			this.IsProceedScoreCount = false;
+
+			// ユーザランキング情報を更新
+			this.UpdateUserRanking();
+
+			// ユーザ統計情報を更新
+			this.UpdateUserStats();
 
 			// 全ての柱を停止させ、出現しないようにする
 			var pillars = this.GetAllPillars();
@@ -271,6 +282,48 @@ namespace Flappy
 				}
 			}
 			return grounds;
+		}
+
+		/// <summary>
+		/// ユーザ統計情報を更新
+		/// </summary>
+		/// TODO: 汚いので書き直す。そもそもここでやるべきかどうか。
+		private void UpdateUserStats()
+		{
+			GameManager.Instance.AccumulatedScore += this.currentScore;
+			GameManager.Instance.AccumulatedGemScore += GameManager.Instance.PrimogemCount;
+
+			// TODO: この時点ではLoadingを表示しないようにして、リザルト画面表示前にリクストが終わってなかったらLoadingを表示するようにする
+			LoadingManager.Instance.Show();
+			new UserStatsUpdateRequest(
+				GameManager.Instance.AccumulatedScore,
+				GameManager.Instance.AccumulatedGemScore
+			).Request<UserStatsUpdateResponse>((response) =>
+			{
+				LoadingManager.Instance.CompleteTask();
+			});
+		}
+
+		/// <summary>
+		/// ユーザランキング情報を更新
+		/// </summary>
+		private void UpdateUserRanking()
+		{
+			// TODO: この時点ではLoadingを表示しないようにして、リザルト画面表示前にリクストが終わってなかったらLoadingを表示するようにする
+			// TODO: ユーザIDはどこかにキャッシュしておくようにする
+			LoadingManager.Instance.Show();
+			new LoginRequest().Request<LoginResponse>((loginResponse) =>
+			{
+				new UserRankingUpdateRequest(
+					loginResponse.UserId,
+					GameManager.Instance.RoundScore(this.currentScore),
+					GameManager.Instance.PrimogemCount
+				).Request<UserRankingUpdateResponse>((response) =>
+				{
+					LoadingManager.Instance.CompleteTask();
+				});
+			});
+
 		}
 	}
 }
