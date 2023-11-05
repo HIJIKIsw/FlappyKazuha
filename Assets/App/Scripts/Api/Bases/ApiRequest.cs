@@ -32,6 +32,16 @@ namespace Flappy.Api
 		public Dictionary<string, string> Parameters { get; protected set; } = new Dictionary<string, string>();
 
 		/// <summary>
+		/// ゲーム開始時に実行される
+		/// </summary>
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+		private static void Initialize()
+		{
+			// レスポンスキャッシュを削除する
+			responseCaches.Clear();
+		}
+
+		/// <summary>
 		/// APIリクエスト実行
 		/// </summary>
 		/// <typeparam name="T">レスポンスの種類</typeparam>
