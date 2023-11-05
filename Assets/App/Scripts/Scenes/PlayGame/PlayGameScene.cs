@@ -113,6 +113,10 @@ namespace Flappy
 		/// </summary>
 		private void Start()
 		{
+			// 原石獲得数をリセット
+			// TODO: この変数はPlayGameScene側で持ちたい
+			GameManager.Instance.PrimogemCount = 0;
+
 			// TODO: タップでスタート実装後はタップするまでカウント始まらないようにする
 			this.IsProceedScoreCount = true;
 
@@ -275,7 +279,6 @@ namespace Flappy
 		{
 			GameManager.Instance.AccumulatedScore += this.currentScore;
 			GameManager.Instance.AccumulatedGemScore += GameManager.Instance.PrimogemCount;
-			GameManager.Instance.PrimogemCount = 0;
 
 			// TODO: この時点ではLoadingを表示しないようにして、リザルト画面表示前にリクストが終わってなかったらLoadingを表示するようにする
 			LoadingManager.Instance.Show();
