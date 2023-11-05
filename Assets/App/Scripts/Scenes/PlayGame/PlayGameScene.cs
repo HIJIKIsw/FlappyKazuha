@@ -172,6 +172,9 @@ namespace Flappy
 		{
 			this.IsProceedScoreCount = false;
 
+			// ユーザランキング情報を更新
+			this.UpdateUserRanking();
+
 			// ユーザ統計情報を更新
 			this.UpdateUserStats();
 
@@ -289,6 +292,28 @@ namespace Flappy
 			{
 				LoadingManager.Instance.CompleteTask();
 			});
+		}
+
+		/// <summary>
+		/// ユーザランキング情報を更新
+		/// </summary>
+		private void UpdateUserRanking()
+		{
+			// TODO: この時点ではLoadingを表示しないようにして、リザルト画面表示前にリクストが終わってなかったらLoadingを表示するようにする
+			// TODO: ユーザIDはどこかにキャッシュしておくようにする
+			LoadingManager.Instance.Show();
+			new LoginRequest().Request<LoginResponse>((loginResponse) =>
+			{
+				new UserRankingUpdateRequest(
+					loginResponse.UserId,
+					GameManager.Instance.RoundScore(this.currentScore),
+					GameManager.Instance.PrimogemCount
+				).Request<UserRankingUpdateResponse>((response) =>
+				{
+					LoadingManager.Instance.CompleteTask();
+				});
+			});
+
 		}
 	}
 }
