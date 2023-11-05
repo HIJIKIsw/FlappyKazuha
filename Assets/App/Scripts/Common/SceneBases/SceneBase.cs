@@ -25,7 +25,7 @@ namespace Flappy.Common
 		/// <summary>
 		/// シーンに渡されたパラメータ
 		/// </summary>
-		public SceneParameter parameter;
+		public SceneParameter Parameter;
 
 		/// <summary>
 		/// シーンを初期化
@@ -34,7 +34,7 @@ namespace Flappy.Common
 		/// <param name="parameter">シーンに渡すパラメータ</param>
 		public virtual void Initialize(UnityAction<SceneState> notification, SceneParameter parameter = null)
 		{
-			this.parameter = parameter ?? new SceneParameter();
+			this.Parameter = parameter ?? new SceneParameter();
 
 			// 初期化が完了したことをSceneManagerに知らせる
 			notification(SceneState.Success);
