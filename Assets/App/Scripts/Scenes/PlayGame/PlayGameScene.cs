@@ -315,7 +315,6 @@ namespace Flappy
 			new LoginRequest().Request<LoginResponse>((loginResponse) =>
 			{
 				new UserRankingUpdateRequest(
-					loginResponse.UserId,
 					GameManager.Instance.RoundScore(this.currentScore),
 					GameManager.Instance.PrimogemCount
 				).Request<UserRankingUpdateResponse>((response) =>

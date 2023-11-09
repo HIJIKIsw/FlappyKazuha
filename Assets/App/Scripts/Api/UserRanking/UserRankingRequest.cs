@@ -28,9 +28,8 @@ namespace Flappy.Api
 			GemScore,
 		}
 
-		public UserRankingRequest(int userId, UserRankingRequest.Division division)
+		public UserRankingRequest(UserRankingRequest.Division division)
 		{
-			this.Parameters.Add("UserId", userId.ToString());
 			this.Parameters.Add("Division", division.ToString());
 		}
 	}
