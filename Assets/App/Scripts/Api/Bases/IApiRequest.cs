@@ -13,6 +13,11 @@ namespace Flappy.Api
 		string Url { get; }
 
 		/// <summary>
+		/// ログイン情報が必要なAPI領域か
+		/// </summary>
+		bool IsLoginRequired { get; }
+
+		/// <summary>
 		/// リクエストのパラメータ
 		/// </summary>
 		Dictionary<string, string> Parameters { get; }

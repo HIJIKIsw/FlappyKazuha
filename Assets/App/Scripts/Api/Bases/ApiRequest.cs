@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
+using Flappy.Common;
 using Flappy.Utility;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -25,6 +27,11 @@ namespace Flappy.Api
 		/// APIのエンドポイント
 		/// </summary>
 		public abstract string Url { get; }
+
+		/// <summary>
+		/// ログイン情報が必要なAPI領域か
+		/// </summary>
+		public virtual bool IsLoginRequired { get; } = true;
 
 		/// <summary>
 		/// リクエストのパラメータ
@@ -65,6 +72,24 @@ namespace Flappy.Api
 
 		protected IEnumerator SendRequest<T>(UnityAction<T> onSuccess, UnityAction<Exception> onError) where T : ApiResponse, IDisposable, new()
 		{
+			// ログイン情報が必要なAPI領域の場合はパラメータにログイン情報を付加
+			if (this.IsLoginRequired == true)
+			{
+				var loginInfo = ApiRequest.responseCaches.Where(_ => _.Key == typeof(LoginResponse)).FirstOrDefault().Value as LoginResponse;
+				if (loginInfo == null)
+				{
+					var errorMessage = "This is an API area that requires login.";
+					Debug.LogError($"[ApiRequest] EndPoint: {this.Url}, Result: Failed\r\n{errorMessage}");
+					onError?.Invoke(new Exception(errorMessage));
+					yield break;
+				}
+
+				// ログイン済であればDeviceUuidの存在は担保されている
+				var uuid = PlayerPrefs.GetString(Constants.PlayerPrefsKeys.DeviceUuid);
+				this.Parameters["UUID"] = uuid;
+				this.Parameters["UserId"] = loginInfo.UserId.ToString();
+			}
+
 			var bodyJson = new RequestBody(this.Parameters).ToJson();
 			var encryptedParameter = EncryptionUtility.Encrypt(bodyJson, ApiConstants.BodyEncryptKey);
 			var encryptedParameterBytes = Encoding.UTF8.GetBytes(encryptedParameter);
