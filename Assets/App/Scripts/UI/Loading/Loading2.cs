@@ -89,14 +89,8 @@ namespace Flappy.UI
 		{
 			base.Update();
 
-			if (Input.GetMouseButtonDown(0))
-			{
-				this.ChangeTips();
-				this.tipsChangeInterval = 0;
-			}
-
 			this.tipsChangeInterval += Time.deltaTime;
-			if (this.tipsChangeInterval >= 5)
+			if (Input.GetMouseButtonDown(0) || this.tipsChangeInterval >= 5)
 			{
 				this.ChangeTips();
 				this.tipsChangeInterval = 0;
