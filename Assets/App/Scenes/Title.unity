@@ -731,6 +731,37 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 6158611332390548683, guid: 1866e9f2c398a764d96cc6c683dc68bf, type: 3}
   m_PrefabInstance: {fileID: 676720572}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &876703565
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 876703566}
+  m_Layer: 0
+  m_Name: PopupWindows
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &876703566
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876703565}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1388106494}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &980142073
 GameObject:
   m_ObjectHideFlags: 0
@@ -1500,6 +1531,7 @@ Transform:
   m_Children:
   - {fileID: 676720573}
   - {fileID: 182134487}
+  - {fileID: 876703566}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1388106495
@@ -2066,6 +2098,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1643986538}
   m_CullTransparentMesh: 1
+--- !u!1 &1680159282 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6848533680252721816, guid: 595720c2f40ddb6408920fd138de7c58, type: 3}
+  m_PrefabInstance: {fileID: 79214630776279309}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1886344076
 GameObject:
   m_ObjectHideFlags: 0
@@ -2468,6 +2505,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2929480196031705756, guid: 595720c2f40ddb6408920fd138de7c58, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929480196031705756, guid: 595720c2f40ddb6408920fd138de7c58, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929480196031705756, guid: 595720c2f40ddb6408920fd138de7c58, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 401448425458512845}
+    - target: {fileID: 2929480196031705756, guid: 595720c2f40ddb6408920fd138de7c58, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929480196031705756, guid: 595720c2f40ddb6408920fd138de7c58, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenChangeNameWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929480196031705756, guid: 595720c2f40ddb6408920fd138de7c58, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Flappy.Title.ChangeNameButton, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929480196031705756, guid: 595720c2f40ddb6408920fd138de7c58, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6848533680252721816, guid: 595720c2f40ddb6408920fd138de7c58, type: 3}
       propertyPath: m_Name
       value: Change
@@ -2479,13 +2544,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6848533680252721816, guid: 595720c2f40ddb6408920fd138de7c58, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 401448425458512845}
   m_SourcePrefab: {fileID: 100100000, guid: 595720c2f40ddb6408920fd138de7c58, type: 3}
 --- !u!224 &401448425458512839 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1295444104064129991, guid: 595720c2f40ddb6408920fd138de7c58, type: 3}
   m_PrefabInstance: {fileID: 79214630776279309}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &401448425458512845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680159282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e61658ae63eab5469a4e78d7ef915c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupRoot: {fileID: 876703565}
+  changeNamePopupPrefab: {fileID: 845554843759888237, guid: 4b511692de03d324bbc6cea5dfcd6712, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
