@@ -11,6 +11,7 @@ namespace Flappy.UI
 	/// <summary>
 	/// 汎用ボタン
 	/// </summary>
+	/// TODO: もう少し基礎的な要素だけを抽出したCommonButtonクラスとIButtonWithLabel,IButtonWithIconなどのインターフェイスに分ける
 	public class CommonButton : MonoBehaviour
 	{
 		/// <summary>
