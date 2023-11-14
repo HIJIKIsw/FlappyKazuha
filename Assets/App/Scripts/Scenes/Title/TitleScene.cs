@@ -56,7 +56,8 @@ namespace Flappy
 			new LoginRequest().Request<LoginResponse>((loginResponse) =>
 			{
 				GameManager.Instance.UserId = loginResponse.UserId;
-				this.playerName.text = loginResponse.Name;
+				GameManager.Instance.UserName = loginResponse.Name;
+				this.playerName.text = GameManager.Instance.UserName;
 				LoadingManager.Instance.CompleteTask();
 
 				// 最高記録の取得

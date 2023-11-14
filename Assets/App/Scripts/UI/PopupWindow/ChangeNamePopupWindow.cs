@@ -29,6 +29,19 @@ namespace Flappy.UI
 		}
 
 		/// <summary>
+		/// ウィンドウを表示する
+		/// </summary>
+		/// <param name="defaultNameText">初期値としてセットする名前</param>
+		public void Open(string defaultNameText = null)
+		{
+			// 基底クラスのOpenを呼ぶ
+			this.Open(true);
+
+			// 名前初期値をセット
+			this.nameText.text = defaultNameText ?? string.Empty;
+		}
+
+		/// <summary>
 		/// 使用できないメソッドのため呼ばれたらエラー出力して処理続行
 		/// </summary>
 		/// <remarks>メソッドチェーン可</remarks>

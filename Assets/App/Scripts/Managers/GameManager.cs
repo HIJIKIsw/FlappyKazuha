@@ -38,6 +38,11 @@ namespace Flappy.Manager
 		public int UserId { get; set; }
 
 		/// <summary>
+		/// ユーザ名
+		/// </summary>
+		public string UserName { get; set; }
+
+		/// <summary>
 		/// コンストラクタを隠蔽する
 		/// </summary>
 		GameManager()

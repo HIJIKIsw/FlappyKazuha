@@ -1,3 +1,4 @@
+using Flappy.Manager;
 using Flappy.UI;
 using UnityEngine;
 
@@ -24,7 +25,7 @@ namespace Flappy.Title
 		{
 			// 名前変更ウィンドウプレハブをインスタンス化
 			var window = GameObject.Instantiate(this.changeNamePopupPrefab, this.popupRoot.transform);
-			window.Open();
+			window.Open(GameManager.Instance.UserName);
 		}
 	}
 }
