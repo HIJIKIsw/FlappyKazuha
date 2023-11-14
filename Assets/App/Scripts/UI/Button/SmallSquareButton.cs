@@ -1,4 +1,4 @@
-using TMPro;
+using UnityEngine;
 
 namespace Flappy.UI
 {
@@ -8,10 +8,12 @@ namespace Flappy.UI
 	public class SmallSquareButton : CommonButton
 	{
 		/// <summary>
-		/// SmallSquareButtonはLabelを使用できない
+		/// 使用できないメソッドのため呼ばれたらエラー出力して処理続行
 		/// </summary>
+		/// <remarks>メソッドチェーン可</remarks>
 		public new SmallSquareButton SetLabel(string label)
 		{
+			Debug.LogAssertion("This method is not supported.");
 			return this;
 		}
 	}
