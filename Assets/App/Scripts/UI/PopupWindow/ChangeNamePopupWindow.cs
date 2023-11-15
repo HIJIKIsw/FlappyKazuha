@@ -12,6 +12,9 @@ namespace Flappy.UI
 	/// TODO: クラス構成ややこしくなりそうなら、CommonPopupWindowの親としてBaseクラスを用意してより汎用的なモデルにする
 	public class ChangeNamePopupWindow : CommonPopupWindow
 	{
+		/// <summary>
+		/// 入力欄に表示しているテキスト
+		/// </summary>
 		[SerializeField]
 		TextMeshProUGUI nameText;
 
