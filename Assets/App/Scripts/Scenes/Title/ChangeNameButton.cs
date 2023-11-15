@@ -1,6 +1,7 @@
 using Flappy.Manager;
 using Flappy.UI;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Flappy.Title
 {
@@ -19,13 +20,18 @@ namespace Flappy.Title
 		private ChangeNamePopupWindow changeNamePopupPrefab;
 
 		/// <summary>
+		/// 名前変更イベント通知デリゲート
+		/// </summary>
+		public UnityAction<string> OnChangeName { get; set; }
+
+		/// <summary>
 		/// 名前変更ウィンドウを開く
 		/// </summary>
 		public void OpenChangeNameWindow()
 		{
 			// 名前変更ウィンドウプレハブをインスタンス化
 			var window = GameObject.Instantiate(this.changeNamePopupPrefab, this.popupRoot.transform);
-			window.Open(GameManager.Instance.UserName);
+			window.Open(GameManager.Instance.UserName, this.OnChangeName);
 		}
 	}
 }

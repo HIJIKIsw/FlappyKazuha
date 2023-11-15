@@ -2,6 +2,7 @@ using Flappy.Api;
 using Flappy.Manager;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Flappy.UI
 {
@@ -16,6 +17,11 @@ namespace Flappy.UI
 		/// </summary>
 		[SerializeField]
 		private TextMeshProUGUI nameText;
+
+		/// <summary>
+		/// 名前変更イベント通知デリゲート
+		/// </summary>
+		private UnityAction<string> onChangeName;
 
 		/// <summary>
 		/// 初期化処理
@@ -34,13 +40,17 @@ namespace Flappy.UI
 		/// ウィンドウを表示する
 		/// </summary>
 		/// <param name="defaultNameText">初期値としてセットする名前</param>
-		public void Open(string defaultNameText = null)
+		/// <param name="onChangeName">名前変更イベント通知デリゲート</param>
+		public void Open(string defaultNameText = null, UnityAction<string> onChangeName = null)
 		{
 			// 基底クラスのOpenを呼ぶ
 			this.Open(true);
 
 			// 名前初期値をセット
 			this.nameText.text = defaultNameText ?? string.Empty;
+
+			// 名前変更イベントをセット
+			this.onChangeName = onChangeName;
 		}
 
 		/// <summary>
@@ -58,8 +68,21 @@ namespace Flappy.UI
 		/// </summary>
 		public void OnClickOk()
 		{
-			// TOOD
-			this.Close();
+			// 名前を変更していない場合は何もせず閉じる
+			if (this.nameText.text == GameManager.Instance.UserName)
+			{
+				this.Close();
+				return;
+			}
+
+			// TODO: バリデーション
+			LoadingManager.Instance.Show();
+			new UserInfoUpdateRequest(this.nameText.text).Request<UserInfoUpdateResponse>((response) =>
+			{
+				this.onChangeName?.Invoke(response.UserName);
+				this.Close();
+				LoadingManager.Instance.CompleteTask();
+			});
 		}
 	}
 }

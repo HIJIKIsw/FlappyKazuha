@@ -1552,6 +1552,7 @@ MonoBehaviour:
   playerBestGemScore: {fileID: 2023610046}
   playerAccumulatedScore: {fileID: 1379193597}
   playerAccumulatedGemScore: {fileID: 1390172146}
+  changeNameButton: {fileID: 401448425458512845}
 --- !u!1 &1390172144
 GameObject:
   m_ObjectHideFlags: 0
