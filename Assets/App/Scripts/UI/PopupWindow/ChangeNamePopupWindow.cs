@@ -16,7 +16,7 @@ namespace Flappy.UI
 		/// 入力欄に表示しているテキスト
 		/// </summary>
 		[SerializeField]
-		TextMeshProUGUI nameText;
+		private TextMeshProUGUI nameText;
 
 		/// <summary>
 		/// 初期化処理
