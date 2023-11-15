@@ -265,17 +265,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 89011242197925102, guid: c9cb818160cd7bb4f9aac66007228b29, type: 3}
   m_PrefabInstance: {fileID: 1173028377}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &194922838 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1758633488262804123, guid: fbf62c9fe482bdb4faf2980851448bef, type: 3}
-  m_PrefabInstance: {fileID: 232460404}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &194922841 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4264310078335685582, guid: fbf62c9fe482bdb4faf2980851448bef, type: 3}
@@ -388,6 +377,10 @@ PrefabInstance:
     - target: {fileID: 5732683837588162047, guid: fbf62c9fe482bdb4faf2980851448bef, type: 3}
       propertyPath: m_Name
       value: CharaterList
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732683837588162047, guid: fbf62c9fe482bdb4faf2980851448bef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -615,7 +608,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1388106495}
         m_TargetAssemblyTypeName: Flappy.TitleScene, Assembly-CSharp
-        m_MethodName: StartPlayGame
+        m_MethodName: TransitionHome
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1438,7 +1431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b44c8b8158e340d4f94e540c2c5b095d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterList: {fileID: 194922838}
+  characterList: {fileID: 0}
   playerName: {fileID: 407331741}
   playerBestScore: {fileID: 1394558516}
   playerBestGemScore: {fileID: 2023610046}

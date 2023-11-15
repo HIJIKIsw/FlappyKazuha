@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/App/Scenes/ManagerContainer.unity
     guid: c77919963f8b6f247badf5c3b902dae9
   - enabled: 1
+    path: Assets/App/Scenes/Home.unity
+    guid: c085a28e42fdfe44a9aeb3feed5c4889
+  - enabled: 1
     path: Assets/App/Scenes/PlayGame.unity
     guid: dc74fb524b721934e96fe94ce08b2837
   - enabled: 1
