@@ -54,7 +54,7 @@ namespace Flappy
 				LoadingManager.Instance.CompleteTask();
 
 				// 最高記録の取得
-				new UserRankingRequest(loginResponse.UserId, UserRankingRequest.Division.Overall).Request<UserRankingResponse>((rankingResponse) =>
+				new UserRankingRequest(UserRankingRequest.Division.Overall).Request<UserRankingResponse>((rankingResponse) =>
 				{
 					GameManager.Instance.BestScore = rankingResponse.Score;
 					this.playerBestScore.text = GameManager.Instance.ScoreToText(GameManager.Instance.BestScore);
@@ -63,7 +63,7 @@ namespace Flappy
 				});
 
 				// 統計情報の取得
-				new UserStatsRequest(loginResponse.UserId).Request<UserStatsResponse>((statsResponse) =>
+				new UserStatsRequest().Request<UserStatsResponse>((statsResponse) =>
 				{
 					GameManager.Instance.AccumulatedScore = statsResponse.AccumulatedScore;
 					GameManager.Instance.AccumulatedGemScore = statsResponse.AccumulatedGemScore;

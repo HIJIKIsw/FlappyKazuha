@@ -11,6 +11,8 @@ namespace Flappy.Api
 	{
 		public override string Url => "login";
 
+		public override bool IsLoginRequired => false;
+
 		public LoginRequest()
 		{
 			// TODO: PlayerPrefsManager的なクラスを実装して置き換える

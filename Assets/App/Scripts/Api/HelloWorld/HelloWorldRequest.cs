@@ -7,6 +7,8 @@ namespace Flappy.Api
 	public class HelloWorldRequest : ApiRequest
 	{
 		public override string Url => "helloworld";
+
+		public override bool IsLoginRequired => false;
 	}
 }
 #endif
