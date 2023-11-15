@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Flappy.Utility;
+using Flappy.Api;
+using Flappy.Manager;
 using TMPro;
 using UnityEngine;
 
