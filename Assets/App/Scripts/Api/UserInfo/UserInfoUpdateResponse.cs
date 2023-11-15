@@ -1,17 +1,13 @@
+using System;
+
 namespace Flappy.Api
 {
 	/// <summary>
 	/// UserInfoUpdate API レスポンス
 	/// </summary>
-	public class UserInfoUpdateResponse : ApiResponse
+	[Serializable]
+	public class UserInfoUpdateResponse : UserInfoResponse
 	{
-		/// <summary>
-		/// ユーザID
-		/// </summary>
-		public int UserId;
-		/// <summary>
-		/// ユーザ名
-		/// </summary>
-		public string Name;
+		public override Type CacheType => typeof(UserInfoResponse);
 	}
 }
