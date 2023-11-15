@@ -7,6 +7,7 @@ using Flappy.Common;
 using Flappy.Manager;
 using Unity.VisualScripting;
 using TMPro;
+using System.Collections.Generic;
 
 namespace Flappy.UI
 {
@@ -36,6 +37,12 @@ namespace Flappy.UI
 		[SerializeField]
 		Image progressBarBase;
 
+		int currentTipsNumber;
+
+		float tipsChangeInterval;
+
+		List<string> tipsList = new List<string>();
+
 		protected override float fadeTime => 0.4f;
 		protected override float minDisplayTime => 1.5f;
 
@@ -58,6 +65,60 @@ namespace Flappy.UI
 				this.tips.color = new Color32(207,189,144,255);
 				this.progressBarFill.color = new Color32(234,228,213,255);
 			}
+
+			this.InitTipsList();
+			this.ChangeTips();
+		}
+
+		/// <summary>
+		/// Tipsリスト
+		/// </summary>
+		private void InitTipsList()
+		{
+			this.tipsList.Add("<size=22>胡桃</size>\n炎アタッカー");
+			this.tipsList.Add("<size=22>ヨォーヨ</size>\n水アタッカー");
+			this.tipsList.Add("<size=22>放浪者</size>\n笠っち");
+			this.tipsList.Add("<size=22>アルレッキーノ</size>\n気になる");
+			this.tipsList.Add("<size=22>フォンテーヌ</size>\n地理の性質から言えば、フォンテーヌの地上大湖は「湖」であるが、フォンテーヌの人々はそれを「海」と呼んでいる。");
+		}
+
+		/// <summary>
+		/// 左クリック時にTipsテキストを変更する
+		/// </summary>
+		protected override void Update()
+		{
+			base.Update();
+
+			this.tipsChangeInterval += Time.deltaTime;
+			if (Input.GetMouseButtonDown(0) || this.tipsChangeInterval >= 5)
+			{
+				this.ChangeTips();
+				this.tipsChangeInterval = 0;
+			}
+		}
+
+		/// <summary>
+		/// Tipsテキストを変更する関数
+		/// </summary>
+		private void ChangeTips()
+		{
+			int listCount = tipsList.Count;
+			int rnd = Random.Range(0, listCount);
+
+			if (rnd == this.currentTipsNumber)
+			{
+				if (rnd == listCount-1)
+				{
+					rnd--;
+				}
+				else
+				{
+					rnd++;
+				}
+			}
+
+			this.tips.text = this.tipsList[rnd];
+			this.currentTipsNumber = rnd;
 		}
 
 		/// <summary>
