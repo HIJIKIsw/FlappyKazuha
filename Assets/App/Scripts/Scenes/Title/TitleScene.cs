@@ -1,6 +1,7 @@
 using Flappy.Api;
 using Flappy.Common;
 using Flappy.Manager;
+using Flappy.Title;
 using TMPro;
 using UnityEngine;
 
@@ -47,6 +48,12 @@ namespace Flappy
 		private TextMeshProUGUI playerAccumulatedGemScore;
 
 		/// <summary>
+		/// 名前変更ボタン
+		/// </summary>
+		[SerializeField]
+		private ChangeNameButton changeNameButton;
+
+		/// <summary>
 		/// 初期化
 		/// </summary>
 		private void Start()
@@ -56,7 +63,8 @@ namespace Flappy
 			new LoginRequest().Request<LoginResponse>((loginResponse) =>
 			{
 				GameManager.Instance.UserId = loginResponse.UserId;
-				this.playerName.text = loginResponse.Name;
+				GameManager.Instance.UserName = loginResponse.Name;
+				this.playerName.text = GameManager.Instance.UserName;
 				LoadingManager.Instance.CompleteTask();
 
 				// 最高記録の取得
@@ -79,6 +87,9 @@ namespace Flappy
 					LoadingManager.Instance.CompleteTask();
 				});
 			});
+
+			// 名前が変更された時のイベントを登録
+			this.changeNameButton.OnChangeName += (name) => { this.playerName.text = name; };
 		}
 
 		/// <summary>
