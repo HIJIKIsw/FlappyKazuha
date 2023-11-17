@@ -136,10 +136,14 @@ namespace Flappy.Api
 							onSuccess?.Invoke(response);
 						}
 						break;
-					default:
-						//TODO: エラーコードを返す
-						//TODO: onError 設定していない時用の共通エラー処理
-						Debug.LogError($"[ApiRequest] EndPoint: {this.Url}, Result: Failed (" + stopwatch.ElapsedMilliseconds + " ms)\r\n" + post.downloadHandler.text);
+					case UnityWebRequest.Result.ConnectionError:
+					case UnityWebRequest.Result.DataProcessingError:
+						Debug.LogError($"[ApiRequest] EndPoint: {this.Url}, Result: ConnectionError (" + stopwatch.ElapsedMilliseconds + " ms)\r\n" + post.downloadHandler.text);
+						// 通信エラーは致命的なので指定されたonErrorで処理はしない
+						// TODO: エラーメッセージ表示してタイトルに戻す
+						break;
+					case UnityWebRequest.Result.ProtocolError:
+						Debug.LogError($"[ApiRequest] EndPoint: {this.Url}, Result: ProtocolError (" + stopwatch.ElapsedMilliseconds + " ms)\r\n" + post.downloadHandler.text);
 						onError?.Invoke(new Exception(post.downloadHandler.text));
 						break;
 				}
