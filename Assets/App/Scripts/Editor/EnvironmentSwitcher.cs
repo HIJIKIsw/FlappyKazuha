@@ -5,19 +5,31 @@ namespace Flappy.Editor
 {
 	public class EnvironmentSwitcher : EditorWindow
 	{
-		[MenuItem("Environment/Local")]
+#if ENV_LOCAL
+		[MenuItem("Environment/✓Local")]
+#else
+		[MenuItem("Environment/　Local")]
+#endif
 		public static void SwitchLocalEnvironment()
 		{
 			PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.WebGL, "ENV_LOCAL");
 		}
 
-		[MenuItem("Environment/Development")]
+#if ENV_DEVELOPMENT
+		[MenuItem("Environment/✓Development")]
+#else
+		[MenuItem("Environment/　Development")]
+#endif
 		public static void SwitchDevelopmentEnvironment()
 		{
 			PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.WebGL, "ENV_DEVELOPMENT");
 		}
 
-		[MenuItem("Environment/Test")]
+#if ENV_TEST
+		[MenuItem("Environment/✓Test")]
+#else
+		[MenuItem("Environment/　Test")]
+#endif
 		public static void SwitchTestEnvironment()
 		{
 			PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.WebGL, "ENV_TEST");
