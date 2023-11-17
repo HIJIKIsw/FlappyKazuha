@@ -108,6 +108,7 @@ namespace Flappy.Api
 				yield return post.SendWebRequest();
 
 				// リクエストの完了を待つ
+				// TODO: タイムアウト処理
 				while (post.isDone == false)
 				{
 					yield return null;
