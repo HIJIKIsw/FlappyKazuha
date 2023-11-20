@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Flappy.Common;
+using Flappy.Manager;
 using Flappy.Utility;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -66,8 +67,7 @@ namespace Flappy.Api
 				return;
 			}
 
-			// TODO: ApiManagerを実装する
-			StaticCoroutine.Start(this.SendRequest<T>(onSuccess, onError));
+			ApiManager.Instance.StartRequest(this.SendRequest<T>(onSuccess, onError));
 		}
 
 		protected IEnumerator SendRequest<T>(UnityAction<T> onSuccess, UnityAction<Exception> onError) where T : ApiResponse, IDisposable, new()
@@ -108,6 +108,7 @@ namespace Flappy.Api
 				yield return post.SendWebRequest();
 
 				// リクエストの完了を待つ
+				// TODO: タイムアウト処理
 				while (post.isDone == false)
 				{
 					yield return null;
@@ -135,11 +136,25 @@ namespace Flappy.Api
 							onSuccess?.Invoke(response);
 						}
 						break;
-					default:
-						//TODO: エラーコードを返す
-						//TODO: onError 設定していない時用の共通エラー処理
-						Debug.LogError($"[ApiRequest] EndPoint: {this.Url}, Result: Failed (" + stopwatch.ElapsedMilliseconds + " ms)\r\n" + post.downloadHandler.text);
-						onError?.Invoke(new Exception(post.downloadHandler.text));
+					case UnityWebRequest.Result.ConnectionError:
+					case UnityWebRequest.Result.DataProcessingError:
+						Debug.LogError($"[ApiRequest] EndPoint: {this.Url}, Result: ConnectionError (" + stopwatch.ElapsedMilliseconds + " ms)\r\n" + post.downloadHandler.text);
+						// 通信エラーは致命的なので指定されたonErrorで処理はしない
+						// TODO: リトライ処理
+						ApiManager.Instance.ShowErrorAndStopAllRequest();
+						LoadingManager.Instance.CompleteDirty();
+						break;
+					case UnityWebRequest.Result.ProtocolError:
+						Debug.LogError($"[ApiRequest] EndPoint: {this.Url}, Result: ProtocolError (" + stopwatch.ElapsedMilliseconds + " ms)\r\n" + post.downloadHandler.text);
+						if (onError == null)
+						{
+							ApiManager.Instance.ShowErrorAndStopAllRequest("リクエストエラー", post.downloadHandler.text + "\r\nエラーコード: " + post.responseCode);
+							LoadingManager.Instance.CompleteDirty();
+						}
+						else
+						{
+							onError?.Invoke(new Exception(post.downloadHandler.text));
+						}
 						break;
 				}
 			}
