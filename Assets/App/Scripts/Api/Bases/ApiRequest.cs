@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Flappy.Common;
+using Flappy.Manager;
 using Flappy.Utility;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -66,8 +67,7 @@ namespace Flappy.Api
 				return;
 			}
 
-			// TODO: ApiManagerを実装する
-			StaticCoroutine.Start(this.SendRequest<T>(onSuccess, onError));
+			ApiManager.Instance.StartRequest(this.SendRequest<T>(onSuccess, onError));
 		}
 
 		protected IEnumerator SendRequest<T>(UnityAction<T> onSuccess, UnityAction<Exception> onError) where T : ApiResponse, IDisposable, new()
@@ -140,11 +140,21 @@ namespace Flappy.Api
 					case UnityWebRequest.Result.DataProcessingError:
 						Debug.LogError($"[ApiRequest] EndPoint: {this.Url}, Result: ConnectionError (" + stopwatch.ElapsedMilliseconds + " ms)\r\n" + post.downloadHandler.text);
 						// 通信エラーは致命的なので指定されたonErrorで処理はしない
-						// TODO: エラーメッセージ表示してタイトルに戻す
+						// TODO: リトライ処理
+						ApiManager.Instance.ShowErrorAndStopAllRequest();
+						LoadingManager.Instance.CompleteDirty();
 						break;
 					case UnityWebRequest.Result.ProtocolError:
 						Debug.LogError($"[ApiRequest] EndPoint: {this.Url}, Result: ProtocolError (" + stopwatch.ElapsedMilliseconds + " ms)\r\n" + post.downloadHandler.text);
-						onError?.Invoke(new Exception(post.downloadHandler.text));
+						if (onError == null)
+						{
+							ApiManager.Instance.ShowErrorAndStopAllRequest("リクエストエラー", post.downloadHandler.text + "\r\nエラーコード: " + post.responseCode);
+							LoadingManager.Instance.CompleteDirty();
+						}
+						else
+						{
+							onError?.Invoke(new Exception(post.downloadHandler.text));
+						}
 						break;
 				}
 			}

@@ -36,27 +36,28 @@ namespace Flappy.Manager
 		/// <summary>
 		/// エラーを表示して全てのリクエストコルーチンを停止
 		/// </summary>
-		public void ShowErrorAndStopAllRequest()
+		/// <param name="title">エラーポップアップに表示するタイトル</param>
+		/// <param name="message">エラーポップアップに表示するメッセージ</param>
+		public void ShowErrorAndStopAllRequest(string title = null, string message = null)
 		{
 			var button = GameObject.Instantiate(this.buttonPrefab);
-			button.SetIcon(Constants.Assets.Sprite.ButtonIcon.Circle)
-			.SetLabel("OK")
-			.SetClickAction(this.TransitionToTitle);
-
 			var popup = GameObject.Instantiate(this.popupPrefab, this.transform);
-			popup.SetTitle("通信エラー")
-			.SetMessage("サーバーとの通信に失敗しました。タイトル画面に戻ります。")
-			.SetCloseButtonActive(false)
-			.AddButton(button);
-			this.StopAllCoroutines();
-		}
 
-		/// <summary>
-		/// タイトルシーンに遷移する
-		/// </summary>
-		private void TransitionToTitle()
-		{
-			SceneManager.Instance.Load<TitleScene>(null, LoadingManager.Types.FullscreenWithoutProgressbar);
+			button.SetIcon(Constants.Assets.Sprite.ButtonIcon.Circle)
+			.SetLabel("タイトル画面に戻る")
+			.SetClickAction(() =>
+			{
+				popup.Close();
+				SceneManager.Instance.Load<TitleScene>(null, LoadingManager.Types.FullscreenWithoutProgressbar);
+			});
+
+			popup.SetTitle(title ?? "接続エラー")
+			.SetMessage(message ?? "サーバー接続に失敗しました。\r\nサーバーが応答しませんでした。")
+			.SetCloseButtonActive(false)
+			.AddButton(button)
+			.Open();
+
+			this.StopAllCoroutines();
 		}
 	}
 }
