@@ -57,6 +57,21 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 29eece2166b709a45a30b65839ea5177
+    m_Address: Prefab/Home/KazuhaHome
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f829d8e32ac4b2f498e387b4952da33c
+    m_Address: Prefab/Home/WandererHome
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1904bf8ccc0a45b4f9060e560d699d20
+    m_Address: Prefab/Home/HutaoHome
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: defd891a142de174b9cf34444c33dfa0, type: 2}
   m_SchemaSet:

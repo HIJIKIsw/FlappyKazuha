@@ -59,6 +59,16 @@ namespace Flappy.Common
 					Kazuha = Constants.Game.Character.Kazuha,
 					Wanderer = Constants.Game.Character.Wanderer,
 				}
+
+				/// <summary>
+				/// Home画面の立ち絵
+				/// </summary>
+				public enum Home
+				{
+					KazuhaHome = Constants.Game.Character.Kazuha,
+					WandererHome = Constants.Game.Character.Wanderer,
+					HutaoHome = Constants.Game.Character.Hutao,
+				}
 			}
 
 			/// <summary>
