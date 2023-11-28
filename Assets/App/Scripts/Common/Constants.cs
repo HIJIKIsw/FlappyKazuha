@@ -14,6 +14,16 @@ namespace Flappy.Common
 			/// 1秒間に加算されるスコア
 			/// </summary>
 			public const float ScorePerSecond = 2f;
+
+			/// <summary>
+			/// プレイアブルキャラクター
+			/// </summary>
+			public enum Character
+			{
+				Kazuha,
+				Wanderer,
+				Hutao,
+			}
 		}
 
 		/// <summary>
@@ -46,8 +56,8 @@ namespace Flappy.Common
 				/// </summary>
 				public enum Player
 				{
-					Kazuha,
-					Wanderer,
+					Kazuha = Constants.Game.Character.Kazuha,
+					Wanderer = Constants.Game.Character.Wanderer,
 				}
 			}
 
