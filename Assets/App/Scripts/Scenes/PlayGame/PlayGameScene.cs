@@ -134,11 +134,11 @@ namespace Flappy
 			// パラメータから値を取り出す
 			var character = this.Parameter[PlayGameScene.Parameters.Character] as Enum;
 			var address = AssetAddressUtility.GetAssetAddress(character);
-			var handle = Addressables.LoadAssetAsync<GameObject>(address);
-			handle.Completed += (op) =>
+			var request = Addressables.LoadAssetAsync<GameObject>(address);
+			request.Completed += (response) =>
 			{
 				// Playerインスタンスを生成
-				this.player = GameObject.Instantiate(op.Result, this.transform).GetComponent<PlayerBase>();
+				this.player = GameObject.Instantiate(response.Result, this.transform).GetComponent<PlayerBase>();
 
 				// HeightLimitにPlayerインスタンスへの参照を通知
 				this.heightLimit.SetPlayerInstance(this.player);
